@@ -1,0 +1,19 @@
+[
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome to First 5 LA Data Hub",
+    "description": "Welcome to our new blog, First 5 LA Data Hub. We hope you enjoy \nreading what we have to say!",
+    "author": [
+      {
+        "name": "Nora Jones",
+        "url": "https://example.com/norajones"
+      }
+    ],
+    "date": "2024-01-23",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2024-01-23T14:40:39-08:00",
+    "input_file": {}
+  }
+]

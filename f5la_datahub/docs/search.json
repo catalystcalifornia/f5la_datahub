@@ -1,0 +1,20 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About this blog",
+      "description": "Some additional details about the blog",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n",
+      "last_modified": "2024-01-23T14:40:41-08:00"
+    },
+    {
+      "path": "index.html",
+      "title": "First 5 LA Data Hub",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n",
+      "last_modified": "2024-01-23T14:40:42-08:00"
+    }
+  ],
+  "collections": ["posts/posts.json"]
+}
