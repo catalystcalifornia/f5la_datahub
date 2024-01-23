@@ -1,7 +1,7 @@
 ---
-title: "GBI Learning Dialogue Presentation"
+title: "GBI Presentation"
 description: |
-  A short description of the post.
+  Presentation created by Catalyst California for First 5 LA Learning Dialogue on Guaranteed Basic Income (GBI)
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
@@ -11,13 +11,8 @@ output:
     self_contained: false
 ---
 
+The Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners about the importance of Guaranteed Basic Income (GBI) as it relates to the Best Start Geographies and children 0-5. 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-
-Distill is a publication format for scientific and technical writing, native to the web.
-
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+[Link to the full presentation](https://github.com/catalystcalifornia/f5la/blob/master/F5LA%20GBI%20Dialogue%20CC.pdf) 
 
 

@@ -1,7 +1,7 @@
 ---
-title: "GBI Presentation"
+title: "Data Narrative"
 description: |
-  Presentation created by Catalyst California for First 5 LA Learning Dialogue on Guaranteed Basic Income (GBI)
+  Data Narrative created during Catalyst California and First 5 LA Strategic Partnership 2019-2021
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
@@ -11,8 +11,9 @@ output:
     self_contained: false
 ---
 
-The Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners about the importance of Guaranteed Basic Income (GBI) as it relates to the Best Start Geographies and children 0-5. 
 
-[Link to the full presentation](https://github.com/catalystcalifornia/f5la/blob/master/F5LA%20GBI%20Dialogue%20CC.pdf) 
+A Strategic Partnership with Catalyst California was created in 2019 to support understanding the current conditions in Best Start geographies for First 5 LA staff. The work was initially created for the Communities Team at First 5 LA to have data that can advance policy and systems change. An internal cross Team/Office workgroup guides this effort with Catalyst California. First 5 LA staff and Regional Network Grantees were engaged to lift up community priorities in Best Start geographies.
+
+Link to the [First 5 LA Data Narrative](https://apca-dev.dreamhosters.com/)
 
 
