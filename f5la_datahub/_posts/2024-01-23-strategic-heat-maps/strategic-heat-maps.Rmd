@@ -1,0 +1,23 @@
+---
+title: "Strategic Heat Map"
+description: |
+  Visualizing changes over-time in the Best Start Geographies across key indicators related to children 0-5
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-01-17
+output:
+  distill::distill_article:
+    css: "W:\\RDA Team\\R\\cc_brandguide.css"
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+    self_contained: false
+---
+
+Catalyst California supported First 5 LA in its strategic refinement process by processing key indicators related to children 0-5 across the Best Start Geographies for 2008-2012 and 2017-2021.
+
+The final product is a webpage consisting of maps that visualize changes over time to key indicators for households with children age 0-5. All maps are visualized at the PUMA geography level for 2012 and 2021. Both the 2012 and 2012 data come from American Community Survey (ACS) 5-year estimates. The 2012 data is comprised of the 2008-2012 ACS 5-year estimates, while the 2021 data is comprised of the 2017-2021 ACS 5-year estimates.
+
+[Click here to explore the strategic heat maps analysis](https://catalystcalifornia.github.io/f5la/Strategic_Heat_Maps)
+

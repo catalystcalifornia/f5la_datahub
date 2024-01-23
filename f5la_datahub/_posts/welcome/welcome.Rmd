@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # https://rstudio.github.io/distill/blog.html
 
 
-create_post("GBI Learning Dialogue Presentation")
+create_post("Strategic Heat Maps")
 
 ```
 
