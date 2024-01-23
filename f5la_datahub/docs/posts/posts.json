@@ -18,8 +18,8 @@
   },
   {
     "path": "posts/2024-01-23-data-narrative/",
-    "title": "Data Narrative",
-    "description": "Data Narrative created during Catalyst California and First 5 LA Strategic Partnership 2019-2021",
+    "title": "GBI Presentation",
+    "description": "Presentation created by Catalyst California for First 5 LA Learning Dialogue on Guaranteed Basic Income (GBI)",
     "author": [
       {
         "name": "Catalyst California",
@@ -28,9 +28,9 @@
     ],
     "date": "2024-01-23",
     "categories": [],
-    "contents": "\r\nA Strategic Partnership with Catalyst California was created in 2019 to support understanding the current conditions in Best Start geographies for First 5 LA staff. The work was initially created for the Communities Team at First 5 LA to have data that can advance policy and systems change. An internal cross Team/Office workgroup guides this effort with Catalyst California. First 5 LA staff and Regional Network Grantees were engaged to lift up community priorities in Best Start geographies.\r\nLink to the First 5 LA Data Narrative\r\n\r\n\r\n\r\n",
+    "contents": "\r\nThe Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners about the importance of Guaranteed Basic Income (GBI) as it relates to the Best Start Geographies and children 0-5.\r\nLink to the full presentation\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2024-01-23T15:04:34-08:00",
+    "last_modified": "2024-01-23T15:11:38-08:00",
     "input_file": "data-narrative.knit.md"
   }
 ]
