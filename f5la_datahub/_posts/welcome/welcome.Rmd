@@ -19,6 +19,9 @@ knitr::opts_chunk$set(echo = FALSE)
 # Learn more about creating blogs with Distill at:
 # https://rstudio.github.io/distill/blog.html
 
+
+create_post("Data Narrative")
+
 ```
 
 
