@@ -1,7 +1,7 @@
 name: "f5la_datahub"
 title: "First 5 LA Data Hub"
 description: |
-  First 5 LA Data Hub
+  First 5 LA Data Hub created by Catalyst California
 output_dir: "docs"
 navbar:
   right:

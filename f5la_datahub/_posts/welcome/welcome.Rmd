@@ -1,18 +1,17 @@
 ---
-title: "Welcome to First 5 LA Data Hub"
+title: "Welcome to Data Hub Test"
 description: |
-  Welcome to our new blog, First 5 LA Data Hub. We hope you enjoy 
-  reading what we have to say!
+  Basic guide to using the data hub
 author:
-  - name: Nora Jones 
-    url: https://example.com/norajones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
+  - name: Catalyst California 
+    url: catalystcalifornia.org
 date: 01-23-2024
 output:
   distill::distill_article:
     self_contained: false
 ---
+
+Here can be an introductory article explaining the data hub and basics of how to use the interface
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
