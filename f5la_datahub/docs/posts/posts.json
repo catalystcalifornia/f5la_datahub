@@ -34,23 +34,6 @@
     "input_file": {}
   },
   {
-    "path": "posts/welcome/",
-    "title": "Welcome to Data Hub Test",
-    "description": "Basic guide to using the data hub",
-    "author": [
-      {
-        "name": "Catalyst California",
-        "url": "catalystcalifornia.org"
-      }
-    ],
-    "date": "2024-01-23",
-    "categories": [],
-    "contents": "\r\nHere can be an introductory article explaining the data hub and basics of how to use the interface\r\n\r\n\r\n\r\n",
-    "preview": {},
-    "last_modified": "2024-01-23T14:46:43-08:00",
-    "input_file": {}
-  },
-  {
     "path": "posts/2024-01-23-strategic-heat-maps/",
     "title": "Strategic Heat Map",
     "description": "Visualizing changes over-time in the Best Start Geographies across key indicators related to children 0-5",
@@ -66,5 +49,39 @@
     "preview": {},
     "last_modified": "2024-01-23T15:40:44-08:00",
     "input_file": "strategic-heat-maps.knit.md"
+  },
+  {
+    "path": "posts/2024-01-23-map-test-park-access/",
+    "title": "Map Test: Park Access",
+    "description": "Access to parks in Los Angeles County (excerpt from African American Data Pullout).",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-01-23",
+    "categories": [],
+    "contents": "\r\nParks are another important aspect to a healthy built environment for children and families, as they promote active lifestyles and allow for more outdoor activities. The importance of green space increased during the pandemic, when outdoor spaces became the only way for children and families to safely gather. It isn’t surprising that a survey conducted by Community Coalition found the need for more park space to be a top priority amongst South Los Angeles residents. Using funding from First 5 LA, Community Coalition is working on a new park project in Broadway/Manchester to respond to the community’s need.\r\nAccess to green space for families is disparate between where predominantly white families live versus families of color. The map below shows the results of a countywide parks needs assessment that was conducted in 2016. For this assessment, park need was defined by analyzing five park metrics:\r\nHow much park land is there in acres?\r\nHow much land is available to residents in the area and around each park?\r\nWhat is the condition of the park?\r\nHow much of the population has access to parks?\r\nWhat park amenities are available?\r\nAreas with a High and Very High park need are located in the South LA area, where a high concentration of Black families live, and the San Fernando Valley area. Detailed methodology for the data behind this map can be found here.\r\nTo explore the data further, click on each census tract on the map. You can also view the high black population census tracts, or the Best Start Geography boundaries, by clicking on the boxes in the top right corner of the map. Higher black population tracts are defined as census tracts with a black population of at least 10%.\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2024-01-23T16:22:07-08:00",
+    "input_file": "map-test-park-access.knit.md"
+  },
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome to Data Hub Test",
+    "description": "Basic guide to using the data hub",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-01-01",
+    "categories": [],
+    "contents": "\r\nHere can be an introductory article explaining the data hub and basics of how to use the interface\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2024-01-23T16:19:13-08:00",
+    "input_file": "welcome.knit.md"
   }
 ]
