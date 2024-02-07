@@ -2173,8 +2173,241 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   /*-- Additional custom styles --*/
   /* Add any additional CSS rules below                      */
   </style>
-  <style type="text/css">
-  /* base variables */
+  <style type="text/css">/* CC Brand Guide CSS Stylesheet for RMDs*/
+
+  /* Styling from https://www.catalystcalifornia.org/campaign-tools/maps-and-data/justice-equity-need-index */
+  /* h1 seems reserved for the title of the webpage */
+  h1{
+    font-size: 27px;
+    letter-spacing: normal;
+    line-height: 1.24;
+    font-weight: 600;
+    display: block;
+    color: #3A207D;
+  }
+
+  /* h5 headers are wrapped in <strong> for "Overview"/"About" type sections */
+  h5{
+    font-size: 21px;
+    letter-spacing: normal;
+    line-height: 1.2;
+    font-weight: 600;
+    margin: 1em 0;
+    display: block;
+    color: #3A207D;
+  }
+
+  /* p is for body content - may or may not want to use for visuals */
+  p{
+    font-size: 18px; /* consider changing to 15px*/
+    letter-spacing: normal;
+    line-height: 1.5;
+    font-weight: 400;
+    margin: 1em 0;
+    display: block;
+    color: #3A207D;
+  }
+
+  .p .em{
+    color: #3A207D;
+  }
+
+
+
+  /* Setting global properties */
+  * {
+    color: #000000; /* --Meteor dark purple color the font color-- */
+    font-family: Inter, sans-serif;
+  }
+
+  /* --Headers-- */
+
+    h1{
+      font-size: 27px;
+      letter-spacing: normal;
+      line-height: 1.24;
+      font-weight: 600;
+      display: block;
+      color: #3A207D;
+    }
+
+    h2{
+      font-size: 21px;
+      letter-spacing: normal;
+      line-height: 1.2;
+      font-weight: 800;
+      margin: 1em 0;
+      display: block;
+      color: #3A207D;
+    }
+
+    h3{
+      font-size: 21px;
+      letter-spacing: normal;
+      line-height: 1.2;
+      font-weight: 600;
+      margin: 1em 0;
+      display: block;
+      color: #3A207D;
+    }
+
+    h4{
+      color: #3A207D;
+    }
+    
+  /* --Link-- */
+
+    a{
+    font-family: Inter;
+    }
+    
+  /* --Unordered List (bullet list)-- */
+
+    ul{
+    font-family: Inter;
+    }
+    
+  /* --Ordered List (numeric list)-- */
+
+    ol{
+    font-family: Inter;
+    }
+    
+  /* --Document body-- */
+
+    body{
+    font-family: Inter;
+    font-size: 14px;
+    background-color: #FFFFFF;
+  }
+
+  /* --Paragraph-- see above*/
+
+
+
+  /* --Footer Logo-- */
+
+  .image-container {
+      position: static;
+      /* top: 0; */
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+  }
+
+  /* --TOC coloring-- */
+
+  .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+    background-color: #3A207D;
+    border-color: #3A207D;
+  }
+
+  .leaflet-top .leaflet-right {
+    color:black;
+  }
+
+  .leaflet-map-title {
+    font-size: 21px;
+    color: #000000;
+    
+    margin-bottom: 5px;
+    font-family: Inter;
+    font-weight: 800;
+    text-align: left;
+  }
+  .leaflet-map-subtitle {
+    font-size: 14px;
+    color: #000000;
+    text-align: left;
+    margin-top: 0px;
+    font-family: Inter;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  /* --Media Queries-- */
+
+  @media (min-width: 576px) {
+    .highcharts-title{
+      font-size: 18px !important
+    }
+
+    .highcharts-subtitle{
+      font-size: 12px !important
+    }
+
+    .highcharts-axis-labels{
+      font-size: 8px !important
+    }
+
+    .highcharts-caption{
+      font-size: 8px !important
+    }
+
+  }
+
+  @media (min-width: 768px) {
+    .highcharts-title{
+      font-size: 21px !important
+    }
+
+    .highcharts-subtitle{
+      font-size: 14px !important
+    }
+
+    .highcharts-axis-labels{
+      font-size: 10px !important
+    }
+
+    .highcharts-caption{
+      font-size: 10px !important
+    }
+
+  }
+
+  @media (min-width: 992px) {
+    .highcharts-title{
+      font-size: 21px !important
+    }
+
+    .highcharts-subtitle{
+      font-size: 14px !important
+    }
+
+    .highcharts-axis-labels{
+      font-size: 14px !important
+    }
+
+    .highcharts-axis-labels .highcharts-xaxis-labels{
+      font-size: 10px !important
+    }
+
+    .highcharts-axis-labels .highcharts-yaxis-labels{
+      font-size: 10px !important
+    }
+
+    .highcharts-caption{
+      font-size: 10px !important
+    }
+
+    .highcharts-container{
+      height: 472px !important
+    }
+
+    .highcharts-legend-item{
+      font-size: 14px !important
+    }
+
+    /* .highcharts-tooltip {
+      width:40px !important;
+      overflow: auto;
+      white-space: normal !important;
+  } */
+  }
+
+
+  /* EDITING WEBSITE PROPERTIES */
 
   /* Edit the CSS properties in this file to create a custom
      Distill theme. Only edit values in the right column
@@ -2452,141 +2685,158 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
 <!--radix_placeholder_article_listing-->
-
-
-<script type="application/javascript">
-
-function init_posts_list() {
-
-  function load_image(img) {
-    var src = $(img).attr('data-src');
-    if (src) {
-      $(img).attr('src', src);
-      $(img).on("load", function() {
-        img.removeAttribute('data-src');
-      });
-    }
-  }
-
-  function set_posts_visible(posts, visible) {
-    if (visible) {
-
-      // show bottom border by default
-      $(posts).removeClass('post-preview-last');
-
-      // apply limits if need be
-      var max_posts = 25;
-      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
-      if (apply_limits && posts.length > max_posts) {
-        posts = $(posts).slice(0, max_posts);
-      } else {
-        $('.posts-more a').addClass('hidden');
-      }
-
-      // apply last style
-      $(posts.slice(-1)[0]).addClass('post-preview-last');
-
-      $(posts).removeClass('hidden');
-      $(posts).find('img[data-src]').each(function(i, img) {
-        load_image(img);
-      });
-    } else {
-      $(posts).addClass('hidden');
-    }
-  }
-
-  function apply_hash_filter() {
-
-    // clear active state
-    $('.categories .active').removeClass('active');
-
-    // mark all posts invisible to start
-    set_posts_visible($('.posts-list').children('a'), false);
-
-    // if we have a hash filter
-    if (window.location.hash && window.location.hash.startsWith("#category:")) {
-
-      // mark posts that match the category visible
-      var page_category = window.location.hash.replace(/^#category:/, "");
-      page_category = decodeURIComponent(page_category)
-      var posts = $('.post-metadata').map(function(idx, script) {
-        var metadata = $.parseJSON($(script).html());
-        var post = null;
-        $.each(metadata.categories, function(idx, category) {
-          category = category.replace(/ /g,"_");
-          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
-            post = $(script).parent().get();
-            return false;
-          }
-        });
-        return post;
-      });
-      set_posts_visible(posts, true);
-
-      // mark the hash active
-      $('.categories li>a[href="' + decodeURIComponent(window.location.hash) + '"]').addClass('active');
-
-      // update the list_caption
-      var list_caption = $('.posts-list-caption');
-      var caption = (page_category || '').toLowerCase() === "articles"
-        ? list_caption.attr('data-caption')
-        : ('Category: ' + page_category.replace(/_/g," "));
-      list_caption.text(caption);
-
-    } else {
-
-      // no hash filter, make all posts visible (subject to max display)
-      set_posts_visible($('.posts-list').children(), true);
-
-      // reset list caption
-      var list_caption = $('.posts-list-caption');
-      list_caption.text(list_caption.attr('data-caption'));
-
-
-    }
-  }
-
-  // more articles
-  function apply_post_limits(apply) {
-    if (apply) {
-      $('.posts-container').addClass('posts-apply-limit');
-      $('.posts-more a').removeClass('hidden');
-    } else {
-      $('.posts-container').removeClass('posts-apply-limit');
-      $('.posts-more a').addClass('hidden');
-    }
-  }
-
-  // click handling for tags
-  $('.dt-tag').click(function(ev) {
-    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
-    return false;
-  })
-
-  // hash filter handling
-  apply_hash_filter();
-  $(window).on('hashchange',function() {
-    apply_post_limits(true);
-    apply_hash_filter();
-  });
-
-  // more articles link
-  $('.posts-more a').click(function(e) {
-    e.preventDefault();
-    apply_post_limits(false);
-    apply_hash_filter();
-    return false;
-  });
-
-}
-
-</script>
-
-
+
+
+<script type="application/javascript">
+
+function init_posts_list() {
+
+  function load_image(img) {
+    var src = $(img).attr('data-src');
+    if (src) {
+      $(img).attr('src', src);
+      $(img).on("load", function() {
+        img.removeAttribute('data-src');
+      });
+    }
+  }
+
+  function set_posts_visible(posts, visible) {
+    if (visible) {
+
+      // show bottom border by default
+      $(posts).removeClass('post-preview-last');
+
+      // apply limits if need be
+      var max_posts = 25;
+      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
+      if (apply_limits && posts.length > max_posts) {
+        posts = $(posts).slice(0, max_posts);
+      } else {
+        $('.posts-more a').addClass('hidden');
+      }
+
+      // apply last style
+      $(posts.slice(-1)[0]).addClass('post-preview-last');
+
+      $(posts).removeClass('hidden');
+      $(posts).find('img[data-src]').each(function(i, img) {
+        load_image(img);
+      });
+    } else {
+      $(posts).addClass('hidden');
+    }
+  }
+
+  function apply_hash_filter() {
+
+    // clear active state
+    $('.categories .active').removeClass('active');
+
+    // mark all posts invisible to start
+    set_posts_visible($('.posts-list').children('a'), false);
+
+    // if we have a hash filter
+    if (window.location.hash && window.location.hash.startsWith("#category:")) {
+
+      // mark posts that match the category visible
+      var page_category = window.location.hash.replace(/^#category:/, "");
+      page_category = decodeURIComponent(page_category)
+      var posts = $('.post-metadata').map(function(idx, script) {
+        var metadata = $.parseJSON($(script).html());
+        var post = null;
+        $.each(metadata.categories, function(idx, category) {
+          category = category.replace(/ /g,"_");
+          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
+            post = $(script).parent().get();
+            return false;
+          }
+        });
+        return post;
+      });
+      set_posts_visible(posts, true);
+
+      // mark the hash active
+      $('.categories li>a[href="' + decodeURIComponent(window.location.hash) + '"]').addClass('active');
+
+      // update the list_caption
+      var list_caption = $('.posts-list-caption');
+      var caption = (page_category || '').toLowerCase() === "articles"
+        ? list_caption.attr('data-caption')
+        : ('Category: ' + page_category.replace(/_/g," "));
+      list_caption.text(caption);
+
+    } else {
+
+      // no hash filter, make all posts visible (subject to max display)
+      set_posts_visible($('.posts-list').children(), true);
+
+      // reset list caption
+      var list_caption = $('.posts-list-caption');
+      list_caption.text(list_caption.attr('data-caption'));
+
+
+    }
+  }
+
+  // more articles
+  function apply_post_limits(apply) {
+    if (apply) {
+      $('.posts-container').addClass('posts-apply-limit');
+      $('.posts-more a').removeClass('hidden');
+    } else {
+      $('.posts-container').removeClass('posts-apply-limit');
+      $('.posts-more a').addClass('hidden');
+    }
+  }
+
+  // click handling for tags
+  $('.dt-tag').click(function(ev) {
+    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
+    return false;
+  })
+
+  // hash filter handling
+  apply_hash_filter();
+  $(window).on('hashchange',function() {
+    apply_post_limits(true);
+    apply_hash_filter();
+  });
+
+  // more articles link
+  $('.posts-more a').click(function(e) {
+    e.preventDefault();
+    apply_post_limits(false);
+    apply_hash_filter();
+    return false;
+  });
+
+}
+
+</script>
+
+
 
 <div class="posts-container posts-apply-limit l-page">
 <div class="posts-list">
 <h1 class="posts-list-caption" data-caption="First 5 LA Data Hub">First 5 LA Data Hub</h1>
+<a href="posts/2024-02-06-childcare-center-closures/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Feb. 6, 2024</div>
+<div class="dt-authors">
+<div class="dt-author">Catalyst California</div>
+</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Childcare Center Closures</h2>
+<div class="dt-tags"></div>
+<p>Trends in child care capacity changes in California and LA County in 2019 and 2020</p>
+</div>
+</a>
 <a href="posts/2024-01-23-data-narrative/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":[]}</script>
 <div class="metadata">
@@ -2621,6 +2871,23 @@ function init_posts_list() {
 <p>Presentation created by Catalyst California for First 5 LA Learning Dialogue on Guaranteed Basic Income (GBI)</p>
 </div>
 </a>
+<a href="posts/2024-01-23-map-test-park-access/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">Jan. 23, 2024</div>
+<div class="dt-authors">
+<div class="dt-author">Catalyst California</div>
+</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Map Test: Park Access</h2>
+<div class="dt-tags"></div>
+<p>Access to parks in Los Angeles County (excerpt from African American Data Pullout).</p>
+</div>
+</a>
 <a href="posts/2024-01-23-strategic-heat-maps/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":[]}</script>
 <div class="metadata">
@@ -2636,21 +2903,6 @@ function init_posts_list() {
 <h2>Strategic Heat Map</h2>
 <div class="dt-tags"></div>
 <p>Visualizing changes over-time in the Best Start Geographies across key indicators related to children 0-5</p>
-</div>
-</a>
-<a href="posts/2024-01-23-map-test-park-access/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":[]}</script>
-<div class="metadata">
-<div class="publishedDate">Jan. 23, 2024</div>
-<div class="dt-authors">
-<div class="dt-author">Catalyst California</div>
-</div>
-</div>
-<div class="thumbnail"></div>
-<div class="description">
-<h2>Map Test: Park Access</h2>
-<div class="dt-tags"></div>
-<p>Access to parks in Los Angeles County (excerpt from African American Data Pullout).</p>
 </div>
 </a>
 <a href="posts/welcome/" class="post-preview">
@@ -2675,7 +2927,7 @@ function init_posts_list() {
 <a href="#">More articles &raquo;</a>
 </div>
 </div>
-<!--/radix_placeholder_article_listing-->
+<!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
 <h1>First 5 LA Data Hub</h1>
