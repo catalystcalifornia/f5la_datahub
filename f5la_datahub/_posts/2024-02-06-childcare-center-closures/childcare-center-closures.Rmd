@@ -790,7 +790,7 @@ hc_add_theme(hc, thm)
 
 ### Closures in 2019 vs. 2020
 
-```{r, message = FALSE, echo = FALSE}
+```{r, message = FALSE, echo = FALSE, , preview=TRUE}
 
 #add a year column for the seats table in LAC
 closed2020_lac<-closed2020_lac%>%
