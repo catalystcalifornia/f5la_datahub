@@ -1,0 +1,1404 @@
+---
+title: "Childcare Center Closures"
+description: |
+  Trends in child care capacity changes in California and LA County in 2019 and 2020
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-02-06
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: yes
+    toc_depth: '2'
+---
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(comment=FALSE, message=FALSE, warning=FALSE, echo=FALSE
+)
+library(tidyr)
+library(dplyr)
+library(highcharter)
+library(stringr)
+library(RPostgreSQL)
+library(tidyverse)
+```
+
+```{r, include=FALSE}
+##########CREATE A THEME FOR HIGHCHART GRAPHS###################
+thm <- hc_theme(
+  colors = c("#332a86", "#22bcb9", "#ec098d"),
+  chart = list(
+    backgroundColor = "white"
+  ),
+  title = list(
+    style = list(
+      color = "#333333"
+    )
+  ),
+  subtitle = list(
+    style = list(
+      color = "#666666",
+      margin = 20,
+      align = "left",
+      style = list(useHTML = TRUE, fontWeight="bold")
+    
+    )
+  ),
+  legend = list(
+    itemStyle = list(
+      color = "black"
+    ),
+    itemHoverStyle = list(
+      color = "gray"
+    )
+  )
+)
+```
+
+```{r, include=FALSE}
+############################SET UP FOR CHILD CARE CENTER DATA##############################################
+
+#read in csv data for child care centers
+
+#childcare_org<-read.csv("W:/Project/RDA Team/First5LA/V2.0 Report/Data/ChildCareCenters11152020.csv") #download 11-15-20
+
+childcare_org<-read.csv("W:/Project/RDA Team/First5LA/V2.0 Report/Data/ChildCareCenters01032021.csv")  #download 01/07/21
+#create a new column 'OPEN' = 1 for all the centers that are licensed (not closed, not pending, not on probation)
+childcare<-childcare_org%>%
+  mutate(open=ifelse(Facility.Status=='LICENSED', 1,0))%>%
+  mutate(close=ifelse(Facility.Status!='LICENSED', 1,0))%>%
+  mutate(Facility.Address=paste(childcare_org$Facility.Address, childcare_org$Facility.City, childcare_org$Facility.State, childcare_org$Facility.Zip, sep=" "))
+#keeping columns of interest 
+childcare<-childcare%>%
+  select(Facility.Type, Facility.Name, Facility.Address, County.Name, Facility.Capacity, Facility.Status, License.First.Date, 
+         Closed.Date, Last.Visit.Date, open, close)
+#make the closed date column in date format for easier data manipulation
+childcare$Closed.Date <- as.Date(childcare$Closed.Date, format= "%m/%d/%Y")
+#now I want to separate out the data by month and year so I can look at closures per month/year instead of per day
+  childcare<-childcare%>%
+  mutate(month = format(Closed.Date, "%m"), year = format(Closed.Date, "%Y"))%>%
+  mutate(year=format(Closed.Date,"%Y"), year=format(Closed.Date, "%Y"))
+  
+  
+#test to make sure it worked
+  childcare%>%
+    select(Closed.Date, month, year)
+  
+  
+#now I can filter data by the year I am interested in -for now lets look at 2020 only  
+y2020<-childcare%>%
+  filter(year==2020)
+#and lets create another dataset for just 2019
+y2019<-childcare%>%
+  filter(year==2019)
+```
+
+```{r include=FALSE}
+#################################SET UP FOR FAMILY CHILD CARE HOME DATA#####################################
+
+#########adding in Family Child Care Homes
+   #read in family child care homes data
+   homes<-read.csv("W:/Project/RDA Team/First5LA/V2.0 Report/Data/CHILDCAREHOMEmorethan801032021.csv")
+   
+   #create a new column 'OPEN' = 1 for all the centers that are licensed (not closed, not pending, not on probation)
+   homes<-homes%>%
+     mutate(open=ifelse(Facility.Status=='LICENSED', 1,0))%>%
+     mutate(close=ifelse(Facility.Status!='LICENSED', 1,0))%>%
+  mutate(Facility.Address=paste(homes$Facility.City, homes$Facility.State, homes$Facility.Zip, sep=" "))
+   
+   #keeping columns of interest 
+   homes<-homes%>%
+     select(Facility.Type, Facility.Name, Facility.Address, County.Name, Facility.Capacity, Facility.Status, License.First.Date, 
+            Closed.Date, Last.Visit.Date, open, close)
+   
+   #make the closed date column in date format for easier data manipulation
+   homes$Closed.Date <- as.Date(homes$Closed.Date, format= "%m/%d/%Y")
+   
+   
+   #now I want to separate out the data by month and year so I can look at closures per month/year instead of per day
+   
+   homes<-homes%>%
+     mutate(month = format(Closed.Date, "%m"), year = format(Closed.Date, "%Y"))%>%
+     mutate(year=format(Closed.Date,"%Y"), year=format(Closed.Date, "%Y"))
+   
+   
+   #now filter for year 2020
+   homes2020<-homes%>%
+     filter(year==2020)
+   
+   #and lets filter for 2019
+   
+ homes2019<-homes%>%
+     filter(year==2019)
+```
+
+```{r include=FALSE}
+#now lets read both the child care and family childcare home data frames into excel for geocoding 
+  library("writexl")
+  write_xlsx(y2020, "W:/Project/RDA Team/First5LA/V2.0 Report/Data/childcarecenter_y2020_download010721_HCIMPORT.xlsx")
+  write_xlsx(homes2020, "W:/Project/RDA Team/First5LA/V2.0 Report/Data/familyhomes_y2020_download010721_HCIMPORT.xlsx")
+```
+
+# Overview
+
+The purpose of this research is to explore child care center and family child care home closures in 2020 to gauge if and how Covid-19 affected closures. This research question was lifted by F5LA and might be incorporated into our F5LA deliverable. 
+
+For this research, I pulled child care center and family child care home data from the [California Department of Social Services (CDSS) page](https://www.ccld.dss.ca.gov/carefacilitysearch/DownloadData). The data was last downloaded on 01/07/21 and is updated on the CDSS page weekly. 
+
+It is important to note that using the licensing data has limitations. Data from the CDSS page only reflects permanent facility closures. These are facilities that no longer have a license to operate. For the purposes of this analysis, facilities that are pending having their licenses approved are also considered closed.
+
+The CDSS data does not show the reason a facility permanently closed. Many facilities have had to close due to new Covid-19 guidelines, or a decrease in enrollment and funding. However, these closures could be excluded from this data because the facility owners can still have their license but cease operations. These type of closures can be thought of as 'temporary closures' because the facility owners still have a license. Temporary closures are not captured in the data, resulting in an under-representation of facilities that are no longer providing services to families. 
+
+__While this research focuses on permanently closed facilities, the facilities that are open are being impacted by Covid-19.__ [Anecdotes from providers and families](https://www.advancementprojectca.org/blog) reveal that many facilities are heavily impacted by Covid-19, which the data might not accurately capture. [Women of color and immigrant women](https://nwlc-ciw49tixgw5lbab.stackpathdns.com/wp-content/uploads/2020/08/ChildCareWorkersFS.pdf) in particular, who disproportionately represent child care workers, are shouldering the burden for providing early learning and care to families. 
+
+For more information on how Covid-19 has been impacting child care in California and Los Angeles, please refer to the Center for the Study of Child Care and Employment's (CSCCE) [survey of licensed child care centers and licensed family child care programs](https://cscce.berkeley.edu/regional-snapshot-california-child-care-at-the-brink-covid-19/).
+
+* The survey results show that family child care homes and child care centers in Los Angeles are facing significant financial challenges and staffing changes as a result of Covid-19. 
+* Over 70% of centers reported that families are unable to pay for childcare due to loss of income
+* Majority of centers report difficulty in affording sanitizing supplies and PPE for staff. 
+
+# Map of Permanent Closures
+
+Below shows the child care facilities and family home care centers that have closed permanently in 2020. Please note that for family home care centers, addresses for each facility was not available. Family home care centers are plotted by the state, city and zip code information. Child care facilities are plotted based on the facility address.
+
+```{r}
+
+#connect to postgres
+
+source("W:\\RDA Team\\R\\credentials_source.R")
+
+con <- connect_to_db("f5la_v2")
+drv <- dbDriver("PostgreSQL")
+
+####Layer 1: Child Care Centers####
+
+library(readxl)
+# centers<-read_xlsx("W:/Project/RDA Team/First5LA/V2.0 Report/Data/childcarecenter_2020_download1152020_HCEXPORT.xlsx")
+centers<-read_xlsx("W:/Project/RDA Team/First5LA/V2.0 Report/Data/childcarecenter_y2020_download010721_HCEXPORT.xlsx")
+
+
+#convert name column to make nicer for label
+centers$name = str_to_title(centers$name)
+
+#####Layer 2: Family Care Centers#####
+
+#read in geocoded family child care center data
+# family<-read_xlsx("W:/Project/RDA Team/First5LA/V2.0 Report/Data/familyhomes_2020_download1152020_HCEXPORT.xlsx")
+family<-read_xlsx("W:/Project/RDA Team/First5LA/V2.0 Report/Data/familyhomes_y2020_download010721_HCEXPORT.xlsx")
+
+
+
+
+#convert name column to make nicer for label
+family$name = str_to_title(family$name)
+
+######Layer 3: BSC###########
+library(sf)
+library(tigris)
+library(rpostgis)
+library(sp)
+
+
+
+bsc<-pgGetGeom(con, "f5la_best_start_geographies") #this is the updated view that CR made 
+
+#convert to sf 
+bsc<-st_as_sf(bsc)
+
+####transform bsc shapefile for leaflet
+
+bsc<-st_transform(bsc, CRS('+proj=longlat +datum=WGS84'))
+
+####Add XY coordinates to bsc spatial df
+
+## find centroid coordinates
+bsc_cnt = st_centroid(bsc)
+bsc_crd = data.frame(st_coordinates(bsc_cnt))
+
+#add ID column to each df and spatial df for joining
+bsc$ID <- seq.int(nrow(bsc))
+bsc_crd$ID <- seq.int(nrow(bsc_crd))
+
+##join spatial frame with data frame to get the XY columns into the spatial frame
+
+bsc<-geo_join(bsc, bsc_crd, 'ID', 'ID',
+              how = "left")
+
+#create label 
+bsc_label<-paste(bsc$best_start)
+
+
+#####LAYER 4: LA County#####
+
+lac<-pgGetGeom(con, "cb_2018_06_county_500k_losangelescounty_noislands")
+
+
+#convert to sf 
+lac<-st_as_sf(lac)
+
+####transform bsc shapefile for leaflet
+
+lac<-st_transform(lac, CRS('+proj=longlat +datum=WGS84'))
+
+
+
+#########################MAP###############################
+ 
+##define points pop up message  
+   points<-paste(centers$name)
+
+
+library(leaflet)
+library(RColorBrewer)
+library(htmltools)
+
+
+#######Map#########
+
+
+
+leaflet()%>%
+  addMapPane("centers_pane", zIndex=480)%>%
+  addMapPane("family_pane", zIndex=480)%>%
+  addMapPane("bsc_pane", zIndex=490)%>%
+
+  
+addCircleMarkers(data = centers, lat = ~Y, lng = ~X, 
+                   weight = 3, fillOpacity = 1, radius=3,
+                   color="white", popup = ~htmlEscape(points), fillColor= "#332a86", stroke = TRUE,
+                 group="Child Care Centers",
+                  options = pathOptions(pane = "centers_pane"))%>%
+  
+  addCircleMarkers(data = family, lat = ~Y, lng = ~X, 
+                   weight = 3, fillOpacity = 1, radius=3,
+                   group="Family Child Care Homes",
+                   color="white", popup = ~htmlEscape(points), fillColor= "#22bcb9", stroke = TRUE,
+                  options = pathOptions(pane = "family_pane"))%>%
+  
+  
+  #bsc layer
+  
+  addPolygons(data=bsc, color="black", weight=1, opacity = 1, fill=F,
+              options = pathOptions(pane = "bsc_pane"),
+              label=as.character(bsc$best_start)
+               ) %>%
+  addLabelOnlyMarkers(data=bsc,  ~X, ~Y, label =  ~as.character(bsc_label), 
+                      labelOptions = labelOptions(noHide= T, direction = 'top', textOnly = T,
+                                                  style=list("font-size"="8px", "color"="black",  "font-weight" = "bold")))%>%
+  
+  
+  #LA County Layer
+  
+  addPolygons(data=lac, color="black", weight=2, fill=F)%>%
+  
+  
+   # toggled layers
+    addLayersControl(overlayGroups =
+                       c("Family Child Care Homes", "Child Care Centers"), 
+                  options = layersControlOptions(collapsed = FALSE),
+                  position = c("bottomleft"))%>%
+  
+  
+  #legend
+   addLegend("bottomleft", colors = c("#22bcb9", "#332a86"), 
+                  labels = c("Family Child Care Homes", "Child Care Centers"))%>%
+ 
+  
+  #base and view
+  addProviderTiles("CartoDB.PositronNoLabels")%>%
+  setView(	-118.205914, 	34.187684	, zoom = 9)
+  
+
+```
+
+
+
+# Summary of Findings
+
+_Child Care Centers_
+
+* More Child Care Centers closed permanently in 2019 compared to 2020 in both California and Los Angeles County
+* There was a huge spike in child care center closures in June of 2020 in California, resulting in a substantial number of seats lost.  Los Angeles County did not experience the same drastic spike.
+* Compared to California, Los Angeles County has fewer closures and seats lost. 
+* In Los Angeles County, permanent closures decreased in April of 2020. 
+
+_Family Care Centers_
+
+* Family Child Care Centers in California experienced a spike in closures and seats lost in August of 2020
+* Both Los Angeles County and California experienced a decrease in closures in April of 2020, similar with Child Care Centers
+* The difference between California and Los Angeles County closures and seats lost is lower compared to the California and Los Angeles County child care centers. 
+
+```{r echo=FALSE, message=FALSE}
+
+library(DT)
+library(kableExtra)
+
+ ###################################CHILD CARE CENTERS: CLOSURES###########################################################
+  
+#Closures in CA
+
+  closed2020<-y2020%>%
+    filter(open==0)%>% #only facilities that are closed
+    group_by(month)%>%
+    summarise(closed=sum(close))%>%
+    mutate(geography='California')
+
+#Closures in LA
+
+   closed2020_lac<-y2020%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(closed=sum(close))%>%
+    mutate(geography='Los Angeles County')
+   
+   #combine and graph on one series and do a summary for  california and la county seats
+   
+   closed2020<-rbind(closed2020, closed2020_lac)
+   
+   #get the total closures lost in 2020 for CA and LAC
+   
+   closed2020<-closed2020%>%
+     mutate(year='2020')%>%
+     select(year, geography, closed)%>%
+     group_by(year, geography)%>%
+     summarise(closed=sum(closed))
+   
+   
+##############now repeat everything above for 2019##############
+
+#childcare closures in CA in 2019
+   
+  closed2019<-y2019%>%
+    filter(open==0)%>% #only facilities that are closed
+    group_by(month)%>%
+    summarise(closed=sum(close))%>%
+    mutate(geography='California')
+
+   
+#childcare closures in LA county in 2019
+   
+    closed2019_lac<-y2019%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(closed=sum(close))%>%
+    mutate(geography='Los Angeles County')
+
+
+   # now combine the two tables
+   
+   closed2019<-rbind(closed2019, closed2019_lac)
+   
+   #now summarise total closures in 2019 for CA and LAC
+   
+  closed2019<-closed2019%>%
+     mutate(year='2019')%>%
+     select(year, geography, closed)%>%
+     group_by(year, geography)%>%
+     summarise(closed=sum(closed))
+  
+  #combine 2019 and 2020 childcare center closures for CA and LAC
+  
+  closed_childcarecenter<-rbind(closed2019, closed2020) %>%
+      mutate(closed=scales::comma(closed))%>%
+  mutate(type="Child Care Center-Closures")
+  
+  #convert to wide
+closed_childcarecenter<-spread(closed_childcarecenter, geography, closed)
+  
+ ###################################CHILD CARE CENTERS: SEATS LOST#######################################################
+  
+ #CA seats 
+  
+  seats2020<-y2020%>%
+    filter(open==0)%>% #only facilities that are closed
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='California')
+
+  #LA County seats
+  
+  seats2020_lac<-y2020%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='Los Angeles County')
+   
+   #combine and graph on one series and do a summary for  california and la county seats
+   
+  seats2020<-rbind(seats2020,seats2020_lac)
+   
+   #get the total seats lost in 2020 for CA and LAC
+   
+   seats2020<-seats2020%>%
+     mutate(year='2020')%>%
+     select(year, geography, seatslost)%>%
+     group_by(year, geography)%>%
+     summarise(seatslost=sum(seatslost))
+   
+   
+##now repeat everything above for 2019#
+   
+   #childcare seats lost in CA in 2019
+   
+     
+  seats2019<-y2019%>%
+    filter(open==0)%>% #only facilities that are closed
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='California')
+
+   
+   #childcare seats lost in la county in 2019
+   
+    seats2019_lac<-y2019%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='Los Angeles County')
+
+
+   # now combine the two tables and graph
+   
+   seats2019<-rbind(seats2019, seats2019_lac)
+   
+   #now summarise total seats lost in 2019 for CA and LAC
+   
+  seats2019<-seats2019%>%
+     mutate(year='2019')%>%
+     select(year, geography, seatslost)%>%
+     group_by(year, geography)%>%
+     summarise(seatslost=sum(seatslost))
+   
+  
+  #####combine 2020 and 2019 dataframes and make a table 
+  
+seats_childcarecenter<-rbind(seats2019, seats2020)%>%
+  mutate(seatslost=scales::comma(seatslost))%>%
+  mutate(type="Child Care Center-Seats Lost")
+
+#convert to wide
+seats_childcarecenter<-spread(seats_childcarecenter, geography, seatslost)
+
+  
+ ##################################FAMILY CHILD CARE HOMES: CLOSURES######################################################
+  
+  
+#Closures in CA
+
+  homes_closed2020<-homes2020%>%
+    filter(open==0)%>% #only facilities that are closed
+    group_by(month)%>%
+    summarise(closed=sum(close))%>%
+    mutate(geography='California')
+
+#Closures in LA
+
+   homes_closed2020_lac<-homes2020%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(closed=sum(close))%>%
+    mutate(geography='Los Angeles County')
+   
+   #combine and graph on one series and do a summary for  california and la county seats
+   
+   homes_closed2020<-rbind(homes_closed2020, homes_closed2020_lac)
+   
+   #get the total closures lost in 2020 for CA and LAC
+   
+   homes_closed2020<-homes_closed2020%>%
+     mutate(year='2020')%>%
+     select(year, geography, closed)%>%
+     group_by(year, geography)%>%
+     summarise(closed=sum(closed))
+   
+   
+####now repeat everything above for 2019#######
+
+#childcare closures in CA in 2019
+   
+  homes_closed2019<-homes2019%>%
+    filter(open==0)%>% #only facilities that are closed
+    group_by(month)%>%
+    summarise(closed=sum(close))%>%
+    mutate(geography='California')
+
+   
+#childcare closures in LA county in 2019
+   
+    homes_closed2019_lac<-homes2019%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(closed=sum(close))%>%
+    mutate(geography='Los Angeles County')
+
+
+   # now combine the two tables and graph
+   
+   homes_closed2019<-rbind(homes_closed2019, homes_closed2019_lac)
+   
+   #now summarise total closures in 2019 for CA and LAC
+   
+  homes_closed2019<-homes_closed2019%>%
+     mutate(year='2019')%>%
+     select(year, geography, closed)%>%
+     group_by(year, geography)%>%
+     summarise(closed=sum(closed))
+  
+  #combine 2019 and 2020 childcare center closures for CA and LAC
+  
+  closed_familyhome<-rbind(homes_closed2020, homes_closed2019)%>%
+          mutate(closed=scales::comma(closed))%>%
+  mutate(type="Family Child Care Home-Closures")
+  
+  #convert to wide
+  
+closed_familyhome<-spread(closed_familyhome, geography, closed)
+
+ 
+##################################FAMILY CHILD CARE HOMES: SEATS LOST###################################################
+ 
+#CA seats 
+  
+  home_seats2020<-homes2020%>%
+    filter(open==0)%>% #only facilities that are closed
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='California')
+
+  #LA County seats
+  
+   home_seats2020_lac<-homes2020%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='Los Angeles County')
+   
+   #combine and graph on one series and do a summary for  california and la county seats
+   
+   home_seats2020<-rbind(home_seats2020, home_seats2020_lac)
+   
+   #get the total seats lost in 2020 for CA and LAC
+   
+   home_seats2020<-home_seats2020%>%
+     mutate(year='2020')%>%
+     select(year, geography, seatslost)%>%
+     group_by(year, geography)%>%
+     summarise(seatslost=sum(seatslost))
+   
+   
+##now repeat everything above for 2019#
+   
+   #childcare seats lost in CA in 2019
+   
+     
+  home_seats2019<-homes2019%>%
+    filter(open==0)%>% #only facilities that are closed
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='California')
+
+   
+   #childcare seats lost in la county in 2019
+   
+    home_seats2019_lac<-homes2019%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='Los Angeles County')
+
+
+   # now combine the two tables and graph
+   
+   home_seats2019<-rbind(home_seats2019, home_seats2019_lac)
+   
+   #now summarise total seats lost in 2019 for CA and LAC
+   
+  home_seats2019<-home_seats2019%>%
+     mutate(year='2019')%>%
+     select(year, geography, seatslost)%>%
+     group_by(year, geography)%>%
+     summarise(seatslost=sum(seatslost))
+   
+  
+  #####combine 2020 and 2019 dataframes and make a table 
+  
+seats_familyhome<-rbind(home_seats2019, home_seats2020)%>%
+  mutate(seatslost=scales::comma(seatslost))%>%
+  mutate(type="Family Child Care Home-Seats Lost")
+
+#convert to wide
+seats_familyhome<-spread(seats_familyhome, geography, seatslost)
+  
+
+ 
+  
+  
+  
+###########################################FINAL COMBINE  / TABLE#################################################
+  
+  #####combine 2020 and 2019 dataframes and make a table 
+  
+table<-rbind(closed_familyhome, closed_childcarecenter, seats_familyhome, seats_childcarecenter)
+
+
+#customize order of the rows to be alphabetical
+table <- table[order(table$type),]
+
+
+#rename columns to look nicer
+
+names(table)[names(table) == "year"] <- "Year"
+names(table)[names(table) == "geography"] <- "Geography"
+names(table)[names(table) == "closed"] <- "Closures"
+
+
+
+
+#make a nice table
+kable(table, 
+      caption = "Summary of Permanent Closures and Seats Lost", align='c', col.names = c("", "", "California", "Los Angeles County"))%>%
+      kable_styling(bootstrap_options = c("striped"), position = "center", font_size = 15)%>%
+    pack_rows("Permanent Center Closures", 1, 4, label_row_css = "background-color: #332a86; color: #fff;") %>%
+      pack_rows("Family Child Care Home", 1, 2)%>%
+  pack_rows("Child Care Center", 3, 4)%>%
+      pack_rows("Seats Lost", 5, 8, label_row_css = "background-color: #332a86; color: #fff;")%>%
+      pack_rows("Family Child Care Home", 5, 6)%>%
+  pack_rows("Child Care Center", 7, 8)
+
+
+```
+
+# Child Care Centers 
+
+## Closures {.tabset .tabset-pills}
+
+### Closures in 2020 by month
+
+```{r, echo=FALSE, message=FALSE}
+############Closures###############
+###################################
+
+#I want to summarise and get the number of closed facilities every month in 2020
+
+closed2020<-y2020%>%
+  group_by(month)%>%
+ summarise(closed=sum(close))%>%
+  mutate(geography='California')
+
+
+
+##now lets look at it but only for LA County
+
+
+closed2020_lac<-y2020%>%
+  filter(County.Name=='LOS ANGELES')%>%
+  group_by(month)%>%
+  summarise(closed=sum(close))%>%
+  mutate(geography='Los Angeles County')
+
+
+#now I am going to combine and look at CA and LA County on the same graph
+  
+  closed2020<-rbind(closed2020, closed2020_lac)
+  
+#alter text to get months spelled out and numbers formatted nicely
+  closed2020<-closed2020%>% 
+    mutate(month=as.numeric(month))%>%
+    mutate(MonthName = month.name[month])
+  
+#graph
+ hc<-hchart(closed2020, "line",
+         hcaes(x=MonthName, y=closed, group=geography),
+         tooltip = list(pointFormat = "Number of centers with close dates in {point.MonthName}:
+                        {point.closed}<br>"))%>%
+
+      hc_tooltip(crosshairs = TRUE)%>%
+     #hc_xAxis(title = list(text = "Year=2020"))%>%
+    hc_yAxis(title = list(text = "Number of Childcare Center Closures"))%>%
+   hc_xAxis(title = list(text = "Month of Closure"))%>%
+    hc_title(
+    text = "Child Care Center Closures in 2020",
+    margin = 20,
+    align = "left",
+    style = list(useHTML = TRUE, fontWeight="bold")
+    )%>%
+      hc_subtitle(
+    text = "Permanent Closures",
+     style = list( fontWeight = "bold"),
+    align = "left"
+  ) 
+  
+ hc_add_theme(hc, thm)
+
+  
+```  
+
+
+### Closures in 2020 by day
+
+```{r, echo=FALSE, message=FALSE}
+
+closed_day<-y2020%>%
+  group_by(Closed.Date)%>%
+  summarise(closed=sum(close))%>%
+  mutate(geography='California')
+
+closed_day_lac<-y2020%>%
+  filter(County.Name=='LOS ANGELES')%>%
+  group_by(Closed.Date)%>%
+  summarise(closed=sum(close))%>%
+  mutate(geography='Los Angeles County')
+
+closed_day<-rbind(closed_day, closed_day_lac)
+
+#graph
+hc<-hchart(closed_day, "line",
+         hcaes(x=Closed.Date, y=closed, group=geography),
+         tooltip = list(pointFormat = "Number of Closures:
+                        {point.closed}<br>"))%>%
+
+      hc_tooltip(crosshairs = TRUE)%>%
+     #hc_xAxis(title = list(text = "Year=2020"))%>%
+    hc_yAxis(title = list(text = "Number of Childcare Center Closures"))%>%
+   hc_xAxis(title = list(text = "Date of Closure"))%>%
+  hc_title(
+    text = "Child Care Center Closures in 2020",
+    margin = 20,
+    align = "left",
+    style = list(useHTML = TRUE, fontWeight="bold")
+    )%>%
+      hc_subtitle(
+    text = "Permanent Closures",
+     style = list( fontWeight = "bold"),
+    align = "left"
+  ) 
+
+hc_add_theme(hc, thm)
+```
+
+
+### Closures in 2019 vs. 2020
+
+```{r, message = FALSE, echo = FALSE}
+
+#add a year column for the seats table in LAC
+closed2020_lac<-closed2020_lac%>%
+  mutate(year=2020)
+
+#now analyze the data for 2019
+
+
+closed2019_lac<-childcare%>%
+  filter(year==2019)%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(closed=sum(close))%>%
+    mutate(geography='Los Angeles County')%>%
+     mutate(year=2019)
+
+   # now combine the two tables and graph
+   
+   closeds1920_lac<-rbind(closed2020_lac, closed2019_lac)%>%
+     mutate(month=as.numeric(month))%>%
+     mutate(MonthName=month.name[month])
+   
+
+   #lets calculate the means per year so we can potentially add a throughline on the graph
+   mean<-closeds1920_lac%>%
+     group_by(year)%>%
+     summarise(mean=mean(closed))
+   
+   #and now lets add the mean values back to the df for graphing
+  closeds1920_lac<-closeds1920_lac%>%
+     mutate(mean=ifelse(year==2019, 14.9, 9.8))
+  
+  #separate df for text labels on mean line
+  
+  text<-data.frame(
+    label=c("Average = 14.9", "Average = 9.8"),
+    year=c("2019", "2020")
+    
+  )
+
+  #graph
+   library(ggplot2)
+   
+  
+   ggplot(data=closeds1920_lac, aes(x=month, y=closed))+
+  geom_line(aes(group=1))+
+     geom_point()+
+     geom_hline(aes(yintercept=mean), colour="#22bcb9", lty=5)+
+    
+      geom_text(data=text, color="black",
+               mapping = aes(x=-Inf, y=-Inf, label=label),
+               hjust=-2,
+               vjust=-20)+
+     
+     xlab("\nMonth of Closure")+
+     ylab("Number of Seats Lost\n")+
+    theme_bw()+
+     scale_x_continuous(breaks=seq(0, 12, 1))+
+          theme(plot.title = element_text(hjust = 0.5),
+                 plot.subtitle = element_text(hjust = 0.5))+
+     labs(title = "Child Care Center Closures in 2019 and 2020 in LA County",
+              subtitle = "Permanent Closures\n"
+              )+
+     facet_wrap(~year)
+
+
+
+   
+```     
+
+## Seats Lost {.tabset .tabset-pills}
+
+### Seats lost in 2020 by month
+  
+```{r, echo=FALSE, message=FALSE}
+
+
+#############Seats Lost###############
+  ####################################
+  
+  #CA seats 
+  
+  seats2020<-y2020%>%
+    filter(open==0)%>% #only facilities that are closed
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='California')
+
+  #LA County seats
+  
+   seats2020_lac<-y2020%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='Los Angeles County')
+   
+   #combine and graph on one series
+   
+   seats2020<-rbind(seats2020, seats2020_lac)
+   
+   #mutate to add a column with fully spelled out months AND for commas in 1k+ values
+   
+   seats2020<-seats2020%>%
+     mutate(month=as.numeric(month))%>%
+     mutate(MonthName=month.name[month])
+
+   
+
+#graph
+   hc<-hchart(seats2020, "line", 
+          hcaes(x=MonthName, y=seatslost, group=geography),
+           tooltip = list(pointFormat = "Number of seats lost  with close dates in {point.MonthName}:
+                        {point.seatslost:,.0f}<br>"))%>%
+     hc_yAxis(title = list(text = "Number of Childcare Center Seats Lost"))%>%
+      hc_xAxis(title = list(text = "Month of Closure"))%>%
+     hc_title(
+    text = "Child Care Center Seats Lost in 2020",
+    margin = 20,
+    align = "left",
+    style = list(useHTML = TRUE, fontWeight="bold")
+    )%>%
+      hc_subtitle(
+    text = "Permanent Losses",
+    align = "left",
+    style = list( fontWeight = "bold")
+  ) 
+
+hc_add_theme(hc, thm) 
+```
+
+
+### Seats lost in 2020 by day
+
+```{r, echo=FALSE, message=FALSE}
+
+seats_day<-y2020%>%
+  group_by(Closed.Date)%>%
+  summarise(seatslost=sum(Facility.Capacity))%>%
+  mutate(geography='California')
+
+seats_day_lac<-y2020%>%
+  filter(County.Name=='LOS ANGELES')%>%
+  group_by(Closed.Date)%>%
+  summarise(seatslost=sum(Facility.Capacity))%>%
+  mutate(geography='Los Angeles County')
+
+seats_day<-rbind(seats_day, seats_day_lac)
+
+
+
+#graph
+hc<-hchart(seats_day, "line", 
+         hcaes(x=Closed.Date, y=seatslost, group=geography),
+         tooltip = list(pointFormat = "Number of Seats Lost:
+                        {point.seatslost}<br>"))%>%
+
+      hc_tooltip(crosshairs = TRUE)%>%
+    hc_yAxis(title = list(text = "Number of Seats Lost"))%>%
+  hc_xAxis(title=list(text="Date of Closure"))%>%
+   hc_title(
+    text = "Child Care Center Seats Lost in 2020",
+    margin = 20,
+    align = "left",
+    style = list(useHTML = TRUE, fontWeight="bold")
+    )%>%
+      hc_subtitle(
+    text = "Permanent Losses",
+    align = "left",
+    style = list( fontWeight = "bold")
+  ) 
+
+hc_add_theme(hc, thm) 
+
+
+```
+
+
+
+### Seats lost in 2019 vs. 2020
+
+```{r, echo=FALSE, message=FALSE}
+
+#add a year column for the seats table in LAC
+seats2020_lac<-seats2020_lac%>%
+  mutate(year=2020)
+
+#now analyze the data for 2019
+
+   seats2019_lac<-childcare%>%
+  filter(year==2019)%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='Los Angeles County')%>%
+     mutate(year=2019)
+
+   # now combine the two tables and graph
+   
+   seats1920_lac<-rbind(seats2020_lac, seats2019_lac)%>%
+     mutate(month=as.numeric(month))%>%
+     mutate(MonthName=month.name[month])
+   
+   #lets calculate the means per year so we can potentially add a throughline on the graph
+   mean<-seats1920_lac%>%
+     group_by(year)%>%
+     summarise(mean=mean(seatslost))
+   
+   #and now lets add the mean values back to the df for graphing
+   seats1920_lac<-seats1920_lac%>%
+     mutate(mean=ifelse(year==2019, 706.6, 449.3))
+
+   
+   
+     
+  #separate df for text labels on mean line
+  
+  text<-data.frame(
+    label=c("Average = 706.6", "Average = 449.3"),
+    year=c("2019", "2020")
+    
+  )
+   
+  #graph
+   library(ggplot2)
+   
+   ggplot(data=seats1920_lac, aes(x=month, y=seatslost))+
+  geom_line(aes(group=1))+
+     geom_point()+
+     xlab("\nMonth of Closure")+
+     ylab("Number of Seats Lost\n")+
+     theme_bw()+
+     geom_hline(aes(yintercept=mean), colour="#22bcb9", lty=5)+
+     
+      geom_text(data=text, color="black",
+               mapping = aes(x=-Inf, y=-Inf, label=label),
+               hjust=-1.62,
+               vjust=-20)+
+     
+     scale_x_continuous(breaks=seq(0, 12, 1))+
+         theme(plot.title = element_text(hjust = 0.5),
+                 plot.subtitle = element_text(hjust = 0.5))+
+     labs(title = "Child Care Center Seats Lost in 2019 and 2020 in LA County",
+              subtitle = "Permanent Losses\n"
+              )+
+     facet_wrap(~year)
+
+
+```
+
+
+# Family Child Care Homes 
+
+## Closures {.tabset .tabset-pills}
+
+### Closures in 2020 by month
+
+```{r, echo=FALSE, message=FALSE}
+
+   #I want to summarise and get the number of closed facilities every month in 2020
+   
+   homesclosed2020<-homes2020%>%
+     group_by(month)%>%
+     summarise(closed=sum(close))%>%
+     mutate(geography='California')
+   
+   
+#now lets do the same analysis but only for LA County
+      homesclosed2020_lac<-homes2020%>%
+        filter(County.Name=="LOS ANGELES")%>%
+     group_by(month)%>%
+     summarise(closed=sum(close))%>%
+     mutate(geography='Los Angeles County')
+
+#now combine the tables and graph     #and format the month column 
+homesclosed2020<-rbind(homesclosed2020, homesclosed2020_lac)%>%
+  mutate(month=as.numeric(month))%>%
+  mutate(MonthName=month.name[month])
+
+#graph
+
+   hc<-hchart(homesclosed2020, "line",
+          hcaes(x=MonthName, y=closed, group=geography),
+           tooltip = list(pointFormat = "Number of family child care homes with close dates in {point.MonthName}: {point.closed:,.0f}<br>"))%>%
+     hc_xAxis(title = list(text = "Month of Closure"))%>%
+     hc_yAxis(title = list(text = "Number of Family Child Care Homes Closed"))%>%
+      hc_title(
+    text = "Family Care Center Closures in 2020",
+    margin = 20,
+    align = "left",
+    style = list(useHTML = TRUE, fontWeight="bold")
+    )%>%
+      hc_subtitle(
+    text = "Permanent Closures",
+     style = list( fontWeight = "bold"),
+    align = "left"
+  ) 
+   
+hc_add_theme(hc, thm) 
+
+
+
+   
+```   
+
+### Closures in 2020 by day
+
+```{r, echo=FALSE, message=FALSE}
+
+homes_day<-homes2020%>%
+  group_by(Closed.Date)%>%
+  summarise(closed=sum(close))%>%
+  mutate(geography='California')
+
+homes_day_lac<-homes2020%>%
+  filter(County.Name=='LOS ANGELES')%>%
+  group_by(Closed.Date)%>%
+  summarise(closed=sum(close))%>%
+  mutate(geography='Los Angeles County')
+
+
+homes_day<-rbind(homes_day, homes_day_lac)
+
+
+
+#graph
+hc<-hchart(homes_day, "line", 
+         hcaes(x=Closed.Date, y=closed, group=geography),
+         tooltip = list(pointFormat = "Number of Closures:
+                        {point.closed}<br>"))%>%
+
+      hc_tooltip(crosshairs = TRUE)%>%
+     hc_xAxis(title = list(text = "Date of Closure"))%>%
+    hc_yAxis(title = list(text = "Number of Closures"))%>%
+   hc_title(
+    text = "Family Care Center Closures in 2020",
+    margin = 20,
+    align = "left",
+    style = list(useHTML = TRUE, fontWeight="bold")
+    )%>%
+      hc_subtitle(
+    text = "Permanent Closures",
+     style = list( fontWeight = "bold"),
+    align = "left"
+  ) 
+
+hc_add_theme(hc, thm) 
+
+
+```
+
+### Closures in 2019 vs. 2020
+
+```{r, message = FALSE, echo = FALSE}
+
+#add a year column for the seats table in LAC
+
+homesclosed2020_lac<-homesclosed2020_lac%>%
+  mutate(year=2020)
+
+#now analyze the data for 2019
+
+
+homesclosed2019<-homes%>%
+  filter(year==2019)%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(closed=sum(close))%>%
+    mutate(geography='Los Angeles County')%>%
+     mutate(year=2019)
+
+   # now combine the two tables and graph
+   
+   homesclosed1920_lac<-rbind(homesclosed2020_lac, homesclosed2019)%>%
+     mutate(month=as.numeric(month))%>%
+     mutate(MonthName=month.name[month])
+   
+   #lets calculate the means per year so we can potentially add a throughline on the graph
+   mean<-homesclosed1920_lac%>%
+     group_by(year)%>%
+     summarise(mean=mean(closed))
+   
+   #and now lets add the mean values back to the df for graphing
+   homesclosed1920_lac<-homesclosed1920_lac%>%
+     mutate(mean=ifelse(year==2019, 16.2, 16.7))
+   
+   
+       
+  #separate df for text labels on mean line
+  
+  text<-data.frame(
+    label=c("Average = 16.2", "Average = 16.7"),
+    year=c("2019", "2020")
+    
+  )
+
+
+  #graph
+   library(ggplot2)
+   
+  
+   ggplot(data=homesclosed1920_lac, aes(x=month, y=closed))+
+  geom_line(aes(group=1))+
+     geom_point()+
+     
+     xlab("\nMonth of Closure")+
+     ylab("Numer of Closures\n")+
+    theme_bw()+
+     geom_hline(aes(yintercept=mean), colour="#22bcb9", lty=5)+
+     
+     geom_text(data=text, color="black",
+               mapping = aes(x=-Inf, y=-Inf, label=label),
+               hjust=-1.9,
+               vjust=-24.3)+
+     
+     scale_x_continuous(breaks=seq(0, 12, 1))+
+      scale_y_continuous(breaks=seq(0, 30, 5))+
+       theme(plot.title = element_text(hjust = 0.5),
+                 plot.subtitle = element_text(hjust = 0.5))+
+     labs(title = "Family Care Center Closures in 2019 and 2020 in LA County",
+              subtitle = "Permanent Closures\n"
+              )+
+     facet_wrap(~year)
+
+   
+```     
+
+
+## Seats {.tabset .tabset-pills}
+
+### Seats Lost in 2020 by month
+```{r, echo=FALSE, message=FALSE}
+#############Seats Lost###############
+  ####################################
+  
+  #CA seats 
+  
+  homeseats2020<-homes2020%>%
+    filter(open==0)%>% 
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='California')
+
+  #LA County seats
+  
+   homeseats2020_lac<-homes2020%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='Los Angeles County')
+   
+   #combine and graph on one series
+   
+   homeseats2020<-rbind(homeseats2020, homeseats2020_lac)
+   
+   #mutate to add a column with fully spelled out months AND for commas in 1k+ values
+   
+   homeseats2020<-homeseats2020%>%
+     mutate(month=as.numeric(month))%>%
+     mutate(MonthName=month.name[month])
+
+   #graph 
+   
+
+   hc<-hchart(homeseats2020, "line",
+          hcaes(x=MonthName, y=seatslost, group=geography),
+           tooltip = list(pointFormat = "Number of seats lost  with close dates in {point.MonthName}:
+                        {point.seatslost:,.0f}<br>"))%>%
+     hc_xAxis(title = list(text = "Month of Closure"))%>%
+     hc_yAxis(title = list(text = "Number of Family Child Care Center Seats Lost"))%>%
+     hc_title(
+    text = "Family Care Center Seats Lost in 2020",
+    margin = 20,
+    align = "left",
+    style = list(useHTML = TRUE, fontWeight="bold")
+    )%>%
+      hc_subtitle(
+    text = "Permanent Losses",
+     style = list( fontWeight = "bold"),
+    align = "left"
+  ) 
+   
+   hc_add_theme(hc, thm) 
+
+
+``` 
+
+### Seats Lost in 2020 by day
+
+```{r, echo=FALSE, message=FALSE}
+
+homeseats_day<-homes2020%>%
+  group_by(Closed.Date)%>%
+  summarise(seatslost=sum(Facility.Capacity))%>%
+  mutate(geography='California')
+
+homeseats_day_lac<-homes2020%>%
+  filter(County.Name=='LOS ANGELES')%>%
+  group_by(Closed.Date)%>%
+  summarise(seatslost=sum(Facility.Capacity))%>%
+  mutate(geography='Los Angeles County')
+
+
+homeseats_day<-rbind(homeseats_day, homeseats_day_lac)
+
+#graph
+
+
+  
+hc<-hchart(homeseats_day, "line", 
+         hcaes(x=Closed.Date, y=seatslost, group=geography),
+         tooltip = list(pointFormat = "Seats Lost:
+                        {point.seatslost}<br>"))%>%
+
+      hc_tooltip(crosshairs = TRUE)%>%
+     hc_xAxis(title = list(text = "Date of Closure"))%>%
+    hc_yAxis(title = list(text = "Number of Seats Lost"))%>%
+  hc_title(
+    text = "Family Care Center Seats Lost in 2020",
+    margin = 20,
+    align = "left",
+    style = list(useHTML = TRUE, fontWeight="bold")
+    )%>%
+      hc_subtitle(
+    text = "Permanent Losses",
+     style = list( fontWeight = "bold"),
+    align = "left"
+  ) 
+
+hc_add_theme(hc, thm) 
+
+
+```
+
+
+### Seats Lost in 2019 vs. 2020
+```{r, message = FALSE, echo = FALSE}
+
+#add a year column for the seats table in LAC
+
+homeseats2020_lac<-homeseats2020_lac%>%
+  mutate(year=2020)
+
+#now analyze the data for 2019
+
+
+homeseats2019<-homes%>%
+  filter(year==2019)%>%
+    filter(open==0)%>%
+    filter(County.Name=='LOS ANGELES')%>%
+    group_by(month)%>%
+    summarise(seatslost=sum(Facility.Capacity))%>%
+    mutate(geography='Los Angeles County')%>%
+     mutate(year=2019)
+
+   # now combine the two tables and graph
+   
+   homeseats1920_lac<-rbind(homeseats2020_lac, homeseats2019)%>%
+     mutate(month=as.numeric(month))%>%
+     mutate(MonthName=month.name[month])
+   
+   #lets calculate the means per year so we can potentially add a throughline on the graph
+   mean<-homeseats1920_lac%>%
+     group_by(year)%>%
+     summarise(mean=mean(seatslost))
+   
+   #and now lets add the mean values back to the df for graphing
+   homeseats1920_lac<-homeseats1920_lac%>%
+     mutate(mean=ifelse(year==2019, 224.7, 231))
+   
+         
+  #separate df for text labels on mean line
+  
+  text<-data.frame(
+    label=c("Average = 224.7", "Average = 231.0"),
+    year=c("2019", "2020")
+    
+  )
+
+  #graph
+   library(ggplot2)
+   
+  
+   ggplot(data=homeseats1920_lac, aes(x=month, y=seatslost))+
+  geom_line(aes(group=1))+
+     geom_point()+
+     
+     xlab("\nMonth of Closure")+
+     ylab("Numer of Seats Lost\n")+
+    theme_bw()+
+     geom_hline(aes(yintercept=mean), colour="#22bcb9", lty=5)+
+     
+      geom_text(data=text, color="black",
+               mapping = aes(x=-Inf, y=-Inf, label=label),
+               hjust=-1.7,
+               vjust=-24)+
+     
+     scale_x_continuous(breaks=seq(0, 12, 1))+
+      scale_y_continuous(breaks=seq(0, 400, 50))+
+       theme(plot.title = element_text(hjust = 0.5),
+                 plot.subtitle = element_text(hjust = 0.5))+
+     labs(title = "Family Care Center Seats Lost in 2019 and 2020 in LA County",
+              subtitle = "Permanent Losses\n"
+              )+
+     facet_wrap(~year)
+
+   
+```     
