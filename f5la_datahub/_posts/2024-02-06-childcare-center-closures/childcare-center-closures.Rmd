@@ -2,12 +2,14 @@
 title: "Childcare Center Closures"
 description: |
   Trends in child care capacity changes in California and LA County in 2019 and 2020
-author:
+preview: 
+  author:
   - name: Catalyst California
     url: catalystcalifornia.org
 date: 2024-02-06
 output:
   distill::distill_article:
+    css: "W:\\RDA Team\\R\\cc_brandguide.css"
     self_contained: false
     toc: yes
     toc_depth: '2'
