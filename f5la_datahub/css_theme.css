@@ -1,5 +1,238 @@
+/* CC Brand Guide CSS Stylesheet for RMDs*/
 
-/* base variables */
+/* Styling from https://www.catalystcalifornia.org/campaign-tools/maps-and-data/justice-equity-need-index */
+/* h1 seems reserved for the title of the webpage */
+h1{
+  font-size: 27px;
+  letter-spacing: normal;
+  line-height: 1.24;
+  font-weight: 600;
+  display: block;
+  color: #3A207D;
+}
+
+/* h5 headers are wrapped in <strong> for "Overview"/"About" type sections */
+h5{
+  font-size: 21px;
+  letter-spacing: normal;
+  line-height: 1.2;
+  font-weight: 600;
+  margin: 1em 0;
+  display: block;
+  color: #3A207D;
+}
+
+/* p is for body content - may or may not want to use for visuals */
+p{
+  font-size: 18px; /* consider changing to 15px*/
+  letter-spacing: normal;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 1em 0;
+  display: block;
+  color: #3A207D;
+}
+
+.p .em{
+  color: #3A207D;
+}
+
+
+
+/* Setting global properties */
+* {
+  color: #000000; /* --Meteor dark purple color the font color-- */
+  font-family: Inter, sans-serif;
+}
+
+/* --Headers-- */
+
+  h1{
+    font-size: 27px;
+    letter-spacing: normal;
+    line-height: 1.24;
+    font-weight: 600;
+    display: block;
+    color: #3A207D;
+  }
+
+  h2{
+    font-size: 21px;
+    letter-spacing: normal;
+    line-height: 1.2;
+    font-weight: 800;
+    margin: 1em 0;
+    display: block;
+    color: #3A207D;
+  }
+
+  h3{
+    font-size: 21px;
+    letter-spacing: normal;
+    line-height: 1.2;
+    font-weight: 600;
+    margin: 1em 0;
+    display: block;
+    color: #3A207D;
+  }
+
+  h4{
+    color: #3A207D;
+  }
+  
+/* --Link-- */
+
+  a{
+  font-family: Inter;
+  }
+  
+/* --Unordered List (bullet list)-- */
+
+  ul{
+  font-family: Inter;
+  }
+  
+/* --Ordered List (numeric list)-- */
+
+  ol{
+  font-family: Inter;
+  }
+  
+/* --Document body-- */
+
+  body{
+  font-family: Inter;
+  font-size: 14px;
+  background-color: #FFFFFF;
+}
+
+/* --Paragraph-- see above*/
+
+
+
+/* --Footer Logo-- */
+
+.image-container {
+    position: static;
+    /* top: 0; */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+}
+
+/* --TOC coloring-- */
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+  background-color: #3A207D;
+  border-color: #3A207D;
+}
+
+.leaflet-top .leaflet-right {
+  color:black;
+}
+
+.leaflet-map-title {
+  font-size: 21px;
+  color: #000000;
+  
+  margin-bottom: 5px;
+  font-family: Inter;
+  font-weight: 800;
+  text-align: left;
+}
+.leaflet-map-subtitle {
+  font-size: 14px;
+  color: #000000;
+  text-align: left;
+  margin-top: 0px;
+  font-family: Inter;
+  font-weight: 400;
+  text-align: left;
+}
+
+/* --Media Queries-- */
+
+@media (min-width: 576px) {
+  .highcharts-title{
+    font-size: 18px !important
+  }
+
+  .highcharts-subtitle{
+    font-size: 12px !important
+  }
+
+  .highcharts-axis-labels{
+    font-size: 8px !important
+  }
+
+  .highcharts-caption{
+    font-size: 8px !important
+  }
+
+}
+
+@media (min-width: 768px) {
+  .highcharts-title{
+    font-size: 21px !important
+  }
+
+  .highcharts-subtitle{
+    font-size: 14px !important
+  }
+
+  .highcharts-axis-labels{
+    font-size: 10px !important
+  }
+
+  .highcharts-caption{
+    font-size: 10px !important
+  }
+
+}
+
+@media (min-width: 992px) {
+  .highcharts-title{
+    font-size: 21px !important
+  }
+
+  .highcharts-subtitle{
+    font-size: 14px !important
+  }
+
+  .highcharts-axis-labels{
+    font-size: 14px !important
+  }
+
+  .highcharts-axis-labels .highcharts-xaxis-labels{
+    font-size: 10px !important
+  }
+
+  .highcharts-axis-labels .highcharts-yaxis-labels{
+    font-size: 10px !important
+  }
+
+  .highcharts-caption{
+    font-size: 10px !important
+  }
+
+  .highcharts-container{
+    height: 472px !important
+  }
+
+  .highcharts-legend-item{
+    font-size: 14px !important
+  }
+
+  /* .highcharts-tooltip {
+    width:40px !important;
+    overflow: auto;
+    white-space: normal !important;
+} */
+}
+
+
+/* EDITING WEBSITE PROPERTIES */
 
 /* Edit the CSS properties in this file to create a custom
    Distill theme. Only edit values in the right column
