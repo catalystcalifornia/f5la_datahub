@@ -1,0 +1,141 @@
+---
+title: "Children Under 5"
+description: "The population of children under 5 decreased by 24% over the last 10 years." 
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-02-07
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidycensus)
+library(tidyverse)
+library(ggplot2)
+library(scales)
+library(highcharter)
+library(magrittr)
+
+```
+
+```{r}
+#make line chart of LA County under 5 population over time
+
+#set variables
+#v21 <- load_variables(2021, "acs1")
+#View(v21)
+pop_vars <- c(
+  "B01001_003",
+  "B01001_027")
+
+#set years - no 2020 b/c of pandemic
+years <- c(2013:2019, 2021:2022)
+names(years) <- years
+
+
+#get data
+la_under5_by_year <- map_dfr(years, ~{
+  get_acs(
+  geography = "county",
+  variables = pop_vars,
+  state = "CA",
+  county = "Los Angeles",
+  survey = "acs1",
+  year = .x
+)
+}, .id = "year")
+
+
+#add male and female to get totals
+la_under5_by_year <- la_under5_by_year %>% group_by(NAME, year) %>%
+  summarize(population = sum(estimate),
+            moe = moe_sum(moe, estimate = estimate, na.rm = FALSE))
+
+
+#make 2020 value as average of 2019 and 2021 values
+under5_2020 <- (la_under5_by_year[which(la_under5_by_year$year == 2019),]$population +
+  la_under5_by_year[which(la_under5_by_year$year == 2021),]$population) / 2
+
+
+#and add it to the rest
+la_under5_by_year[nrow(la_under5_by_year) + 1,] = list("Los Angeles County, California", "2020", under5_2020, 0)
+la_under5_by_year <- la_under5_by_year %>% arrange(year)
+#View(la_under5_by_year)
+
+
+
+# set options so I get commas for decimals
+hcoptslang <- getOption("highcharter.lang")
+hcoptslang$thousandsSep <- ","
+options(highcharter.lang = hcoptslang)
+
+#chart
+hchart(la_under5_by_year %>% mutate(group = "Children under 5"), 
+                type = "line", 
+                hcaes(x = year, y = population, group = group)) %>%
+                
+  hc_title(
+    text = "LA County households report 150,752 fewer children under 5 in 2022 than in 2013"
+  ) %>%
+   hc_exporting(
+    enabled = TRUE, sourceWidth=900, sourceHeight=600,
+    chartOptions=list(plotOptions=list(series=list(dataLabels=list(enabled=TRUE, format='{point.y:,.0f}')))),
+    filename = "plot"
+  )
+
+
+
+```
+
+
+## Why it matters?
+There's a disconnect between our values and the ability to raise a family in LA. We want to welcome children, but a nine-year decline in the under-five-population means families are choosing other options. Additionally,
+
+ * fewer children means fewer State and Federal funds for schools and other critical infrastructure.
+
+## Learn more.
+The decrease in children results from a number of factors that surveys and local experts can explain. See the [Data Narrative](https://apca-dev.dreamhosters.com/) for details.
+
+
+```{r chart2}
+
+# #chart for the blog window
+# 
+# options(scipen=999)
+# la_under5_by_year$highlight <- ifelse(la_under5_by_year$year == "2022" |
+#                                         la_under5_by_year$year == "2013", "highlight", "normal")
+# textdf <- la_under5_by_year[la_under5_by_year$year == "2022" | la_under5_by_year$year == "2013", ]
+# mycolours <- c("highlight" = "red", "normal" = "black")
+# 
+# p1 <- ggplot(la_under5_by_year, aes(x = year, y = population, group = 1)) +
+#         geom_line() +
+#         geom_point(aes(color=highlight), show.legend = FALSE) +
+#         scale_color_manual("Status", values = mycolours) +
+#         geom_text(data = textdf, aes(x = year, y = population, 
+#                                      label = format(population, big.mark = ",", scientific = FALSE)
+#                                      , vjust=1.5)) +
+#         scale_y_continuous(limits = c(0, max(la_under5_by_year$population)), label = comma) +
+#         labs(
+#           title = "LA County households report 150,000+ fewer children under 5\nin 2022 than in 2013",
+#           caption = "Source: ACS 1-year estimates. 2020 estimate an average of 2019 and 2021 estimates.",
+#           x = "",
+#           y=""
+#         )
+# 
+# p1 + theme(axis.text.y=element_blank(),
+#            axis.ticks.y=element_blank(),
+#            axis.ticks.x=element_blank(),
+#            panel.background = element_rect(fill = "white",
+#                                            colour = "white",
+#                                            size = 0.5, linetype = "solid"),
+#            panel.grid.major = element_line(size = 0.25, linetype = 'solid',
+#                                            colour = "#f3f6f4"), 
+#            panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+#                                            colour = "white")
+#            )
+```
+
