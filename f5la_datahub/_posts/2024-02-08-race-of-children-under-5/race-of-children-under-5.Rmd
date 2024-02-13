@@ -1,0 +1,326 @@
+---
+title: "Race of children under 5"
+description: |
+  Latinx children under 5 are 57% of all children under 5.
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-02-08
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(data.table)
+library(readxl)
+library(tidycensus)
+library(srvyr)
+library(highcharter)
+library(stringr)
+
+```
+
+
+```{r data}
+# PUMS Data
+root <- "W:/Data/Demographics/PUMS/"
+
+## Load the people PUMS data
+people <- fread(paste0(root, "CA_2018_2022/psam_p06.csv"), header = TRUE, data.table = FALSE,
+             colClasses = list(character = c("PUMA10", "PUMA20", "ANC1P", "ANC2P", "HISP", "RAC1P", "RAC2P", "RAC3P", "RACAIAN", "RACPI", "RACNH")))
+
+## Select LA County
+la <- people %>% filter(grepl('037', PUMA20) | grepl('037', PUMA10) )
+
+## Sum to test accuracy
+#N <- sum(la$PWGTP) #536,815 is in the right ballpark for a 5-year estimate
+
+## Recode race/eth
+la<-la%>%
+  mutate(latino=(ifelse(HISP %in% "01", "Not Latinx", "Latinx")))
+
+la<-la%>%
+  mutate(aian=(ifelse(RACAIAN %in% "0", "Not AIAN", "AIAN Alone or in Combination")))
+
+la<-la%>%
+  mutate(nhpi=(ifelse(RACPI %in% "1", "NHPI Alone or in Combination",
+                      ifelse(RACNH %in% '1', 'NHPI Alone or in Combination', "Not NHPI"))))
+
+###### Set up codes for SWANA ######
+# First use ancestry codes to help identify estimated swana pop
+## Create list of swana codes for PUMS
+pums_swana_list<-list("Algerian","Arab","Assyrian","Bahraini","Berber","Chaldean","Egyptian","Emirati","Iranian","Iraqi","Israeli","Jordanian","Kurdish","Kuwaiti","Lebanese","Libyan","Middle Eastern","Moroccan","North African","Omani","Palestinian","Qatari","Saudi","Syriac","Syrian","Tunisian","Yazidi","Yemeni","Mideast","Saudi Arabian","Arabic","Other Arab","Libyan (2017 or later)","Kuwaiti (2017 or later)","Turkish","Sudanese","Afghan") # 2017 or later needed based on reviewing data dictionary and saw fields for Arabic and Other Arab
+
+## import PUMS codes
+pums_codes <- read_excel("W:/Data/Demographics/PUMS/CA_2018_2022/PUMS_Data_Dictionary_2018-2022_ANC1P.xlsx")%>%
+  mutate_all(as.character) # create this excel document separate by opening PUMS Data Dictionary in excel and deleting everything but ancestry fields -- since ANC1P and ANC2P have same data values no need to do both
+pums_codes <- pums_codes %>% dplyr::rename("ANC_Code" = "Code_1")
+
+## filter PUMS codes for swana descriptions based on our swana_list
+swana_codes<-pums_codes%>%filter(Description %in% pums_swana_list)
+
+##swana - alone or in combination with another race or latino
+la$swana <- "Not SWANA"
+la$swana[la$ANC1P%in% swana_codes$ANC_Code| la$ANC2P%in% swana_codes$ANC_Code] <- "SWANA"
+la$swana <- as.factor(la$swana)
+
+# code other race groups
+la$race <- NA #declare variable to avoid unequal rows error
+la$race = as.factor(ifelse(la$RAC1P == "1" & la$latino =="Not Latinx", "White NL",
+                            ifelse(la$RAC1P == "1" & la$latino =="Latinx", "Latinx placeholder",
+                            ifelse(la$RAC1P == "2" & la$latino =="Not Latinx", "Black NL",
+                            ifelse(la$RAC1P == "3" | la$RAC1P== "4"|la$RAC1P== "5", "AIAN placeholder",
+                            ifelse(la$RAC1P == "6" & la$latino =="Not Latinx", "Asian NL",
+                            ifelse(la$RAC1P == "7" & la$latino =="Not Latinx", "NHPI placeholder",
+                            ifelse(la$RAC1P == "8" & la$latino =="Not Latinx", "Other NL", 
+                            ifelse(la$RAC1P == "9" & la$latino =="Not Latinx", "Two or More NL", "Latinx placeholder"))))))))) 
+
+```
+
+
+```{r}
+
+# survey design code
+
+# Define weight variable and population base which will be used in the survey design set up
+## You must use WGTP (if you are using psam_h06.csv and want housing units, like for Low Quality Housing) or PWGTP (if you want person units, like for Connected Youth)
+weight <- 'PWGTP'
+
+repwlist = rep(paste0("PWGTP", 1:80))
+youth <- la
+youth$geoid <- "037"
+
+youth<-youth%>%
+  mutate(indicator=(ifelse(youth$AGEP >= 5, "not under 5", "under 5")))
+
+# create survey design
+youth_county <- youth %>%               
+  as_survey_rep(
+    variables = c(geoid, indicator, race, latino, aian, nhpi, swana),   # dplyr::select grouping variables
+    weights = weight,                       #  weight
+    repweights = repwlist,                  # list of replicate weights
+    combined_weights = TRUE,                # tells the function that replicate weights are included in the data
+    mse = TRUE,                             # tells the function to calc mse
+    type="other",                           # statistical method
+    scale=4/80,                             # scaling set by ACS
+    rscale=rep(1,80)                        # setting specific to ACS-scaling
+  )
+
+###### Latino ######
+lat <- youth_county  %>%
+  group_by(geoid,latino,indicator) %>%   # group by race cat
+  summarise(
+    num = survey_total(na.rm=T), # get the (survey weighted) count for the numerators
+    rate = survey_mean()) %>%        # get the (survey weighted) proportion for the numerator
+  left_join(youth_county %>%                                        # left join in the denominators
+              group_by(geoid,latino) %>%                                     # group by geo
+              summarise(pop = survey_total(na.rm=T))) %>%              # get the weighted total for overall geo
+  mutate(rate=rate*100,
+         rate_moe = rate_se*1.645*100,    # calculate the margin of error for the rate based on se
+         rate_cv = ((rate_moe/1.645)/rate) * 100, # calculate cv for rate
+         count_moe = num_se*1.645, # calculate moe for numerator count based on se
+         count_cv = ((count_moe/1.645)/num) * 100)  # calculate cv for numerator count
+
+###### NHPI ######
+nhpi <- youth_county  %>%
+  group_by(geoid,nhpi,indicator) %>%   # group by race cat
+  summarise(
+    num = survey_total(na.rm=T), # get the (survey weighted) count for the numerators
+    rate = survey_mean()) %>%        # get the (survey weighted) proportion for the numerator
+  left_join(youth_county %>%                                        # left join in the denominators
+              group_by(geoid,nhpi) %>%                                     # group by geo
+              summarise(pop = survey_total(na.rm=T))) %>%              # get the weighted total for overall geo
+  mutate(rate=rate*100,
+         rate_moe = rate_se*1.645*100,    # calculate the margin of error for the rate based on se
+         rate_cv = ((rate_moe/1.645)/rate) * 100, # calculate cv for rate
+         count_moe = num_se*1.645, # calculate moe for numerator count based on se
+         count_cv = ((count_moe/1.645)/num) * 100)  # calculate cv for numerator count
+
+###### AIAN ######
+aian <- youth_county  %>%
+  group_by(geoid,aian,indicator) %>%   # group by race cat
+  summarise(
+    num = survey_total(na.rm=T), # get the (survey weighted) count for the numerators
+    rate = survey_mean()) %>%        # get the (survey weighted) proportion for the numerator
+  left_join(youth_county %>%                                        # left join in the denominators
+              group_by(geoid,aian) %>%                                     # group by geo
+              summarise(pop = survey_total(na.rm=T))) %>%              # get the weighted total for overall geo
+  mutate(rate=rate*100,
+         rate_moe = rate_se*1.645*100,    # calculate the margin of error for the rate based on se
+         rate_cv = ((rate_moe/1.645)/rate) * 100, # calculate cv for rate
+         count_moe = num_se*1.645, # calculate moe for numerator count based on se
+         count_cv = ((count_moe/1.645)/num) * 100)  # calculate cv for numerator count
+
+###### SWANA ######
+swana <- youth_county  %>%
+  group_by(geoid,swana,indicator) %>%   # group by race cat
+  summarise(
+    num = survey_total(na.rm=T), # get the (survey weighted) count for the numerators
+    rate = survey_mean()) %>%        # get the (survey weighted) proportion for the numerator
+  left_join(youth_county %>%                                        # left join in the denominators
+              group_by(geoid,swana) %>%                                     # group by geo
+              summarise(pop = survey_total(na.rm=T))) %>%              # get the weighted total for overall geo
+  mutate(rate=rate*100,
+         rate_moe = rate_se*1.645*100,    # calculate the margin of error for the rate based on se
+         rate_cv = ((rate_moe/1.645)/rate) * 100, # calculate cv for rate
+         count_moe = num_se*1.645, # calculate moe for numerator count based on se
+         count_cv = ((count_moe/1.645)/num) * 100)  # calculate cv for numerator count
+
+###### RACE ######
+race <- youth_county  %>%
+  group_by(geoid,race,indicator) %>%   # group by race cat
+  summarise(
+    num = survey_total(na.rm=T), # get the (survey weighted) count for the numerators
+    rate = survey_mean()) %>%        # get the (survey weighted) proportion for the numerator
+  left_join(youth_county %>%                                        # left join in the denominators
+              group_by(geoid,race) %>%                                     # group by geo
+              summarise(pop = survey_total(na.rm=T))) %>%              # get the weighted total for overall geo
+  mutate(rate=rate*100,
+         rate_moe = rate_se*1.645*100,    # calculate the margin of error for the rate based on se
+         rate_cv = ((rate_moe/1.645)/rate) * 100, # calculate cv for rate
+         count_moe = num_se*1.645, # calculate moe for numerator count based on se
+         count_cv = ((count_moe/1.645)/num) * 100)  # calculate cv for numerator count
+
+###### TOTAL ######
+total <- youth_county  %>%
+  group_by(geoid,indicator) %>%   # group by race cat
+  summarise(
+    num = survey_total(na.rm=T), # get the (survey weighted) count for the numerators
+    rate = survey_mean()) %>%        # get the (survey weighted) proportion for the numerator
+  left_join(youth_county %>%                                        # left join in the denominators
+              group_by(geoid) %>%                                     # group by geo
+              summarise(pop = survey_total(na.rm=T))) %>%              # get the weighted total for overall geo
+  mutate(rate=rate*100,
+         rate_moe = rate_se*1.645*100,    # calculate the margin of error for the rate based on se
+         rate_cv = ((rate_moe/1.645)/rate) * 100, # calculate cv for rate
+         count_moe = num_se*1.645, # calculate moe for numerator count based on se
+         count_cv = ((count_moe/1.645)/num) * 100)  # calculate cv for numerator count
+
+
+# rename race name columns as subgroup
+total$subgroup = "Total"
+total <- total %>% select(geoid, subgroup, everything())
+
+aian <- aian %>% rename(subgroup = aian)
+lat <- lat %>% rename(subgroup = latino)
+nhpi <- nhpi %>% rename(subgroup = nhpi)
+race <- race %>% rename(subgroup = race)
+swana <- swana %>% rename(subgroup = swana)
+
+# merge tables
+d_long <- rbind(total, aian, lat, race, nhpi, swana) %>%
+  filter(indicator == "under 5" & 
+           subgroup != "Not AIAN" &
+           subgroup != "Not Latinx" &
+           subgroup != "Not NHPI" &
+           subgroup != "Not SWANA" &
+           subgroup != "AIAN placeholder" &
+           subgroup != "NHPI placeholder" &
+           subgroup != "Latinx placeholder")
+           
+d_long <- as.data.frame(d_long)
+d_long$geoid <- "06037"
+d_long <- d_long %>% select(geoid, everything())
+
+```
+
+```{r}
+
+#chart
+
+#format for chart
+d_chart <- d_long %>% filter(subgroup != "Total") %>%
+  arrange(desc(num)) %>%
+  mutate(across('subgroup', str_replace, ' NL', '')) %>%
+  mutate(across('subgroup', str_replace, ' Alone or in Combination', '')) %>%
+  rename(population = num) %>%
+  mutate(group = "Children under 5")
+
+# set options so I get commas for decimals
+hcoptslang <- getOption("highcharter.lang")
+hcoptslang$thousandsSep <- ","
+options(highcharter.lang = hcoptslang)
+
+hc <- d_chart %>%
+  hchart('column', hcaes(x = subgroup, y = population, group = group)) %>%
+                
+  hc_title(
+    text = "LA County is home to more than 300,000 Latinx children under 5"
+  ) %>%
+   hc_exporting(
+    enabled = TRUE, sourceWidth=900, sourceHeight=600,
+    chartOptions=list(plotOptions=list(series=list(dataLabels=list(enabled=TRUE, format='{point.y:,.0f}')))),
+    filename = "plot"
+  ) %>%
+  
+  hc_caption(text = "Source: ACS 2018-2022 5-year estimates. <br> AIAN = American Indian or Alaska Native. NHPI = Native Hawaiian or Pacific Islander. SWANA = Southwest Asian or North African. In this chart White, Asian, Black, Other and Two or More are non-Hispanic subgroups; AIAN, NHPI, SWANA, and Two or More are alone or in combination with other races. The sum of subgroups in this chart will exceed the total under 5 population.")
+
+hc
+```
+
+## Why it matters?
+Conversations about the under 5 population need to consider the needs of Latinx families, including:
+
+ * dual language access for children, and materials for parents in both English and Spanish.
+
+## Learn more.
+The importance of race and equity in the caring and educating of children under 5 cannot be overstated. See more in the [Data Narrative](https://apca-dev.dreamhosters.com/) for details.
+
+```{r}
+#alternative data cut that's faster but doesn't get the percentages, filters for under 5 first
+
+
+# ## Select LA County under 5
+# la_under5 <- people %>% filter(AGEP <= 4 & (grepl('037', PUMA20) | grepl('037', PUMA10) ))
+# 
+# ## Sum to test accuracy
+# #N <- sum(la_under5$PWGTP) #536,815 is in the right ballpark for a 5-year estimate
+# 
+# ## Recode race/eth
+# la_under5<-la_under5%>%
+#   mutate(latino=(ifelse(HISP %in% "01", "Not Latinx", "Latinx")))
+# 
+# la_under5<-la_under5%>%
+#   mutate(aian=(ifelse(RACAIAN %in% "0", "Not AIAN", "AIAN Alone or in Combination")))
+# 
+# la_under5<-la_under5%>%
+#   mutate(nhpi=(ifelse(RACPI %in% "1", "NHPI Alone or in Combination",
+#                       ifelse(RACNH %in% '1', 'NHPI Alone or in Combination', "Not NHPI"))))
+# 
+# ###### Set up codes for SWANA ######
+# # First use ancestry codes to help identify estimated swana pop
+# ## Create list of swana codes for PUMS
+# pums_swana_list<-list("Algerian","Arab","Assyrian","Bahraini","Berber","Chaldean","Egyptian","Emirati","Iranian","Iraqi","Israeli","Jordanian","Kurdish","Kuwaiti","Lebanese","Libyan","Middle Eastern","Moroccan","North African","Omani","Palestinian","Qatari","Saudi","Syriac","Syrian","Tunisian","Yazidi","Yemeni","Mideast","Saudi Arabian","Arabic","Other Arab","Libyan (2017 or later)","Kuwaiti (2017 or later)","Turkish","Sudanese","Afghan") # 2017 or later needed based on reviewing data dictionary and saw fields for Arabic and Other Arab
+# 
+# ## import PUMS codes
+# pums_codes <- read_excel("W:/Data/Demographics/PUMS/CA_2018_2022/PUMS_Data_Dictionary_2018-2022_ANC1P.xlsx")%>%
+#   mutate_all(as.character) # create this excel document separate by opening PUMS Data Dictionary in excel and deleting everything but ancestry fields -- since ANC1P and ANC2P have same data values no need to do both
+# pums_codes <- pums_codes %>% dplyr::rename("ANC_Code" = "Code_1")
+# 
+# ## filter PUMS codes for swana descriptions based on our swana_list
+# swana_codes<-pums_codes%>%filter(Description %in% pums_swana_list)
+# 
+# ##swana - alone or in combination with another race or latino
+# la_under5$swana <- "Not SWANA"
+# la_under5$swana[la_under5$ANC1P%in% swana_codes$ANC_Code| la_under5$ANC2P%in% swana_codes$ANC_Code] <- "SWANA"
+# la_under5$swana <- as.factor(la_under5$swana)
+# 
+# # code other race groups
+# la_under5$race <- NA #declare variable to avoid unequal rows error
+# la_under5$race = as.factor(ifelse(la_under5$RAC1P == "1" & la_under5$latino =="Not Latinx", "White NL",
+#                             ifelse(la_under5$RAC1P == "1" & la_under5$latino =="Latinx", "Latinx placeholder",
+#                             ifelse(la_under5$RAC1P == "2" & la_under5$latino =="Not Latinx", "Black NL",
+#                             ifelse(la_under5$RAC1P == "3" | la_under5$RAC1P== "4"|la_under5$RAC1P== "5", "AIAN placeholder",
+#                             ifelse(la_under5$RAC1P == "6" & la_under5$latino =="Not Latinx", "Asian NL",
+#                             ifelse(la_under5$RAC1P == "7" & la_under5$latino =="Not Latinx", "NHPI placeholder",
+#                             ifelse(la_under5$RAC1P == "8" & la_under5$latino =="Not Latinx", "Other NL", 
+#                             ifelse(la_under5$RAC1P == "9" & la_under5$latino =="Not Latinx", "Two or More NL", "Latinx placeholder"))))))))) 
+
+
+```
+
