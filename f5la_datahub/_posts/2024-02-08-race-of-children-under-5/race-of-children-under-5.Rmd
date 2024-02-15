@@ -39,7 +39,7 @@ people <- fread(paste0(root, "CA_2018_2022/psam_p06.csv"), header = TRUE, data.t
 la <- people %>% filter(grepl('037', PUMA20) | grepl('037', PUMA10) )
 
 ## Sum to test accuracy
-#N <- sum(la$PWGTP) #536,815 is in the right ballpark for a 5-year estimate
+# N <- sum(la$PWGTP) #536,815 is in the right ballpark for a 5-year estimate
 
 ## Recode race/eth
 la<-la%>%
@@ -89,7 +89,7 @@ la$race = as.factor(ifelse(la$RAC1P == "1" & la$latino =="Not Latinx", "White NL
 # survey design code
 
 # Define weight variable and population base which will be used in the survey design set up
-## You must use WGTP (if you are using psam_h06.csv and want housing units, like for Low Quality Housing) or PWGTP (if you want person units, like for Connected Youth)
+## You must use WGTP (if you are using psam_h06.csv and want housing units, like for Low Quality Housing) or PWGTP (if you want person units)
 weight <- 'PWGTP'
 
 repwlist = rep(paste0("PWGTP", 1:80))
