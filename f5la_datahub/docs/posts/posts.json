@@ -13,7 +13,7 @@
     "categories": [],
     "contents": "\r\n\r\n\r\nlibrary(highcharter)\r\nlibrary(ggplot2)\r\nlibrary(dplyr)\r\n\r\n\r\npokemon%>%\r\n  count(type_1)%>%\r\n  arrange(n)%>%\r\n  hchart(type = \"bar\", hcaes(x = type_1, y = n))%>%  \r\n  hc_exporting(\r\n    enabled = TRUE, # always enabled\r\n    filename = \"custom-file-name\" )\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2024-02-15T14:44:04-08:00",
+    "last_modified": "2024-02-15T14:56:43-08:00",
     "input_file": "test-post.knit.md"
   },
   {
