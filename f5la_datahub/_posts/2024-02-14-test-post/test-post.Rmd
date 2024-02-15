@@ -30,5 +30,9 @@ pokemon%>%
 
 ```
 
-
-
+<style type="text/css">
+d-article hr {
+  margin-top: 0px
+  margin-bottom: 0px
+}
+</style>
