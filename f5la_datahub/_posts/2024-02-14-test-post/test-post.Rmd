@@ -1,0 +1,34 @@
+---
+title: "Test Post"
+description: |
+  A short description of the post.
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-02-14
+output:
+  distill::distill_article:
+    css: css_theme.css
+    self_contained: false
+---
+
+```{r}
+
+library(highcharter)
+library(ggplot2)
+library(dplyr)
+
+
+pokemon%>%
+  count(type_1)%>%
+  arrange(n)%>%
+  hchart(type = "bar", hcaes(x = type_1, y = n))%>%  
+  hc_exporting(
+    enabled = TRUE, # always enabled
+    filename = "custom-file-name" )
+  
+
+```
+
+
+
