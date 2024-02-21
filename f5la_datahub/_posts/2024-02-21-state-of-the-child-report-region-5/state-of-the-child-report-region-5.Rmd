@@ -1,7 +1,7 @@
 ---
 title: "State of the Child Report Region 5"
 description: |
-  A short description of the post.
+  Analysis of systems and outcomes impacting children and families in Antelope Valley
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
