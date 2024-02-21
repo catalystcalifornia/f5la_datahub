@@ -11,6 +11,7 @@ categories:
 output:
   distill::distill_article:
     self_contained: false
+preview: images/housing.png
 ---
 
 The Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners about the housing crises as it relates to children age 0-5 living in the Best Start Geographies and Los Angeles county. 
