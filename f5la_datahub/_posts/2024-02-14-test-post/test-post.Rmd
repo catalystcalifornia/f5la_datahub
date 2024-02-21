@@ -28,7 +28,6 @@ pokemon%>%
   hc_exporting(
     enabled = TRUE, # always enabled
     filename = "custom-file-name" )
-  
 
 ```
 
