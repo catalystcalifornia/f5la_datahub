@@ -139,9 +139,9 @@
       "Learning dialogue"
     ],
     "contents": "\r\nThe Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners about the importance of Guaranteed Basic Income (GBI) as it relates to the Best Start Geographies and children 0-5.\r\nLink to the full presentation\r\n\r\n\r\n\r\n",
-    "preview": {},
-    "last_modified": "2024-02-21T13:49:35-08:00",
-    "input_file": {}
+    "preview": "posts/2024-01-23-gbi-learning-dialogue-presentation/images/gbi.png",
+    "last_modified": "2024-02-21T14:18:29-08:00",
+    "input_file": "gbi-learning-dialogue-presentation.knit.md"
   },
   {
     "path": "posts/2024-01-23-map-test-park-access/",

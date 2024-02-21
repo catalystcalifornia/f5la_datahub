@@ -11,6 +11,7 @@ categories:
 output:
   distill::distill_article:
     self_contained: false
+preview: images/gbi.png
 ---
 
 The Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners about the importance of Guaranteed Basic Income (GBI) as it relates to the Best Start Geographies and children 0-5. 
