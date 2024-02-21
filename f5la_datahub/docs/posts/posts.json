@@ -1,5 +1,43 @@
 [
   {
+    "path": "posts/2024-02-21-housing-presentation/",
+    "title": "Housing Presentation",
+    "description": "Presentation created by Catalyst California for First 5 LA Learning Dialogue on Housing",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-02-21",
+    "categories": [
+      "Learning dialogue"
+    ],
+    "contents": "\r\nThe Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners about the housing crises as it relates to children age 0-5 living in the Best Start Geographies and Los Angeles county.\r\nLink to the full presentation\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2024-02-21T13:47:34-08:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/2024-02-21-state-of-the-child-report-region-5/",
+    "title": "State of the Child Report Region 5",
+    "description": "Analysis of systems and outcomes impacting children and families in Antelope Valley",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-02-21",
+    "categories": [
+      "Region 5"
+    ],
+    "contents": "\r\nCatalyst California worked in partnership with the Children’s Bureau of Southern California and Antelope Valley community members to create a report examining how children and families are faring in the Antelope Valley. The Best Start Region 5 State of the Child Report represents the most comprehensive analysis of data from the region to date, consolidating data on children, families and systems in the Antelope Valley. Children’s Bureau of Southern California commissioned this report to understand the state of children in the Antelope Valley, identify indicators to monitor, and increase the amount of data available to advocates.\r\nYou can view and download the report in its entirety here.\r\nThe data shows that:\r\nThe family-friendly, low-cost-living in the Antelope Valley, that residents love and depend on, is disappearing and a new, more proactive infrastructure for children and families is needed. The current infrastructure was not established for the population increases the Antelope Valley has experienced in the last decade, and the lack of resources is a driver for school-to-prison, youth-to-houselessness pipelines, and other avoidable outcomes. To be specific:\r\nAntelope Valley has a large, diverse, and growing population with roughly 120,000 children under the age of eighteen and 30,000 children under age 5, including many children who need extra support.\r\nHalf of the households in and around the neighborhoods of Lancaster and Palmdale cannot cover basic costs like housing, food, transportation, and child care with their incomes, and four in five families with children under the age of six earn less than the real cost of living.\r\nHigh housing costs and lower wages contribute to a growing unhoused population in the region. Resources available in the Antelope Valley are not keeping up with the needs of the residents. Residents struggle to access health and mental health services and there are few child care and learning opportunities for their children.\r\nEquitable treatment of local children and families is a concern. Rates of hate crimes exceed those countywide, and law enforcement is known to both stop Black drivers and injure Black civilians more than people of other races.\r\nHigh School graduation rates in Antelope Valley schools are lower than those countywide. School administration and the teacher workforce are not representative of the diversity within the student body. Foster students and students with disabilities – students who may need the most support – are most likely to be suspended from school.\r\nTo address these ongoing issues, increased investments in health and mental health are needed, as are increases in child care reimbursement rates and other forms of investments in education within the region. Strengthening the safety net of programs which provide resources or training to residents is a must. Individuals can collaborate to hold systems accountable and spread awareness of resources as well.\r\n\r\n\r\n\r\n",
+    "preview": "posts/2024-02-21-state-of-the-child-report-region-5/images/av_beststart_logo.png",
+    "last_modified": "2024-02-21T13:59:33-08:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2024-02-14-test-post/",
     "title": "Test Post",
     "description": "A short description of the post.",
@@ -10,10 +48,12 @@
       }
     ],
     "date": "2024-02-14",
-    "categories": [],
+    "categories": [
+      "Test post"
+    ],
     "contents": "\r\n\r\n\r\nlibrary(highcharter)\r\nlibrary(ggplot2)\r\nlibrary(dplyr)\r\n\r\n\r\npokemon%>%\r\n  count(type_1)%>%\r\n  arrange(n)%>%\r\n  hchart(type = \"bar\", hcaes(x = type_1, y = n))%>%  \r\n  hc_exporting(\r\n    enabled = TRUE, # always enabled\r\n    filename = \"custom-file-name\" )\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2024-02-15T15:03:24-08:00",
+    "last_modified": "2024-02-21T11:53:55-08:00",
     "input_file": {}
   },
   {
@@ -95,10 +135,12 @@
       }
     ],
     "date": "2024-01-23",
-    "categories": [],
+    "categories": [
+      "Learning dialogue"
+    ],
     "contents": "\r\nThe Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners about the importance of Guaranteed Basic Income (GBI) as it relates to the Best Start Geographies and children 0-5.\r\nLink to the full presentation\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2024-02-14T10:49:11-08:00",
+    "last_modified": "2024-02-21T13:49:35-08:00",
     "input_file": {}
   },
   {

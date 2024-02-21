@@ -4,6 +4,12 @@ theme: css_theme.css
 description: |
   First 5 LA Data Hub created by Catalyst California
 output_dir: "docs"
+collections:
+  posts:
+    categories: true
+    categories_metadata: true
+    authors_metadata: false
+    feed_items_max: 20 # default
 navbar:
   right:
     - text: "Home"

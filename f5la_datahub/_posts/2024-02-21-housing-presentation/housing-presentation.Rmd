@@ -1,0 +1,22 @@
+---
+title: "Housing Presentation"
+description: |
+  Presentation created by Catalyst California for First 5 LA Learning Dialogue on Housing
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-02-21
+categories:
+  - Learning dialogue
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+The Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners about the housing crises as it relates to children age 0-5 living in the Best Start Geographies and Los Angeles county. 
+
+[Link to the full presentation](https://github.com/catalystcalifornia/f5la_datahub/blob/main/F5LA%20Housing%20Learning%20Dialogue_CC.pdf) 
+
+
+
+
