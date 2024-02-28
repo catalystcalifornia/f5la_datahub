@@ -9,6 +9,7 @@ date: 2024-01-23
 output:
   distill::distill_article:
     self_contained: false
+preview: images/essentialworker.png
 ---
 
 
