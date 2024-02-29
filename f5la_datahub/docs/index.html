@@ -2173,7 +2173,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   /*-- Additional custom styles --*/
   /* Add any additional CSS rules below                      */
   </style>
-  <style type="text/css">/* CC Brand Guide CSS Stylesheet for RMDs*/
+  <style type="text/css">@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+  /* CC Brand Guide CSS Stylesheet for RMDs*/
 
   /* Styling from https://www.catalystcalifornia.org/campaign-tools/maps-and-data/justice-equity-need-index */
   /* h1 seems reserved for the title of the webpage */
@@ -2410,11 +2412,33 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   /* JZ DISTILL WEBSITE CSS STYLING */
 
+  .distill-site-header .title, .d-title {
+    display: none;
+  }
+
   d-article hr {margin-top: 0px !important;
     margin-bottom: 0px !important;
   }
 
   p {margin: 0.3em 0;}
+
+
+  .distill-site-nav a{
+    font-family:  'Inter' !important;
+    font-weight: 200;
+    color: #FFFFFF !important;
+  }
+
+  nav.distill-site-nav.distill-site-header{
+    height: 50px;
+  }
+
+  .posts-list .posts-list-caption{
+    font-weight: 650;
+    font-size: 35px;
+    font-family: 'Inter';
+  }
+
 
   /* EDITING WEBSITE PROPERTIES */
 
@@ -2437,9 +2461,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --title-color:       #FBFBFB; 
     --text-color:       #FBFBFB; 
     --text-size:        15px;
-    --hover-color:      black; 
+    --hover-color:      #FBFBFB; 
     --bkgd-color:       #3A207D; 
+    --height: 50px; 
   }
+
 
   html {
     /*-- Main font sizes --*/
@@ -2455,7 +2481,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --aside-color:     rgba(0, 0, 0, 0.6);
     --fig-cap-color:   rgba(0, 0, 0, 0.6);
     /*-- Specify custom fonts ~~~ must be imported above   --*/
-    --heading-font:    sans-serif;
+    --heading-font:    'Inter', sans-serif;
     --mono-font:       monospace;
     --body-font:       sans-serif;
     --navbar-font:     sans-serif;  /* websites + blogs only */
