@@ -237,10 +237,6 @@ p{
 
 /* JZ DISTILL WEBSITE CSS STYLING */
 
-.distill-site-header .title, .d-title {
-  display: none;
-}
-
 d-article hr {margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
