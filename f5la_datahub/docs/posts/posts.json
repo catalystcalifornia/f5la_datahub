@@ -38,6 +38,23 @@
     "input_file": {}
   },
   {
+    "path": "posts/2024-02-15-children-under-5/",
+    "title": "Children under 5",
+    "description": "The population of children under 5 decreased by 24% over the last 10 years.",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-02-15",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\nWhy it matters?\r\nThere’s a disconnect between our values and the ability to raise a family in LA. We want to welcome children, but a nine-year decline in the under-five-population means families are choosing other options. Additionally,\r\nfewer children means fewer State and Federal funds for schools and other critical infrastructure.\r\nLearn more\r\nThe decrease in children results from a number of factors that surveys and local experts can explain. See the Data Narrative for details.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2024-03-01T09:38:24-08:00",
+    "input_file": "children-under-5.knit.md"
+  },
+  {
     "path": "posts/2024-02-13-rent-burden/",
     "title": "Rent burden for children under 5",
     "description": "58.6% of children under 5 are rent burdened.",
