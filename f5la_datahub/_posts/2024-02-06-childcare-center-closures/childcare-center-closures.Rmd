@@ -12,7 +12,7 @@ output:
     self_contained: false
     toc: yes
     toc_depth: '2'
-preview: images/closures.png
+preview: images/closures.PNG
 ---
 
 
