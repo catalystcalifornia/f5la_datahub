@@ -38,9 +38,6 @@ people <- fread(paste0(root, "CA_2018_2022/psam_p06.csv"), header = TRUE, data.t
 ## Select LA County
 la <- people %>% filter(grepl('037', PUMA20) | grepl('037', PUMA10) )
 
-## Sum to test accuracy
-# N <- sum(la$PWGTP) #536,815 is in the right ballpark for a 5-year estimate
-
 ## Recode race/eth
 la<-la%>%
   mutate(latino=(ifelse(HISP %in% "01", "Not Latinx", "Latinx")))
@@ -248,8 +245,9 @@ hcoptslang$thousandsSep <- ","
 options(highcharter.lang = hcoptslang)
 
 hc <- d_chart %>%
-  hchart('column', hcaes(x = subgroup, y = population, group = group)) %>%
-                
+  hchart('bar', hcaes(x = subgroup, y = population, group = group)) %>%
+  hc_yAxis(title = list(text = "")) %>%
+  hc_xAxis(title = list(text = "")) %>%
   hc_title(
     text = "LA County is home to more than 300,000 Latinx children under 5"
   ) %>%
@@ -258,18 +256,21 @@ hc <- d_chart %>%
     chartOptions=list(plotOptions=list(series=list(dataLabels=list(enabled=TRUE, format='{point.y:,.0f}')))),
     filename = "plot"
   ) %>%
-  
-  hc_caption(text = "Source: ACS 2018-2022 5-year estimates. <br> AIAN = American Indian or Alaska Native. NHPI = Native Hawaiian or Pacific Islander. SWANA = Southwest Asian or North African. In this chart White, Asian, Black, Other and Two or More are non-Hispanic subgroups; AIAN, NHPI, SWANA, and Two or More are alone or in combination with other races. The sum of subgroups in this chart will exceed the total under 5 population.")
+  hc_subtitle(text = "Total number of children under age 5 by race") %>%
+  hc_caption(text = "Source: ACS 2018-2022 5-year estimates. <br> AIAN = American Indian or Alaska Native. NHPI = Native Hawaiian or Pacific Islander. SWANA = Southwest Asian or North African. In this chart White, Asian, Black, Other and Two or More are non-Hispanic subgroups; AIAN, NHPI, SWANA, and Two or More are alone or in combination with other races. The sum of subgroups in this chart will exceed the total under 5 population.") %>%
+  hc_legend(enabled = F)
 
 hc
 ```
+
+We include SWANA, similar to MENA (Middle Eastern and North African), because of recommendations that people in this group do not identify as non-Hispanic White (or other overlapping racial-ethnic groups) and experience different patterns of racial, ethnic, and religious discrimination than other groups.
 
 ## Why it matters?
 Conversations about the under 5 population need to consider the needs of Latinx families, including:
 
  * dual language access for children, and materials for parents in both English and Spanish.
 
-## Learn more.
+## Learn more
 The importance of race and equity in the caring and educating of children under 5 cannot be overstated. See more in the [Data Narrative](https://apca-dev.dreamhosters.com/) for details.
 
 ```{r}

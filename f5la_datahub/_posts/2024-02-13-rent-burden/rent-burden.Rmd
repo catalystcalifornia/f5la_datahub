@@ -8,6 +8,7 @@ author:
 date: 2024-02-13
 output:
   distill::distill_article:
+    css: css_theme.css
     self_contained: false
 ---
 
@@ -373,13 +374,10 @@ d_chart <- d_long %>%
   rename(population = num) %>%
   mutate(group = "Percent of children under 5 in rent-burdened households")
 
-# set options so I get commas for decimals
-#hcoptslang <- getOption("highcharter.lang")
-#hcoptslang$thousandsSep <- ","
-#options(highcharter.lang = hcoptslang)
-
 hc <- d_chart %>%
-  hchart('column', hcaes(x = subgroup, y = rate, group = group)) %>%
+  hchart('bar', hcaes(x = subgroup, y = rate, group = group)) %>%
+  hc_yAxis(title = list(text = "")) %>%
+  hc_xAxis(title = list(text = "")) %>%
   hc_tooltip(pointFormat = '{point.y:.1f}%') %>%        
   hc_title(
     text = "SWANA, Black, and Latinx children under 5 are more likely to be rent burdened"
@@ -389,19 +387,13 @@ hc <- d_chart %>%
     chartOptions=list(plotOptions=list(series=list(dataLabels=list(enabled=TRUE, format='{point.y:,.1f}%')))),
     filename = "plot"
   ) %>%
-  
-  hc_caption(text = "Source: ACS 2018-2022 5-year estimates <br> AIAN = American Indian or Alaska Native. NHPI = Native Hawaiian or Pacific Islander. SWANA = Southwest Asian or North African. In this chart White, Asian, Black, Other and Two or More are non-Hispanic subgroups; AIAN, NHPI, SWANA, and Two or More are alone or in combination with other races.")
-
+  hc_subtitle(text = "Percent of children under 5 in rent-burdened households by race") %>%
+  hc_caption(text = "Source: ACS 2018-2022 5-year estimates <br> AIAN = American Indian or Alaska Native. NHPI = Native Hawaiian or Pacific Islander. SWANA = Southwest Asian or North African. In this chart White, Asian, Black, Other and Two or More are non-Hispanic subgroups; AIAN, NHPI, SWANA, and Two or More are alone or in combination with other races.") %>% 
+  hc_legend(enabled = F)
 hc
 ```
 
-## Why it matters?
-First 5 LA's first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes secure housing for essential psychological safety. This goal has an objective to reduce tot annual percent of households with children prenatal through age 5 who experience housing insecurity. Rent burden is not the sole cause of housing insecurity, but it is a key contributor.
-
-## Learn more.
-See more in the [First 5 LA 2024-2029 Strategic Plan](https://www.first5la.org/wp-content/uploads/2023/11/First-5-LA-Strategic-Plan-2024-2029.pdf) and see related indicators of basic needs in the [Data Narrative](https://apca-dev.dreamhosters.com/).
-
-Note: Aggregated data above conceal variations with disaggregated subgroups. See chart below for details.
+Note: Aggregated data above conceal variations with disaggregated subgroups. 100% of children under 5 of Afghan descent are rent burdened, and Hmong, Pakistani, Indonesian, and Bangladeshi children under 5 are all more likely to be rent burdened than LA County children overall. See chart below for details.
 
 ```{r chart2, echo = FALSE}
 
@@ -419,18 +411,27 @@ d_chart_asian <- asian %>% rename(subgroup = asian) %>%
 hc_asian <- d_chart_asian %>%
   hchart('column', hcaes(x = subgroup, y = rate, group = group)) %>%
   hc_tooltip(pointFormat = '{point.y:.1f}%') %>%        
-  hc_yAxis(max = 100) %>%
+  hc_yAxis(title = list(text = ""), max = 100) %>%
+  #hc_yAxis(title = list(text = "")) %>%
+  hc_xAxis(title = list(text = "")) %>%
   hc_title(
-    text = "Afghan children under 5 are more likely to be rent burdened"
+    text = "Afghan children under 5 are most likely to be rent burdened"
   ) %>%
+  hc_subtitle(text = "Percent of children under 5 in rent-burdened households by Asian ancestry") %>%
    hc_exporting(
     enabled = TRUE, sourceWidth=900, sourceHeight=600,
     chartOptions=list(plotOptions=list(series=list(dataLabels=list(enabled=TRUE, format='{point.y:,.1f}%')))),
     filename = "plot"
   ) %>%
   
-  hc_caption(text = "Source: ACS 2018-2022 5-year estimates")
+  hc_caption(text = "Source: ACS 2018-2022 5-year estimates")%>% 
+  hc_legend(enabled = F)
 
 hc_asian
 ```
 
+## Why it matters?
+First 5 LA's first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes secure housing for essential psychological safety. This goal has an objective to reduce tot annual percent of households with children prenatal through age 5 who experience housing insecurity. Rent burden is not the sole cause of housing insecurity, but it is a key contributor.
+
+## Learn more
+See more in the [First 5 LA 2024-2029 Strategic Plan](https://www.first5la.org/wp-content/uploads/2023/11/First-5-LA-Strategic-Plan-2024-2029.pdf) and see related indicators of basic needs in the [Data Narrative](https://apca-dev.dreamhosters.com/).
