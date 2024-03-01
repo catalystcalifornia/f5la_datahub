@@ -1,0 +1,114 @@
+---
+title: "Children under 5"
+description: "The population of children under 5 decreased by 24% over the last 10 years." 
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-02-15
+output:
+  distill::distill_article:
+    css: css_theme.css 
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidycensus)
+library(tidyverse)
+library(scales)
+library(highcharter)
+library(magrittr)
+
+```
+
+```{r}
+#make line chart of LA County under 5 population over time
+
+#set variables
+#v21 <- load_variables(2021, "acs1")
+#View(v21)
+pop_vars <- c(
+  "B01001_003",
+  "B01001_027")
+
+#set years - no 2020 b/c of pandemic
+years <- c(2013:2019, 2021:2022)
+names(years) <- years
+
+
+#get data
+la_under5_by_year <- map_dfr(years, ~{
+  get_acs(
+  geography = "county",
+  variables = pop_vars,
+  state = "CA",
+  county = "Los Angeles",
+  survey = "acs1",
+  year = .x
+)
+}, .id = "year")
+
+
+#add male and female to get totals
+la_under5_by_year <- la_under5_by_year %>% group_by(NAME, year) %>%
+  summarize(population = sum(estimate),
+            moe = moe_sum(moe, estimate = estimate, na.rm = FALSE))
+
+
+#make 2020 value as average of 2019 and 2021 values
+under5_2020 <- (la_under5_by_year[which(la_under5_by_year$year == 2019),]$population +
+  la_under5_by_year[which(la_under5_by_year$year == 2021),]$population) / 2
+
+
+#and add it to the rest
+la_under5_by_year[nrow(la_under5_by_year) + 1,] = list("Los Angeles County, California", "2020", under5_2020, 0)
+la_under5_by_year <- la_under5_by_year %>% arrange(year)
+#View(la_under5_by_year)
+
+```
+
+```{r}
+
+source("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\R\\chart_prep\\f5la_chart_functions.R")
+
+
+#TITLE 
+title_text <- paste0("LA County households report 150,752 fewer children under 5 in 2022 than in 2013")
+
+#SUBTITLE
+subtitle_text <- paste0("Total number of children under age 5 by year")
+
+#CAPTION
+caption_text<- "Source: American Community Survey 1-year estimates table B01001 (2013-2022). Since 2020 estimates were not published, the 2020 estimate is the average of 2019 and 2021 estimates."
+
+#TOOLTIP
+#modify tooltips as needed 
+
+tooltip_text <- paste0("<b>{point.population:,.0f}</b> children age 0-5 lived in Los Angeles County in <b>{point.year}</b>") #can always customize or add additional text to this as needed
+
+
+#STEP 4 RUN the hchart FUNCTION 
+
+graph <- fx_line(
+    df = la_under5_by_year,
+    x = 'year',
+    y = 'population',
+    chart_title = title_text,
+    chart_subtitle = subtitle_text,
+    chart_tooltip = tooltip_text,
+    chart_caption = caption_text
+)
+
+graph
+
+```
+
+## Why it matters?
+There's a disconnect between our values and the ability to raise a family in LA. We want to welcome children, but a nine-year decline in the under-five-population means families are choosing other options. Additionally,
+
+ * fewer children means fewer State and Federal funds for schools and other critical infrastructure.
+
+## Learn more
+The decrease in children results from a number of factors that surveys and local experts can explain. See the [Data Narrative](https://apca-dev.dreamhosters.com/) for details.
+
