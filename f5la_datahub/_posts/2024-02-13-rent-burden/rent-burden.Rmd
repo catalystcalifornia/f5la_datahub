@@ -1,7 +1,6 @@
 ---
-title: "Rent burden for children under 5"
-description: |
-  58.6% of children under 5 are rent burdened.
+title: "Rent Burden of Children under 5"
+description: "58.6% of children under 5 are rent burdened."
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
@@ -26,7 +25,13 @@ library(srvyr)
 library(highcharter)
 library(stringr)
 
+#SOURCE from the script that has: styling, packages, dbconnection, colors
 source("W:\\RDA Team\\R\\credentials_source.R")
+
+con <- connect_to_db("f5la_v2")
+
+source("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\R\\chart_prep\\f5la_chart_functions.R")
+
 
 ```
 
@@ -98,8 +103,7 @@ la_cnty_under5$race = as.factor(ifelse(la_cnty_under5$RAC1P == "1" & la_cnty_und
                                                                                       & la_cnty_under5$latino =="Not Latinx", "Two or More NL", "Latinx placeholder"))))))))) 
 
 
-la_cnty_under5<-la_cnty_under5%>%
-  mutate(bipoc=(ifelse(race == "White NL" & swana == "Not SWAWNA", "Not BIPOC", "BIPOC")))
+la_cnty_under5<-la_cnty_under5%>% mutate(bipoc=(case_when(race == "White NL" & swana == "Not SWANA" ~ "Not BIPOC", .default="BIPOC")))
 
 #test <- la_cnty_under5 %>% select(SERIALNO, HISP, RAC1P, race, aian, latino, nhpi, swana, bipoc) 
 #View(test)
@@ -163,7 +167,7 @@ la_cnty_under5$asian = as.factor(ifelse(la_cnty_under5$ANC1P == "600" | la_cnty_
 ####  Step 3: filter LA County households eligible for rent-burden calculation and join to under5  #### 
 
 ## Select LA County renter households (in cost-burden universe)
-la_cnty_renter_hhs <- housing %>% filter(TEN <= "3" & is.na(GRPIP) == FALSE & (grepl('037', PUMA20) | grepl('037', PUMA10)))
+la_cnty_renter_hhs <- housing %>% filter(TEN == "3" & is.na(GRPIP) == FALSE & (grepl('037', PUMA20) | grepl('037', PUMA10)))
 
 ## Sum renter hhs to test accuracy
 #N <- sum(la_cnty_renter_hhs$WGTP) #1,733,508 close enough to the 1,796,882 I see here: 
@@ -360,77 +364,104 @@ d_long <- d_long %>% select(geoid, everything())
 
 ```
 
+```{r, echo=FALSE,out.width="100%", out.height="100%"}
 
-```{r chart, echo = FALSE}
+ #format for chart
+ d_chart <- d_long %>% 
+   arrange(desc(rate)) %>%
+   mutate(across('subgroup', str_replace, ' NL', '')) %>%
+   mutate(across('subgroup', str_replace, ' Alone or in Combination', '')) %>%
+   rename(population = num) %>%
+   mutate(group = "Percent of children under 5 in rent-burdened households") %>%
+  filter(subgroup != "Total")
 
-#chart
+#TITLE 
+title_text <- paste0("SWANA, Black, and Latinx Children under 5 are More Likely to be Rent Burdened")
 
-#format for chart
-d_chart <- d_long %>% 
-  arrange(desc(rate)) %>%
-  mutate(across('subgroup', str_replace, ' NL', '')) %>%
-  mutate(across('subgroup', str_replace, ' Alone or in Combination', '')) %>%
-  rename(population = num) %>%
-  mutate(group = "Percent of children under 5 in rent-burdened households")
+#SUBTITLE
+subtitle_text <- paste0("Percent of children under 5 experiencing rent burden in Los Angeles county")
 
-# set options so I get commas for decimals
-#hcoptslang <- getOption("highcharter.lang")
-#hcoptslang$thousandsSep <- ","
-#options(highcharter.lang = hcoptslang)
+#CAPTION
+caption_text<- paste0(acsnote,"<br>",racenote) #can always customize or add additional text to this as needed
 
-hc <- d_chart %>%
-  hchart('column', hcaes(x = subgroup, y = rate, group = group)) %>%
-  hc_tooltip(pointFormat = '{point.y:.1f}%') %>%        
-  hc_title(
-    text = "SWANA, Black, and Latinx children under 5 are more likely to be rent burdened"
-  ) %>%
-   hc_exporting(
-    enabled = TRUE, sourceWidth=900, sourceHeight=600,
-    chartOptions=list(plotOptions=list(series=list(dataLabels=list(enabled=TRUE, format='{point.y:,.1f}%')))),
-    filename = "plot"
-  ) %>%
-  
-  hc_caption(text = "Source: ACS 2018-2022 5-year estimates <br> AIAN = American Indian or Alaska Native. NHPI = Native Hawaiian or Pacific Islander. SWANA = Southwest Asian or North African. In this chart White, Asian, Black, Other and Two or More are non-Hispanic subgroups; AIAN, NHPI, SWANA, and Two or More are alone or in combination with other races.")
+#TOOLTIP
+#modify tooltips as needed 
 
-hc
+tooltip_text <- paste0("<b>{point.rate:.1f}%</b> of <b>{point.subgroup}</b> children under 5 experience rent burden, or a total of <b>{point.pop}</b> children under 5")
+
+
+#STEP 4 RUN the hchart FUNCTION 
+
+graph <- fx_single(
+    df = d_chart,
+    x = 'subgroup',
+    y = 'rate',
+    chart_title = title_text,
+    chart_subtitle = subtitle_text,
+    chart_tooltip = tooltip_text,
+    chart_caption = caption_text
+)
+
+graph
+
 ```
 
-## Why it matters?
-First 5 LA's first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes secure housing for essential psychological safety. This goal has an objective to reduce tot annual percent of households with children prenatal through age 5 who experience housing insecurity. Rent burden is not the sole cause of housing insecurity, but it is a key contributor.
 
-## Learn more.
-See more in the [First 5 LA 2024-2029 Strategic Plan](https://www.first5la.org/wp-content/uploads/2023/11/First-5-LA-Strategic-Plan-2024-2029.pdf) and see related indicators of basic needs in the [Data Narrative](https://apca-dev.dreamhosters.com/).
+## Disaggregating the Asian Subgroup
+Statistics of Asian populations can often mask stark differences between people of different ancestries. See chart below for the Asian disaggregation of rent burden. 
 
-Note: Aggregated data above conceal variations with disaggregated subgroups. See chart below for details.
+ * 100% of children of Afghan descent are rent-burdened, representing a group for advocates to focus on. 
+ * Over 70% of Hmong and Pakistani children under 5 are also rent-burdened.
 
-```{r chart2, echo = FALSE}
 
-# # trying out Asian disagg
+```{r, echo=FALSE,out.width="100%", out.height="100%"}
 
-#chart
+ #format for chart
+ d_chart_asian <- asian %>% rename(subgroup = asian) %>%
+   filter(indicator =="burdened" & pop >= 100 & rate_cv <= 40 & subgroup != "Asian" & subgroup != "Not Asian") %>%
+   arrange(desc(rate)) %>%
+   rename(population = num) %>%
+   mutate(group = "Percent of children under 5 in rent-burdened households")
 
-#format for chart
-d_chart_asian <- asian %>% rename(subgroup = asian) %>%
-  filter(indicator =="burdened" & pop >= 100 & rate_cv <= 40 & subgroup != "Asian" & subgroup != "Not Asian") %>%
-  arrange(desc(rate)) %>%
-  rename(population = num) %>%
-  mutate(group = "Percent of children under 5 in rent-burdened households")
+#TITLE 
+title_text <- paste0("Afghan Children under 5 are Most Likely to be Rent Burdened among Asians")
 
-hc_asian <- d_chart_asian %>%
-  hchart('column', hcaes(x = subgroup, y = rate, group = group)) %>%
-  hc_tooltip(pointFormat = '{point.y:.1f}%') %>%        
-  hc_yAxis(max = 100) %>%
-  hc_title(
-    text = "Afghan children under 5 are more likely to be rent burdened"
-  ) %>%
-   hc_exporting(
-    enabled = TRUE, sourceWidth=900, sourceHeight=600,
-    chartOptions=list(plotOptions=list(series=list(dataLabels=list(enabled=TRUE, format='{point.y:,.1f}%')))),
-    filename = "plot"
-  ) %>%
-  
-  hc_caption(text = "Source: ACS 2018-2022 5-year estimates")
+#SUBTITLE
+subtitle_text <- paste0("Percent of children under 5 experiencing rent burden in Los Angeles county")
 
-hc_asian
+#CAPTION
+caption_text<- paste0(acsnote,"<br>",racenote) #can always customize or add additional text to this as needed
+
+#TOOLTIP
+#modify tooltips as needed 
+
+tooltip_text <- paste0("<b>{point.rate:.1f}%</b> of <b>{point.subgroup}</b> children under 5 experience rent burden, or a total of <b>{point.pop:,.0f}</b> children under 5")
+
+
+#STEP 4 RUN the hchart FUNCTION 
+
+graph <- fx_single(
+    df = d_chart_asian,
+    x = 'subgroup',
+    y = 'rate',
+    chart_title = title_text,
+    chart_subtitle = subtitle_text,
+    chart_tooltip = tooltip_text,
+    chart_caption = caption_text
+)
+
+graph
+
+```
+
+## Why it matters
+First 5 LA's first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes secure housing for essential psychological safety. This goal has an objective to reduce the annual percent of households with children prenatal through age 5 who experience housing insecurity. Rent burden is not the sole cause of housing insecurity, but it is a key contributor.
+
+## Learn more
+See data for other indicators of basic needs in the [First 5 LA 2024-2029 Strategic Plan](https://www.first5la.org/wp-content/uploads/2023/11/First-5-LA-Strategic-Plan-2024-2029.pdf) and see related housing indicators and indicators by race/ethnicity in the [Data Narrative](https://apca-dev.dreamhosters.com/).
+
+```{r, include = FALSE}
+#Close postgres connection
+dbDisconnect(con) 
 ```
 
