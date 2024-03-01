@@ -1,7 +1,6 @@
 ---
-title: "Race of children under 5"
-description: |
-  Latinx children under 5 are 57% of all children under 5.
+title: "Race of Children under 5"
+description: "Latinx children under 5 are 57% of all children under 5."
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
@@ -233,35 +232,49 @@ d_long <- d_long %>% select(geoid, everything())
 ```{r}
 
 #chart
+ d_chart <- d_long %>% filter(subgroup != "Total") %>%
+   arrange(desc(num)) %>%
+   mutate(across('subgroup', str_replace, ' NL', '')) %>%
+   mutate(across('subgroup', str_replace, ' Alone or in Combination', '')) %>%
+   rename(population = num) %>%
+   mutate(group = "Children under 5")
 
-#format for chart
-d_chart <- d_long %>% filter(subgroup != "Total") %>%
-  arrange(desc(num)) %>%
-  mutate(across('subgroup', str_replace, ' NL', '')) %>%
-  mutate(across('subgroup', str_replace, ' Alone or in Combination', '')) %>%
-  rename(population = num) %>%
-  mutate(group = "Children under 5")
+total_under5 <- total$num[[2]] 
 
-# set options so I get commas for decimals
-hcoptslang <- getOption("highcharter.lang")
-hcoptslang$thousandsSep <- ","
-options(highcharter.lang = hcoptslang)
-
-hc <- d_chart %>%
-  hchart('column', hcaes(x = subgroup, y = population, group = group)) %>%
-                
-  hc_title(
-    text = "LA County is home to more than 300,000 Latinx children under 5"
-  ) %>%
-   hc_exporting(
-    enabled = TRUE, sourceWidth=900, sourceHeight=600,
-    chartOptions=list(plotOptions=list(series=list(dataLabels=list(enabled=TRUE, format='{point.y:,.0f}')))),
-    filename = "plot"
-  ) %>%
+d_chart$pct = d_chart$population / total_under5 * 100
   
-  hc_caption(text = "Source: ACS 2018-2022 5-year estimates. <br> AIAN = American Indian or Alaska Native. NHPI = Native Hawaiian or Pacific Islander. SWANA = Southwest Asian or North African. In this chart White, Asian, Black, Other and Two or More are non-Hispanic subgroups; AIAN, NHPI, SWANA, and Two or More are alone or in combination with other races. The sum of subgroups in this chart will exceed the total under 5 population.")
+source("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\R\\chart_prep\\f5la_chart_functions.R")
 
-hc
+#TITLE 
+title_text <- paste0("More than 300,000 Latinx children under 5 live in Los Angeles County")
+
+#SUBTITLE
+subtitle_text <- paste0("Number of children under age 5 by race/ethnicity")
+
+#CAPTION
+caption_text<- "Source: ACS 2018-2022 5-year estimates. <br> AIAN = American Indian or Alaska Native. NHPI = Native Hawaiian or Pacific Islander. SWANA = Southwest Asian or North African. In this chart White, Asian, Black, Other and Two or More are non-Hispanic subgroups; AIAN, NHPI, SWANA, and Two or More are alone or in combination with other races. The sum of subgroups in this chart will exceed the total under 5 population."
+
+#TOOLTIP
+#modify tooltips as needed 
+
+#tooltip_text <- paste0("<b>{point.population:,.0f}</b> children age 0-5 lived in Los Angeles County in #<b>{point.year}</b>") #can always customize or add additional text to this as needed
+
+tooltip_text <- paste0("<b>{point.population:.,1f}</b> {point.subgroup} children under 5 or 
+                       <b>{point.pct:.1f}%</b> of all children under 5 in Los Angeles County")
+
+#STEP 4 RUN the hchart FUNCTION 
+
+graph <- fx_single(
+    df = d_chart,
+    x = 'subgroup',
+    y = 'population',
+    chart_title = title_text,
+    chart_subtitle = subtitle_text,
+    chart_tooltip = tooltip_text,
+    chart_caption = caption_text
+)
+
+graph
 ```
 
 ## Why it matters?
@@ -271,57 +284,3 @@ Conversations about the under 5 population need to consider the needs of Latinx 
 
 ## Learn more.
 The importance of race and equity in the caring and educating of children under 5 cannot be overstated. See more in the [Data Narrative](https://apca-dev.dreamhosters.com/) for details.
-
-```{r}
-#alternative data cut that's faster but doesn't get the percentages, filters for under 5 first
-
-
-# ## Select LA County under 5
-# la_under5 <- people %>% filter(AGEP <= 4 & (grepl('037', PUMA20) | grepl('037', PUMA10) ))
-# 
-# ## Sum to test accuracy
-# #N <- sum(la_under5$PWGTP) #536,815 is in the right ballpark for a 5-year estimate
-# 
-# ## Recode race/eth
-# la_under5<-la_under5%>%
-#   mutate(latino=(ifelse(HISP %in% "01", "Not Latinx", "Latinx")))
-# 
-# la_under5<-la_under5%>%
-#   mutate(aian=(ifelse(RACAIAN %in% "0", "Not AIAN", "AIAN Alone or in Combination")))
-# 
-# la_under5<-la_under5%>%
-#   mutate(nhpi=(ifelse(RACPI %in% "1", "NHPI Alone or in Combination",
-#                       ifelse(RACNH %in% '1', 'NHPI Alone or in Combination', "Not NHPI"))))
-# 
-# ###### Set up codes for SWANA ######
-# # First use ancestry codes to help identify estimated swana pop
-# ## Create list of swana codes for PUMS
-# pums_swana_list<-list("Algerian","Arab","Assyrian","Bahraini","Berber","Chaldean","Egyptian","Emirati","Iranian","Iraqi","Israeli","Jordanian","Kurdish","Kuwaiti","Lebanese","Libyan","Middle Eastern","Moroccan","North African","Omani","Palestinian","Qatari","Saudi","Syriac","Syrian","Tunisian","Yazidi","Yemeni","Mideast","Saudi Arabian","Arabic","Other Arab","Libyan (2017 or later)","Kuwaiti (2017 or later)","Turkish","Sudanese","Afghan") # 2017 or later needed based on reviewing data dictionary and saw fields for Arabic and Other Arab
-# 
-# ## import PUMS codes
-# pums_codes <- read_excel("W:/Data/Demographics/PUMS/CA_2018_2022/PUMS_Data_Dictionary_2018-2022_ANC1P.xlsx")%>%
-#   mutate_all(as.character) # create this excel document separate by opening PUMS Data Dictionary in excel and deleting everything but ancestry fields -- since ANC1P and ANC2P have same data values no need to do both
-# pums_codes <- pums_codes %>% dplyr::rename("ANC_Code" = "Code_1")
-# 
-# ## filter PUMS codes for swana descriptions based on our swana_list
-# swana_codes<-pums_codes%>%filter(Description %in% pums_swana_list)
-# 
-# ##swana - alone or in combination with another race or latino
-# la_under5$swana <- "Not SWANA"
-# la_under5$swana[la_under5$ANC1P%in% swana_codes$ANC_Code| la_under5$ANC2P%in% swana_codes$ANC_Code] <- "SWANA"
-# la_under5$swana <- as.factor(la_under5$swana)
-# 
-# # code other race groups
-# la_under5$race <- NA #declare variable to avoid unequal rows error
-# la_under5$race = as.factor(ifelse(la_under5$RAC1P == "1" & la_under5$latino =="Not Latinx", "White NL",
-#                             ifelse(la_under5$RAC1P == "1" & la_under5$latino =="Latinx", "Latinx placeholder",
-#                             ifelse(la_under5$RAC1P == "2" & la_under5$latino =="Not Latinx", "Black NL",
-#                             ifelse(la_under5$RAC1P == "3" | la_under5$RAC1P== "4"|la_under5$RAC1P== "5", "AIAN placeholder",
-#                             ifelse(la_under5$RAC1P == "6" & la_under5$latino =="Not Latinx", "Asian NL",
-#                             ifelse(la_under5$RAC1P == "7" & la_under5$latino =="Not Latinx", "NHPI placeholder",
-#                             ifelse(la_under5$RAC1P == "8" & la_under5$latino =="Not Latinx", "Other NL", 
-#                             ifelse(la_under5$RAC1P == "9" & la_under5$latino =="Not Latinx", "Two or More NL", "Latinx placeholder"))))))))) 
-
-
-```
-
