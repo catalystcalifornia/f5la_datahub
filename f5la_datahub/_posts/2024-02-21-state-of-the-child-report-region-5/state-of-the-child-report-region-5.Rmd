@@ -1,7 +1,7 @@
 ---
 title: "State of the Child Report Region 5"
 description: |
-  Analysis of systems and outcomes impacting children and families in Antelope Valley
+  Analysis of systems and outcomes impacting children and families in the Antelope Valley. Report was commissioned by Children's Bureau of Southern California.
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
@@ -15,11 +15,11 @@ output:
 preview: images/av_beststart_logo.png
 ---
 
-Catalyst California worked in partnership with the Children’s Bureau of Southern California and Antelope Valley community members to create a report examining how children and families are faring in the Antelope Valley. The Best Start Region 5 State of the Child Report represents the most comprehensive analysis of data from the region to date, consolidating data on children, families and systems in the Antelope Valley. Children’s Bureau of Southern California commissioned this report to understand the state of children in the Antelope Valley, identify indicators to monitor, and increase the amount of data available to advocates. 
+The Best Start Region 5 State of the Child Report represents the most comprehensive analysis of data from the region to date, consolidating data on children, families and systems in the Antelope Valley. Children’s Bureau of Southern California commissioned this report to understand the state of children in the Antelope Valley, identify indicators to monitor, and increase the amount of data available to advocates. 
 
 You can view and download the report in its entirety [here](https://www.all4kids.org/wp-content/uploads/2023/08/Region5_StateOfTheChildReport_2023_Final_Web2-1.pdf).
 
-The data shows that:
+The report finds that:
 
 * [**The family-friendly, low-cost-living in the Antelope Valley, that residents love and depend on, is disappearing and a new, more proactive infrastructure for children and families is needed.**](https://www.racecounts.org/palmdale-once-affordable-for-families/) The current infrastructure was not established for the population increases the Antelope Valley has experienced in the last decade, and the lack of resources is a driver for school-to-prison, youth-to-houselessness pipelines, and other avoidable outcomes. To be specific: 
 
