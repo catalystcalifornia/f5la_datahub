@@ -1,7 +1,7 @@
 ---
 title: "Guaranteed Basic Income Presentation"
 description: |
-  Presentation created by Catalyst California for the First 5 LA Learning Dialogue on Guaranteed Basic Income (GBI) that took place for December 5th, 2023. The Leaning Dialogue convened various departments from First 5 LA along with partner organizations working on GBI efforts in Los Angeles county.
+  Presentation created by Catalyst California for the First 5 LA Learning Dialogue on Guaranteed Basic Income (GBI) that took place on December 5th, 2023. This presentation connects data with literature review findings to show how GBI can improve health outcomes and economic mobility for families and children 0 to 5. 
 author:
   - name: Catalyst California
     url: catalystcalifornia.org

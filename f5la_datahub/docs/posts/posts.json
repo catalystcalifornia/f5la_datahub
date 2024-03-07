@@ -124,8 +124,8 @@
   },
   {
     "path": "posts/2024-01-23-gbi-learning-dialogue-presentation/",
-    "title": "GBI Presentation",
-    "description": "Presentation created by Catalyst California for First 5 LA Learning Dialogue on Guaranteed Basic Income (GBI)",
+    "title": "Guaranteed Basic Income Presentation",
+    "description": "Presentation created by Catalyst California for the First 5 LA Learning Dialogue on Guaranteed Basic Income (GBI) that took place on December 5th, 2023. This presentation connects data with literature review findings to show how GBI can improve health outcomes and economic mobility for families and children 0 to 5.",
     "author": [
       {
         "name": "Catalyst California",
@@ -138,8 +138,8 @@
     ],
     "contents": "\r\nThe Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners about the importance of Guaranteed Basic Income (GBI) as it relates to the Best Start Geographies and children 0-5.\r\nLink to the full presentation\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-01-23-gbi-learning-dialogue-presentation/images/gbi.png",
-    "last_modified": "2024-02-21T14:18:30-08:00",
-    "input_file": {}
+    "last_modified": "2024-03-07T12:15:55-08:00",
+    "input_file": "gbi-learning-dialogue-presentation.knit.md"
   },
   {
     "path": "posts/2024-01-23-strategic-heat-maps/",
