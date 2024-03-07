@@ -1,7 +1,7 @@
 ---
 title: "Housing Presentation"
 description: |
-  Presentation created by Catalyst California for First 5 LA Learning Dialogue on Housing
+  Presentation created by Catalyst California for the First 5 LA Learning Dialogue on Housing that took place on October 18th, 2023. This presentation connects data with literature review findings to illustrate the various ways in which housing insecurity is a racial equity issue, and negatively impacts health and socioeconomic outcomes for families and children ages 0 to 5.
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
@@ -14,7 +14,7 @@ output:
 preview: images/housing.png
 ---
 
-The Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners about the housing crises as it relates to children age 0-5 living in the Best Start Geographies and Los Angeles county. 
+The Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners to share knowledge and learn more about housing issues as they relate to children age 0-5 living in Best Start geographies and Los Angeles county.
 
 [Link to the full presentation](https://github.com/catalystcalifornia/f5la_datahub/blob/main/F5LA%20Housing%20Learning%20Dialogue_CC.pdf) 
 
