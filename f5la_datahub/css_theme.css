@@ -237,6 +237,10 @@ p{
 
 /* JZ DISTILL WEBSITE CSS STYLING */
 
+.sidebar-section.categories > ul > li:first-child {
+  display: none;
+} /* remove default 'articles' category */
+
 d-article hr {margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
