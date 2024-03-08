@@ -5,6 +5,8 @@ author:
   - name: Catalyst California
     url: catalystcalifornia.org
 date: 2024-02-08
+categories:
+  - Indicators
 output:
   distill::distill_article:
     css: css_theme.css
