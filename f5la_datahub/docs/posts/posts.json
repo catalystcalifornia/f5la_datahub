@@ -40,7 +40,7 @@
   {
     "path": "posts/2024-03-01-children-under-5/",
     "title": "Children under 5",
-    "description": "The population of children under 5 decreased by 24% over the last 10 years.",
+    "description": "Updated analysis of total children age 0-5 in Los Angeles county from 2013 to 2022 (updated in 2024), as part of Catalyst California's annual update of key census indicators related to children age 0 to 5 using the most recent census data available.",
     "author": [
       {
         "name": "Catalyst California",
@@ -53,13 +53,13 @@
     ],
     "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\nWhy it matters?\r\nThere’s a disconnect between our values and the ability to raise a family in LA. We want to welcome children, but a nine-year decline in the under-five-population means families are choosing other options. Additionally,\r\nfewer children means fewer State and Federal funds for schools and other critical infrastructure.\r\nLearn more\r\nThe decrease in children results from a number of factors that surveys and local experts can explain. See the Data Narrative for details.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-03-01-children-under-5/images/child0to5.PNG",
-    "last_modified": "2024-03-07T16:28:30-08:00",
-    "input_file": "children-under-5.knit.md"
+    "last_modified": "2024-03-07T16:40:13-08:00",
+    "input_file": {}
   },
   {
     "path": "posts/2024-03-01-rent-burden/",
     "title": "Rent Burden of Children under 5",
-    "description": "58.6% of children under 5 are rent burdened.",
+    "description": "Updated analysis of children age 0-5 experiencing rent burden in Los Angeles county (updated in 2024), as part of Catalyst California's annual update of key census indicators related to children age 0 to 5 using the most recent census data available.",
     "author": [
       {
         "name": "Catalyst California",
@@ -72,13 +72,13 @@
     ],
     "contents": "\r\n\r\n\r\n\r\nDisaggregating the Asian Subgroup\r\nStatistics of Asian populations can often mask stark differences between people of different ancestries. See chart below for the Asian disaggregation of rent burden.\r\n100% of children of Afghan descent are rent-burdened, representing a group for advocates to focus on.\r\nOver 70% of Hmong and Pakistani children under 5 are also rent-burdened.\r\n\r\n\r\n\r\nWhy it matters\r\nFirst 5 LA’s first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes secure housing for essential psychological safety. This goal has an objective to reduce the annual percent of households with children prenatal through age 5 who experience housing insecurity. Rent burden is not the sole cause of housing insecurity, but it is a key contributor.\r\nLearn more\r\nSee data for other indicators of basic needs in the First 5 LA 2024-2029 Strategic Plan and see related housing indicators and indicators by race/ethnicity in the Data Narrative.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-03-01-rent-burden/images/rentburden.PNG",
-    "last_modified": "2024-03-07T16:29:48-08:00",
-    "input_file": "rent-burden.knit.md"
+    "last_modified": "2024-03-07T16:41:10-08:00",
+    "input_file": {}
   },
   {
     "path": "posts/2024-02-08-race-of-children-under-5/",
     "title": "Race of Children under 5",
-    "description": "Latinx children under 5 are 57% of all children under 5.",
+    "description": "Updated analysis of race of children age 0-5 in Los Angeles county (updated in 2024), as part of Catalyst California's annual update of key census indicators related to children age 0 to 5 using the most recent census data available.",
     "author": [
       {
         "name": "Catalyst California",
@@ -91,8 +91,8 @@
     ],
     "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nWhy it matters?\r\nConversations about the under 5 population need to consider the needs of Latinx families, including:\r\ndual language access for children, and materials for parents in both English and Spanish.\r\nLearn more.\r\nThe importance of race and equity in the caring and educating of children under 5 cannot be overstated. See more in the Data Narrative for details.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-02-08-race-of-children-under-5/images/race0to5.PNG",
-    "last_modified": "2024-03-07T16:25:51-08:00",
-    "input_file": "race-of-children-under-5.knit.md"
+    "last_modified": "2024-03-07T16:39:44-08:00",
+    "input_file": {}
   },
   {
     "path": "posts/2024-02-06-childcare-center-closures/",
