@@ -6,6 +6,9 @@ author:
   - name: Catalyst California
     url: catalystcalifornia.org
 date: 2024-01-23
+categories:
+  - Analysis
+  - Data Narrative
 output:
   distill::distill_article:
     self_contained: false

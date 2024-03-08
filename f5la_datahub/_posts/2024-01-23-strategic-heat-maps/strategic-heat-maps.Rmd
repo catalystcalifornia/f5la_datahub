@@ -1,11 +1,13 @@
 ---
 title: "Strategic Heat Map"
 description: |
-  Visualizing changes over-time in the Best Start Geographies across key indicators related to children 0-5
+  ODFA research request in advance of the April 2023 Board Meeting to map key indicators for children age 0 to 5 in Los Angeles county and Best Start Geogrpahies. The original ODFA request expanded to include visualizing changes over-time in the Best Start Geographies across the same key indicators related to children 0-5.
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
 date: 2024-01-23
+categories:
+  - Analysis
 output:
   distill::distill_article:
     css: "W:\\RDA Team\\R\\cc_brandguide.css"
