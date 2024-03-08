@@ -1,9 +1,16 @@
 ---
-title: "About this blog"
-description: |
-  Some additional details about the blog
+title: "About this data hub"
+output:
+  distill::distill_article:
+    css: css_theme.css
+    self_contained: false
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
+This data hub was created by Catalyst California to host the various products created during the First 5 LA-Catalyst California Strategic Partnership. The Strategic Partnership was created in 2019 to support the First 5 LA Communities team in understanding the current conditions in Best Start geographies through data support and thought partnership. 
+
+If you have any questions, please contact:
+
+* Chris Ringewald: cringewald@catalystcalifornia.org
+* Jennifer Zhang: jzhang@catalystcalifornia.org
+
+For more information about Catalyst California please https://www.catalystcalifornia.org/

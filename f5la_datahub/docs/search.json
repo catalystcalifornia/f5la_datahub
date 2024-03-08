@@ -2,18 +2,24 @@
   "articles": [
     {
       "path": "about.html",
-      "title": "About this blog",
-      "description": "Some additional details about the blog",
+      "title": "About this data hub",
       "author": [],
-      "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2024-02-14T10:49:14-08:00"
+      "contents": "\r\nThis data hub was created by Catalyst California to host the various products created during the First 5 LA-Catalyst California Strategic Partnership. The Strategic Partnership was created in 2019 to support the First 5 LA Communities team in understanding the current conditions in Best Start geographies through data support and thought partnership.\r\nIf you have any questions, please contact:\r\nChris Ringewald: cringewald@catalystcalifornia.org\r\nJennifer Zhang: jzhang@catalystcalifornia.org\r\nFor more information about Catalyst California please https://www.catalystcalifornia.org/\r\n\r\n\r\n\r\n",
+      "last_modified": "2024-03-07T15:57:25-08:00"
+    },
+    {
+      "path": "faq.html",
+      "title": "Frequenty Asked Questions",
+      "author": [],
+      "contents": "\r\n\r\nContents\r\nHow to use this site\r\nSite navigation\r\nCategories\r\n\r\nData disaggregation\r\nSSWANA\r\n\r\n\r\nHow to use this site\r\nSite navigation\r\nCategories\r\nData disaggregation\r\nSSWANA\r\n\r\n\r\n\r\n",
+      "last_modified": "2024-03-07T16:03:30-08:00"
     },
     {
       "path": "index.html",
       "title": "First 5 LA Data Hub",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2024-03-01T16:28:42-08:00"
+      "last_modified": "2024-03-07T12:20:34-08:00"
     }
   ],
   "collections": ["posts/posts.json"]

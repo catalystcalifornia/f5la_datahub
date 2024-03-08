@@ -1,0 +1,19 @@
+---
+title: "Frequenty Asked Questions"
+output:
+  distill::distill_article:
+    css: css_theme.css
+    self_contained: false
+    toc: yes
+    toc_depth: '2'
+---
+
+# How to use this site
+
+## Site navigation
+
+## Categories
+
+# Data disaggregation
+
+## SSWANA
