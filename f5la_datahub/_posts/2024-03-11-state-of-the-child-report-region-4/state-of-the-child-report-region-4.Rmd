@@ -1,7 +1,7 @@
 ---
 title: "State of the Child Report Region 4"
 description: |
-  The Region 4 State of the Child project was commissioned by The Nonprofit Partnership (TNP) in order to understand the conditions of children and families within this current moment and not shy away from talking about COVID-19 impacts, rampant police misconduct, or racism.
+  The Region 4 State of the Child Report was commissioned by The Nonprofit Partnership (TNP) in order to understand the conditions of children and families within this current moment and not shy away from talking about COVID-19 impacts, rampant police misconduct, or racism.
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
