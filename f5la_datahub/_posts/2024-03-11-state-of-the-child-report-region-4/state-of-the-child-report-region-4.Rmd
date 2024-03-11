@@ -1,0 +1,22 @@
+---
+title: "State of the Child Report Region 4"
+description: |
+  The Region 4 State of the Child project was commissioned by The Nonprofit Partnership (TNP) in order to understand the conditions of children and families within this current moment and not shy away from talking about COVID-19 impacts, rampant police misconduct, or racism.
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-03-11
+categories:
+  - Region 4
+output:
+  distill::distill_article:
+    self_contained: false
+preview: images/wilmington.PNG
+---
+The State of the Child Report takes a hard look at how children are faring against the backdrop of the twin crises that have swept the nation over the past year. It identifies conditions we should celebrate and those we should advocate improving. It also shows how public systems affect conditions in the community and arms community members with data needed to affect change. The report sets a baseline for measurement that can guide future investments and policy decisions. Data, derived from many disparate sources, are consolidated in the data section of this site. 
+
+The State of the Child Report aims to strengthen the advocacy efforts of these organizations leading the work in Region 4 in the public education, health, criminal justice, and economic systems and systems governing the built environment. This report creates a shared picture of what children and families face and elevates the visibility of these issues. It can help strengthen coordination of advocacy and movement-building efforts across the Central Long Beach and Wilmington communities and support opportunities for fundraising to ensure advocates have the resources they need to help children and families thrive.
+
+Two separate reports were made for Central Long Beach and Wilmington in order to dive deeper into the specific characteristics of each Best Start Geography. Both reports may be accessed [here](https://beststartregion4.org/?)
+
+
