@@ -237,6 +237,11 @@ p{
 
 /* JZ DISTILL WEBSITE CSS STYLING */
 
+d-byline{
+  padding: 1rem 0;
+}
+
+
 .sidebar-section.categories > ul > li:first-child {
   display: none;
 } /* remove default 'articles' category */
@@ -245,7 +250,9 @@ d-article hr {margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
 
-p {margin: 0.3em 0;}
+p {margin: 0.3em 0;,
+  font-size: 14px;
+}
 
 
 .distill-site-nav a{
@@ -253,6 +260,7 @@ p {margin: 0.3em 0;}
   font-weight: 200;
   color: #FFFFFF !important;
 }
+
 
 nav.distill-site-nav.distill-site-header{
   height: 50px;
