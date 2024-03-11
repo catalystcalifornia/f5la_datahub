@@ -390,7 +390,7 @@ caption_text<- paste0(acsnote,"<br>",racenote) #can always customize or add addi
 #TOOLTIP
 #modify tooltips as needed 
 
-tooltip_text <- paste0("<b>{point.rate:.1f}%</b> of <b>{point.subgroup}</b> children under 5 experience rent burden, or a total of <b>{point.pop}</b> children under 5")
+tooltip_text <- paste0("<b>{point.rate:.1f}%</b> of <b>{point.subgroup}</b> children under 5 experience rent burden, or a total of <b>{point.pop:,.0f}</b> children under 5")
 
 
 #STEP 4 RUN the hchart FUNCTION 
