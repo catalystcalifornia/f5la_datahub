@@ -1,0 +1,92 @@
+---
+title: "Real Cost Measure"
+description: |
+  Updated analysis of Real Cost Measure by race in Los Angeles county (updated in 2023), as part of Catalyst California's annual update of key indicators related to families with children age 0-5. 
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-03-20
+categories:
+  - Indicators
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(data.table)
+library(highcharter)
+library(stringr)
+library(RPostgreSQL)
+library(reshape2) 
+
+source("W:\\RDA Team\\R\\credentials_source.R")
+con <- connect_to_db("rda_shared_data")
+
+source("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\R\\chart_prep\\f5la_chart_functions.R")
+```
+
+```{r}
+# read in 2023 RCM data
+
+rcm<-dbGetQuery(con, "SELECT * FROM economic.uw_2023_county_state_real_cost_measure")
+
+
+# filter for columns and geos of interest
+
+df<-rcm%>%
+  filter(county == 'Los Angeles')%>%
+  select(14:25)
+
+#insert value for pct hh aian from dashboard for 2023: https://public.tableau.com/app/profile/hgascon/viz/TheRealCostMeasureinCalifornia2023/RealCostDashboard?publish=yes
+
+df<-df%>%
+  mutate(pct_hh_below_rcm_aian=.50,
+         num_hh_below_rcm_aian=NA)
+
+# pivot table longer
+ df<-df%>%
+   pivot_longer(1:14, names_to = "variable", values_to = "value")
+
+#make data long for both pct and number
+
+pct <- df%>%
+  filter(grepl("pct", variable))%>%
+  rename("pct_var"="variable",
+         "pct_value"="value")%>%
+mutate(pct_value=pct_value*100)
+
+num<-df%>%
+  filter(grepl("num", variable))%>%
+  rename("num_var"="variable",
+         "num_value"="value")
+
+#combine
+
+rcm_race<-cbind(num, pct)
+
+#now remove rows with the NA values because we can't graph
+
+rcm_race<-rcm_race[-c(6), ] 
+
+#now create new variable column with nicer labeling for the graph
+
+rcm_race<-rcm_race%>%
+  mutate(variable=ifelse(pct_var %in% 'pct_white_hh_below_rcm', 'White',
+                         ifelse(pct_var %in% 'pct_black_hh_below_rcm', 'Black',
+                                ifelse(pct_var %in% 'pct_asian_below_rcm', 'Asian',
+                                                ifelse(pct_var %in% 'pct_latino_hh_below_rcm', 'Latinx', ifelse(pct_var %in% 'pct_other_hh_below_rcm', 'Other', "American Indian/Alaskan Native"))))))
+
+
+
+
+
+%>%
+  mutate(across(is.numeric, ~ round(., 1)))
+
+```
+
