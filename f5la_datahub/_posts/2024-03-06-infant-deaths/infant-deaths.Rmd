@@ -1,0 +1,89 @@
+---
+title: "Infant Deaths"
+description: "Rates of infant mortality are half those of 2017 and earlier."
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-03-06
+categories:
+  - Indicators
+output:
+  distill::distill_article:
+    css: css_theme.css 
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidycensus)
+library(tidyverse)
+library(scales)
+library(highcharter)
+library(magrittr)
+
+```
+
+
+```{r}
+#make a line chart of infant deaths over liver births per 1,000 over time (infant mortality rate)
+
+#get CHHS deaths. There are provisional deaths for 23-24, but the numbers are half 2022 or less so suspicious
+deaths14_22 <- read.csv(url("https://data.chhs.ca.gov/datastore/dump/579cc04a-52d6-4c4c-b2df-ad901c9049b7?bom=True"))
+
+deaths <- deaths14_22 %>% filter(County == "Los Angeles" & Strata_Name == "Under 1 year") %>% 
+  group_by(Year) %>% summarize(Year = min(Year), Deaths = sum(Count))
+
+#get CHHS births, comes in two sets of years
+births60_22 <- read.csv(url("https://data.chhs.ca.gov/datastore/dump/d6c30e46-8618-407a-ba5a-bae308f86a1c?bom=True"))
+
+births <- births60_22 %>% filter(County == "Los Angeles" & Year >= 2014) %>% 
+  group_by(Year) %>% summarize(Year = min(Year), Births = sum(Count, na.rm = TRUE))
+
+mortality <- left_join(deaths, births, by = "Year") %>% mutate(mortality = Deaths/Births*1000)
+
+```
+
+```{r}
+
+source("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\R\\chart_prep\\f5la_chart_functions.R")
+
+
+#TITLE 
+title_text <- paste0("LA County Infant Mortality is Down from 2017")
+
+#SUBTITLE
+subtitle_text <- paste0("Number of infant deaths per 1,000 births by year")
+
+#CAPTION
+caption_text<- "Source: California Department of Public Health (2014-2022)"
+
+#TOOLTIP
+#modify tooltips as needed 
+
+tooltip_text <- paste0("<b>{point.Deaths:,.0f}</b> infants under age 1 died in Los Angeles County in <b>{point.Year},</b><br> or <b>{point.mortality:.1f}</b> deaths per 1,000 live births.") #can always customize or add additional text to this as needed
+
+
+#STEP 4 RUN the hchart FUNCTION 
+
+graph <- fx_line(
+    df = mortality,
+    x = 'Year',
+    y = 'mortality',
+    chart_title = title_text,
+    chart_subtitle = subtitle_text,
+    chart_tooltip = tooltip_text,
+    chart_caption = caption_text
+)
+
+graph
+
+```
+
+
+## Why it matters
+While any infant death is one too many, a decline in numbers and rates of infant deaths is something to celebrate. Fewer infant deaths means more healthy infants and families.
+
+## Learn more
+Areas of concern remain for infants. Life/death is unfortunately not the only measure of child welfare. Antelope Valley partners highlight concerns over child welfare. See their [State of the Child report](https://www.all4kids.org/wp-content/uploads/2023/08/Region5_StateOfTheChildReport_2023_Final_Web2-1.pdf) for details.
