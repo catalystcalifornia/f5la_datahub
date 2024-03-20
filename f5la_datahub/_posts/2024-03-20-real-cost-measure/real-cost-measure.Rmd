@@ -30,11 +30,11 @@ con <- connect_to_db("rda_shared_data")
 source("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\R\\chart_prep\\f5la_chart_functions.R")
 ```
 
-```{r}
+```{r, include=FALSE}
+
 # read in 2023 RCM data
 
 rcm<-dbGetQuery(con, "SELECT * FROM economic.uw_2023_county_state_real_cost_measure")
-
 
 # filter for columns and geos of interest
 
@@ -42,15 +42,9 @@ df<-rcm%>%
   filter(county == 'Los Angeles')%>%
   select(14:25)
 
-#insert value for pct hh aian from dashboard for 2023: https://public.tableau.com/app/profile/hgascon/viz/TheRealCostMeasureinCalifornia2023/RealCostDashboard?publish=yes
-
-df<-df%>%
-  mutate(pct_hh_below_rcm_aian=.50,
-         num_hh_below_rcm_aian=NA)
-
 # pivot table longer
  df<-df%>%
-   pivot_longer(1:14, names_to = "variable", values_to = "value")
+   pivot_longer(1:12, names_to = "variable", values_to = "value")
 
 #make data long for both pct and number
 
@@ -69,6 +63,11 @@ num<-df%>%
 
 rcm_race<-cbind(num, pct)
 
+#insert value for pct hh aian from dashboard for 2023: https://public.tableau.com/app/profile/hgascon/viz/TheRealCostMeasureinCalifornia2023/RealCostDashboard?publish=yes
+
+rcm_race<-rcm_race%>%
+  mutate(pct_value=ifelse(pct_var %in% "pct_aian_hh_below_rcm", 50, pct_value))
+
 #now remove rows with the NA values because we can't graph
 
 rcm_race<-rcm_race[-c(6), ] 
@@ -78,15 +77,58 @@ rcm_race<-rcm_race[-c(6), ]
 rcm_race<-rcm_race%>%
   mutate(variable=ifelse(pct_var %in% 'pct_white_hh_below_rcm', 'White',
                          ifelse(pct_var %in% 'pct_black_hh_below_rcm', 'Black',
-                                ifelse(pct_var %in% 'pct_asian_below_rcm', 'Asian',
-                                                ifelse(pct_var %in% 'pct_latino_hh_below_rcm', 'Latinx', ifelse(pct_var %in% 'pct_other_hh_below_rcm', 'Other', "American Indian/Alaskan Native"))))))
-
-
-
-
-
-%>%
-  mutate(across(is.numeric, ~ round(., 1)))
+                                ifelse(pct_var %in% 'pct_asian_hh_below_rcm', 'Asian',
+                                                ifelse(pct_var %in% 'pct_latino_hh_below_rcm', 'Latinx', ifelse(pct_var %in% 'pct_other_hh_below_rcm', 'Other', "American Indian/Alaskan Native"))))))%>%
+  mutate(across(is.numeric, ~ round(., 1)))%>%
+  arrange(-pct_value)
 
 ```
 
+```{r}
+
+# graph
+
+#TITLE 
+title_text <- paste0("Latinx and AIAN households are 2x more likely to earn less than the Real Cost Measure compared to White households")
+
+#SUBTITLE
+subtitle_text <- paste0("Percent of households with young children earning below the Real Cost Measure in Los Angeles county")
+
+#CAPTION
+caption_text<- paste0("The Real Cost Measure in California 2023. United Ways of California. June 2023. https://www.unitedwaysca.org/realcost.") #can always customize or add additional text to this as needed
+
+#TOOLTIP
+#modify tooltips as needed 
+
+tooltip_text <- paste0("<b>{point.pct_value:.1f}%</b> of <b>{point.variable}</b> households with young children earn below the Real Cost Measure, or a total of <b>{point.num_value:,.0f}</b> households")
+
+
+#STEP 4 RUN the hchart FUNCTION 
+
+graph <- fx_single(
+    df = rcm_race,
+    x = 'variable',
+    y = 'pct_value',
+    chart_title = title_text,
+    chart_subtitle = subtitle_text,
+    chart_tooltip = tooltip_text,
+    chart_caption = caption_text
+)
+
+graph
+
+
+```
+
+## Why it matters
+First 5 LA's first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes economic security. Economic security is foundational to reducing the annual percent of households with prenatal to 5 living poverty and experiencing housing insecurity, which are also part of the first strategic plan goal. The Real Cost Measure is a more holistic indicator that measures economic security in the context of families with young children, and what it costs to meet the essential needs of young children. 
+
+## Learn more
+See data for other indicators of basic needs in the [First 5 LA 2024-2029 Strategic Plan](https://www.first5la.org/wp-content/uploads/2023/11/First-5-LA-Strategic-Plan-2024-2029.pdf) and see related economic indicators and indicators by race/ethnicity in the [Data Narrative](https://apca-dev.dreamhosters.com/).
+
+To learn more about Guaranteed Basic Income (GBI) efforts in Los Angeles county and how GBI improves outcomes for children and families, see the Catalyst California GBI presentation from the First 5 LA GBI Learning Dialogue [here](https://catalystcalifornia.github.io/f5la_datahub/f5la_datahub/docs/posts/2024-01-23-gbi-learning-dialogue-presentation/)
+
+```{r, include = FALSE}
+#Close postgres connection
+dbDisconnect(con) 
+```
