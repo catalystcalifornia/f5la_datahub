@@ -15,8 +15,8 @@
     ],
     "contents": "\r\n\r\n\r\n\r\nThe data below visualizes the Real Cost Measure budget for a family in Los Angeles county with two children, one child age 0-5 and one school-aged child. This is visualized alongside the Los Angeles county median household income. All data is from 2021.\r\n\r\n\r\n\r\nWhy it matters\r\nFirst 5 LA’s first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes economic security. Economic security is foundational to reducing the annual percent of households with prenatal to 5 living poverty and experiencing housing insecurity, which are also part of the first strategic plan goal. The Real Cost Measure is a more holistic indicator that measures economic security in the context of families with young children, and what it costs to meet the essential needs of young children.\r\nLearn more\r\nSee data for other indicators of basic needs in the First 5 LA 2024-2029 Strategic Plan and see related economic indicators and indicators by race/ethnicity in the Data Narrative.\r\nTo learn more about Guaranteed Basic Income (GBI) efforts in Los Angeles county and how GBI improves outcomes for children and families, see the Catalyst California GBI presentation from the First 5 LA GBI Learning Dialogue here\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-03-20-real-cost-measure/images/RCM.png",
-    "last_modified": "2024-03-20T17:19:39-07:00",
-    "input_file": "real-cost-measure.knit.md"
+    "last_modified": "2024-03-21T12:58:28-07:00",
+    "input_file": {}
   },
   {
     "path": "posts/2024-03-11-state-of-the-child-report-region-4/",
@@ -53,7 +53,7 @@
     ],
     "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\nWhy it matters\r\nWhile any infant death is one too many, a decline in numbers and rates of infant deaths is something to celebrate. Fewer infant deaths means more healthy infants and families.\r\nLearn more\r\nAreas of concern remain for infants. Life/death is unfortunately not the only measure of child welfare. Antelope Valley partners highlight concerns over child welfare. See their State of the Child report for details.\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2024-03-20T15:28:38-07:00",
+    "last_modified": "2024-03-21T12:58:28-07:00",
     "input_file": {}
   },
   {
@@ -130,6 +130,23 @@
     "contents": "\r\n\r\n\r\n\r\nDisaggregating the Asian Subgroup\r\nStatistics of Asian populations can often mask stark differences between people of different ancestries. See chart below for the Asian disaggregation of rent burden.\r\n100% of children of Afghan descent are rent-burdened, representing a group for advocates to focus on.\r\nOver 70% of Hmong and Pakistani children under 5 are also rent-burdened.\r\n\r\n\r\n\r\nWhy it matters\r\nFirst 5 LA’s first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes secure housing for essential psychological safety. This goal has an objective to reduce the annual percent of households with children prenatal through age 5 who experience housing insecurity. Rent burden is not the sole cause of housing insecurity, but it is a key contributor.\r\nLearn more\r\nSee data for other indicators of basic needs in the First 5 LA 2024-2029 Strategic Plan and see related housing indicators and indicators by race/ethnicity in the Data Narrative.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-03-01-rent-burden/images/rentburden.PNG",
     "last_modified": "2024-03-20T15:21:47-07:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/2024-03-21-poverty-of-children-under-5/",
+    "title": "Poverty of children under 5",
+    "description": "Analysis of children under 5 in poverty by race in Los Angeles County, as part of Catalyst California’s annual update of key indicators for First 5 LA and Best Start",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-02-13",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\nNote: Aggregated data above conceal variations with disaggregated subgroups. 61.5% of children under 5 of Mongolian descent are in poverty. See chart below for details. Cambodian children under 5 are also more likely to be in poverty than LA County children overall. Many of these Cambodian children live in Best Start Region 4, where you can read more about the state of children here.\r\n\r\n\r\n\r\nWhy it matters\r\nPoverty is a key indicator of whether a family can provide for the basic needs of its children. That 17.6% of children under 5 live in poverty is too a percentage for such a prosperous county.\r\nLearn more\r\nSee related indicators of basic needs in the Data Narrative.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2024-03-21T13:13:24-07:00",
     "input_file": {}
   },
   {
