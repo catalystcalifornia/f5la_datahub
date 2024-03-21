@@ -11,6 +11,7 @@ categories:
 output:
   distill::distill_article:
     self_contained: false
+preview: images/RCM.png
 ---
 
 
@@ -23,6 +24,7 @@ library(highcharter)
 library(stringr)
 library(RPostgreSQL)
 library(reshape2) 
+library(scales)
 
 source("W:\\RDA Team\\R\\credentials_source.R")
 con <- connect_to_db("rda_shared_data")
@@ -116,6 +118,86 @@ graph <- fx_single(
 )
 
 graph
+
+
+```
+
+The data below visualizes the Real Cost Measure budget for a family in Los Angeles county with two children, one child age 0-5 and one school-aged child. This is visualized alongside the Los Angeles county median household income. All data is from 2021. 
+
+```{r, fig.width=10,fig.height=9}
+
+# note this still has not been updated and is from 2021. I took this code from: "W:\Project\RDA Team\First5LA\V2.0 Report\R\Real Cost Measure 2023.rmd"
+
+#####Create data frame for RCM budget for LA County family of 4 (two adults, one preschooler, one school child)
+
+rcm_la <-data.frame("measure"=c("Real Cost Measure \nAnnual Household Budget", 
+                                "Real Cost Measure \nAnnual Household Budget", 
+                                "Real Cost Measure \nAnnual Household Budget", 
+                                "Real Cost Measure \nAnnual Household Budget", 
+                                "Real Cost Measure \nAnnual Household Budget", 
+                                "Real Cost Measure \nAnnual Household Budget", 
+                                "Real Cost Measure \nAnnual Household Budget", 
+                               "Median Household Income"),
+                    expense=c("Housing", 
+                              "Child Care",
+                              "Food", 
+                              "Health Care", 
+                              "Transportation",
+                              "Miscellaneous", 
+                              "Taxes", 
+                              "Median Household \nIncome"),
+                    "amount"=c(24696, 
+                               18708, 
+                               12096, 
+                               10080, 
+                               10884, 
+                               7644, 
+                               14520, 
+                               76367))
+
+
+#customize the order for the stacked bar graph
+rcm_la$expense <- factor(rcm_la$expense,levels = c("Child Care", "Food", "Health Care", "Housing", "Transportation", "Taxes", "Miscellaneous", "Median Household \nIncome"))
+
+#####Graph
+
+plot<-ggplot(rcm_la, aes(fill=expense, y=amount, x=measure, label=amount))+
+  
+  geom_bar(position="stack", stat="identity")+
+  
+  geom_text(aes(label=paste0("$", format(amount, big.mark=","))), size = 6, position = position_stack(vjust = 0.5))+
+   
+  scale_y_continuous(name="", labels=dollar_format(), breaks=seq(0,95000,10000))+
+  
+  scale_x_discrete(name="")+
+  
+  labs(fill="",
+       caption=paste0("\n",str_wrap("Data Sources: Real Cost Measure annual budget for a family with two adults, one preschooler, and one school-aged child living in Los Angeles County from Struggling to Stay Afloat: The Real Cost Measure in California 2021, United Ways of California. Median household income from American Community Survey 2017-2021 5-year estimates table B19013.", 120)))+
+  
+   scale_fill_manual(values=c("#332985", "#009CDB", "#22BCB8", "#54B847","#F58326","#EC098C", "#EF4034", "grey"))+
+
+  ggtitle("Real Cost Budget for Family with Children in\nLos Angeles County")+
+  
+ theme(panel.background = element_blank(),
+        plot.title =  element_text(hjust = 0, size = 32, colour = black),
+        plot.caption = element_text(hjust = 0, size = 13, colour = black),
+        legend.text=element_text(size=15),
+       axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 14),
+        axis.ticks = element_blank(),
+        # grid line style
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_line(size = 0.25),
+        panel.border = element_blank(),
+        panel.grid.major.y = element_blank(),
+        axis.line=element_blank()) 
+
+
+plot
+
+ ggsave(plot=plot, filename="RCM.png",
+        path=paste0("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\Github\\JZ\\f5la_datahub\\f5la_datahub\\_posts\\2024-03-20-real-cost-measure\\images"),
+        height=8.5, width=10.5, units="in", dpi=150)
 
 
 ```
