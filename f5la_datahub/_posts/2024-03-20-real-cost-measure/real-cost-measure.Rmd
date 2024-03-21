@@ -197,7 +197,7 @@ plot
 
  ggsave(plot=plot, filename="RCM.png",
         path=paste0("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\Github\\JZ\\f5la_datahub\\f5la_datahub\\_posts\\2024-03-20-real-cost-measure\\images"),
-        height=8.5, width=10.5, units="in", dpi=150)
+        height=8.5, width=11.2, units="in", dpi=150)
 
 
 ```
