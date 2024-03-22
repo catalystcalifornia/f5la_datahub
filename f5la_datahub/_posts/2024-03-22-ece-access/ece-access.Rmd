@@ -1,0 +1,109 @@
+---
+title: "ECE Access"
+description: "Updated analysis of licensed ECE access for children under 5, as part of Catalyst California's annual update of indicators related to children under 5."
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-02-13
+output:
+  distill::distill_article:
+    css: css_theme.css
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(data.table)
+library(readxl)
+library(tidycensus)
+library(srvyr)
+library(highcharter)
+library(stringr)
+library(RPostgreSQL)
+
+#SOURCE from the script that has: styling, packages, dbconnection, colors
+source("W:\\RDA Team\\R\\credentials_source.R")
+
+con <- connect_to_db("f5la_v2")
+bv_con <- connect_to_db("bold_vision")
+
+source("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\R\\chart_prep\\f5la_chart_functions.R")
+
+```
+
+```{r data, include=FALSE}
+
+#Get data
+ece_data <- dbGetQuery(bv_con, "SELECT * FROM bv_2023.pyd_ece_access_subgroup")
+
+#### format
+d_long <- ece_data %>% filter(subgroup != "bipoc") %>%
+  mutate(num = (rate/100)*pop,
+          subgroup = str_replace(subgroup, "nh_", "")) %>%
+  mutate(subgroup = case_when(subgroup == "twoormor" ~ "Multiracial",
+                              subgroup == "aian" ~ "AIAN",
+                              subgroup == "pacisl" ~ "NHPI",
+                              .default = as.character(str_to_title(subgroup))))
+
+```
+
+
+```{r, echo=FALSE,out.width="100%", out.height="100%"}
+
+ #format for chart
+ d_chart <- d_long %>% 
+   arrange(desc(rate)) %>%
+   mutate(across('subgroup', str_replace, ' NL', '')) %>%
+   mutate(across('subgroup', str_replace, ' Alone or in Combination', '')) %>%
+   rename(population = num) %>%
+   mutate(group = "Percent of children under 5 enrolled in ECE") %>%
+  filter(subgroup != "Total")
+
+#TITLE 
+title_text <- paste0("Latino children under 5 are least likely to be enrolled in ECE")
+
+#SUBTITLE
+subtitle_text <- paste0("Percent of LA County children under 5 enrolled in ECE")
+
+#CAPTION
+caption_text<- paste0("Source: Catalyst California calculations of American Institutes for Research (2020), California Child Care Resource and Referral Network (2021), and Census (2020) data. ECE includes licensed family child care, child care centers, pre-Kindergarten and Transitional Kindergarten. Data were not available by race, so percentages are weighted averages of enrollment by the racial-ethnic composition of neighborhood 0-5 year olds.")
+
+#TOOLTIP
+#modify tooltips as needed 
+
+tooltip_text <- paste0("<b>{point.rate:.1f}%</b> of <b>{point.subgroup}</b> children under 5 are enrolled in ECE, or  <b>{point.population:,.0f}</b> children under 5")
+
+
+#STEP 4 RUN the hchart FUNCTION 
+
+graph <- fx_single_tot(
+    df = d_chart,
+    x = 'subgroup',
+    y = 'rate',
+    chart_title = title_text,
+    chart_subtitle = subtitle_text,
+    chart_tooltip = tooltip_text,
+    chart_caption = caption_text,
+    line_label="Total: 34.6%",
+    line_value="34.6"
+)
+
+graph
+
+```
+
+
+
+## Why it matters
+Early Care and Education (ECE) is critical to the socioemotional and cognitive development of children, with lifelong positive impacts. The percentage of children enrolled is too low.
+
+## Learn more
+See related indicators of child care access need in the [Data Narrative](https://apca-dev.dreamhosters.com/).
+
+```{r include=FALSE}
+
+dbDisconnect(con)
+dbDisconnect(bv_con)
+```
