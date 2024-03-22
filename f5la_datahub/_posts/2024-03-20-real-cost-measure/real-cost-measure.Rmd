@@ -172,7 +172,7 @@ plot<-ggplot(rcm_la, aes(fill=expense, y=amount, x=measure, label=amount))+
   scale_x_discrete(name="")+
   
   labs(fill="",
-       caption=paste0("\n",str_wrap("Data Sources: Real Cost Measure annual budget for a family with two adults, one preschooler, and one school-aged child living in Los Angeles County from Struggling to Stay Afloat: The Real Cost Measure in California 2021, United Ways of California. Median household income from American Community Survey 2017-2021 5-year estimates table B19013.", 120)))+
+       caption=paste0("\n",str_wrap("Data Sources: Real Cost Measure annual budget for a family with two adults, one preschooler, and one school-aged child living in Los Angeles County from Struggling to Stay Afloat: The Real Cost Measure in California 2021, United Ways of California. Median household income from American Community Survey 2017-2021 5-year estimates table B19013.", 100)))+
   
    scale_fill_manual(values=c("#332985", "#009CDB", "#22BCB8", "#54B847","#F58326","#EC098C", "#EF4034", "grey"))+
 
