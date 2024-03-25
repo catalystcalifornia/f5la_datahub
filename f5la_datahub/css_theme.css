@@ -234,6 +234,27 @@ p{
 }
 
 
+/* JZ DISTILL WEBSITE TOC */
+
+
+#TOC {
+    background:#FFFFFF
+ none repeat scroll 0 0;
+    border: 3px solid #eaeaea;
+    display: table;
+    font-size: 95%;
+	 border-radius: 25px;
+   margin-bottom: 1em;
+   padding: 10px;
+	 min-width: 95%;
+	 position: sticky !important;
+	 top: 100px !important;
+}
+
+.d-article {
+  overflow-x: visible !important;
+  
+}
 
 /* JZ DISTILL WEBSITE CSS STYLING */
 
