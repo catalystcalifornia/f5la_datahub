@@ -17,7 +17,6 @@ output:
 preview: images/closures.PNG
 ---
 
-
 ```{r, include=FALSE}
 knitr::opts_chunk$set(comment=FALSE, message=FALSE, warning=FALSE, echo=FALSE
 )
