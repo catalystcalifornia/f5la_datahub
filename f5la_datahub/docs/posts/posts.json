@@ -15,8 +15,8 @@
     ],
     "contents": "\r\n\r\n\r\n\r\nThe data below visualizes the Real Cost Measure budget for a family in Los Angeles county with two children, one child age 0-5 and one school-aged child. This is visualized alongside the Los Angeles county median household income. All data is from 2021.\r\n\r\n\r\n\r\nWhy it matters\r\nFirst 5 LA’s first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes economic security. Economic security is foundational to reducing the annual percent of households with prenatal to 5 living poverty and experiencing housing insecurity, which are also part of the first strategic plan goal. The Real Cost Measure is a more holistic indicator that measures economic security in the context of families with young children, and what it costs to meet the essential needs of young children.\r\nLearn more\r\nSee data for other indicators of basic needs in the First 5 LA 2024-2029 Strategic Plan and see related economic indicators and indicators by race/ethnicity in the Data Narrative.\r\nTo learn more about Guaranteed Basic Income (GBI) efforts in Los Angeles county and how GBI improves outcomes for children and families, see the Catalyst California GBI presentation from the First 5 LA GBI Learning Dialogue here\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-03-20-real-cost-measure/images/RCM.png",
-    "last_modified": "2024-03-22T14:33:33-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-25T14:14:06-07:00",
+    "input_file": "real-cost-measure.knit.md"
   },
   {
     "path": "posts/2024-03-11-state-of-the-child-report-region-4/",

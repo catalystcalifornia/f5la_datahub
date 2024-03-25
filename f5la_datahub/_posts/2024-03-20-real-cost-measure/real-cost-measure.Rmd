@@ -94,7 +94,7 @@ rcm_race<-rcm_race%>%
 title_text <- paste0("Latinx and AIAN households are 2x more likely to earn less than the Real Cost Measure compared to White households")
 
 #SUBTITLE
-subtitle_text <- paste0("Percent of households with young children earning below the Real Cost Measure in Los Angeles county")
+subtitle_text <- paste0("Percent of households with a school-aged child, and a child under 5 earning below the Real Cost Measure in Los Angeles county")
 
 #CAPTION
 caption_text<- paste0("The Real Cost Measure in California 2023. United Ways of California. June 2023. https://www.unitedwaysca.org/realcost.") #can always customize or add additional text to this as needed
