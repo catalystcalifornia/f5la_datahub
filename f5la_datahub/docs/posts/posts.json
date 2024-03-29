@@ -178,7 +178,7 @@
   {
     "path": "posts/2024-02-21-state-of-the-child-report-region-5/",
     "title": "State of the Child Report Region 5",
-    "description": "Analysis of systems and outcomes impacting children and families in the Antelope Valley. Report was commissioned by Children's Bureau of Southern California.",
+    "description": "Analysis of systems and outcomes impacting children and families in the Antelope Valley. Report was commissioned by Childrens Bureau of Southern California.",
     "author": [
       {
         "name": "Catalyst California",
@@ -191,7 +191,7 @@
     ],
     "contents": "\r\nThe Best Start Region 5 State of the Child Report represents the most comprehensive analysis of data from the region to date, consolidating data on children, families and systems in the Antelope Valley. Children’s Bureau of Southern California commissioned this report to understand the state of children in the Antelope Valley, identify indicators to monitor, and increase the amount of data available to advocates.\r\nYou can view and download the report in its entirety here.\r\nThe report finds that:\r\nThe family-friendly, low-cost-living in the Antelope Valley, that residents love and depend on, is disappearing and a new, more proactive infrastructure for children and families is needed. The current infrastructure was not established for the population increases the Antelope Valley has experienced in the last decade, and the lack of resources is a driver for school-to-prison, youth-to-houselessness pipelines, and other avoidable outcomes. To be specific:\r\nAntelope Valley has a large, diverse, and growing population with roughly 120,000 children under the age of eighteen and 30,000 children under age 5, including many children who need extra support.\r\nHalf of the households in and around the neighborhoods of Lancaster and Palmdale cannot cover basic costs like housing, food, transportation, and child care with their incomes, and four in five families with children under the age of six earn less than the real cost of living.\r\nHigh housing costs and lower wages contribute to a growing unhoused population in the region. Resources available in the Antelope Valley are not keeping up with the needs of the residents. Residents struggle to access health and mental health services and there are few child care and learning opportunities for their children.\r\nEquitable treatment of local children and families is a concern. Rates of hate crimes exceed those countywide, and law enforcement is known to both stop Black drivers and injure Black civilians more than people of other races.\r\nHigh School graduation rates in Antelope Valley schools are lower than those countywide. School administration and the teacher workforce are not representative of the diversity within the student body. Foster students and students with disabilities – students who may need the most support – are most likely to be suspended from school.\r\nTo address these ongoing issues, increased investments in health and mental health are needed, as are increases in child care reimbursement rates and other forms of investments in education within the region. Strengthening the safety net of programs which provide resources or training to residents is a must. Individuals can collaborate to hold systems accountable and spread awareness of resources as well.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-02-21-state-of-the-child-report-region-5/images/av_beststart_logo.png",
-    "last_modified": "2024-03-29T15:45:47-07:00",
+    "last_modified": "2024-03-29T15:59:11-07:00",
     "input_file": "state-of-the-child-report-region-5.knit.md"
   },
   {
@@ -216,7 +216,7 @@
   {
     "path": "posts/2024-03-01-rent-burden/",
     "title": "Rent Burden of Children under 5",
-    "description": "Updated analysis of children age 0-5 experiencing rent burden in Los Angeles county (updated in 2024), as part of Catalyst California's annual update of key census indicators related to children age 0 to 5 using the most recent census data available.",
+    "description": "Updated analysis of children age under age 5 experiencing rent burden in Los Angeles county (updated in 2024), as part of the Catalyst California annual update of key census indicators related to children age 0 to 5 using the most recent census data available.",
     "author": [
       {
         "name": "Catalyst California",
@@ -229,8 +229,8 @@
     ],
     "contents": "\r\n\r\n\r\n\r\nDisaggregating the Asian Subgroup\r\nStatistics of Asian populations can often mask stark differences between people of different ancestries. See chart below for the Asian disaggregation of rent burden.\r\n100% of children of Afghan descent are rent-burdened, representing a group for advocates to focus on.\r\nOver 70% of Hmong and Pakistani children under 5 are also rent-burdened.\r\n\r\n\r\n\r\nWhy it matters\r\nFirst 5 LA’s first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes secure housing for essential psychological safety. This goal has an objective to reduce the annual percent of households with children prenatal through age 5 who experience housing insecurity. Rent burden is not the sole cause of housing insecurity, but it is a key contributor.\r\nLearn more\r\nSee data for other indicators of basic needs in the First 5 LA 2024-2029 Strategic Plan and see related housing indicators and indicators by race/ethnicity in the Data Narrative.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-03-01-rent-burden/images/rentburden.PNG",
-    "last_modified": "2024-03-20T15:21:47-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-29T16:02:16-07:00",
+    "input_file": "rent-burden.knit.md"
   },
   {
     "path": "posts/2024-03-21-poverty-of-children-under-5/",
@@ -252,7 +252,7 @@
   {
     "path": "posts/2024-03-22-ece-access/",
     "title": "ECE Access",
-    "description": "Updated analysis of licensed ECE access for children under 5, as part of Catalyst California's annual update of indicators related to children under 5.",
+    "description": "Updated analysis of licensed ECE access for children under 5, as part of the Catalyst California annual update of indicators related to children under 5.",
     "author": [
       {
         "name": "Catalyst California",
@@ -265,8 +265,8 @@
     ],
     "contents": "\r\n\r\n\r\n\r\nWhy it matters\r\nEarly Care and Education (ECE) is critical to the socioemotional and cognitive development of children, with lifelong positive impacts. The percentage of children enrolled is too low.\r\nLearn more\r\nSee related indicators of child care access need in the Data Narrative.\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2024-03-29T14:29:04-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-29T16:00:01-07:00",
+    "input_file": "ece-access.knit.md"
   },
   {
     "path": "posts/2024-02-08-race-of-children-under-5/",

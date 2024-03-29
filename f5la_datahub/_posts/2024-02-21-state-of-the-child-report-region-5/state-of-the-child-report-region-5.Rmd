@@ -1,7 +1,7 @@
 ---
 title: "State of the Child Report Region 5"
 description: |
-  Analysis of systems and outcomes impacting children and families in the Antelope Valley. Report was commissioned by Children's Bureau of Southern California.
+  Analysis of systems and outcomes impacting children and families in the Antelope Valley. Report was commissioned by Childrens Bureau of Southern California.
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
