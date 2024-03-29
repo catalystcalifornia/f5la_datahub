@@ -1,6 +1,6 @@
 ---
 title: "Rent Burden of Children under 5"
-description: "Updated analysis of children age 0-5 experiencing rent burden in Los Angeles county (updated in 2024), as part of Catalyst California's annual update of key census indicators related to children age 0 to 5 using the most recent census data available."
+description: "Updated analysis of children age under age 5 experiencing rent burden in Los Angeles county (updated in 2024), as part of the Catalyst California annual update of key census indicators related to children age 0 to 5 using the most recent census data available."
 author:
   - name: Catalyst California
     url: catalystcalifornia.org

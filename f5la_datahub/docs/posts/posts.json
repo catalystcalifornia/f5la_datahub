@@ -235,7 +235,7 @@
   {
     "path": "posts/2024-03-21-poverty-of-children-under-5/",
     "title": "Poverty of children under 5",
-    "description": "Analysis of children under 5 in poverty by race in Los Angeles County, as part of Catalyst California’s annual update of key indicators for First 5 LA and Best Start",
+    "description": "Analysis of children under 5 in poverty by race in Los Angeles County, as part of the Catalyst California annual update of key indicators for First 5 LA and Best Start",
     "author": [
       {
         "name": "Catalyst California",
@@ -246,8 +246,8 @@
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\nNote: Aggregated data above conceal variations with disaggregated subgroups. 61.5% of children under 5 of Mongolian descent are in poverty. See chart below for details. Cambodian children under 5 are also more likely to be in poverty than LA County children overall. Many of these Cambodian children live in Best Start Region 4, where you can read more about the state of children here.\r\n\r\n\r\n\r\nWhy it matters\r\nPoverty is a key indicator of whether a family can provide for the basic needs of its children. That 17.6% of children under 5 live in poverty is too a percentage for such a prosperous county.\r\nLearn more\r\nSee related indicators of basic needs in the Data Narrative.\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2024-03-22T09:00:51-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-29T15:52:27-07:00",
+    "input_file": "poverty-of-children-under-5.knit.md"
   },
   {
     "path": "posts/2024-03-22-ece-access/",
@@ -271,7 +271,7 @@
   {
     "path": "posts/2024-02-08-race-of-children-under-5/",
     "title": "Race of Children under 5",
-    "description": "Updated analysis of race of children age 0-5 in Los Angeles county (updated in 2024), as part of Catalyst California's annual update of key census indicators related to children age 0 to 5 using the most recent census data available.",
+    "description": "Updated analysis of race of children under 5 in Los Angeles county (updated in 2024), as part of the Catalyst California annual update of key census indicators related to children age 0 to 5 using the most recent census data available.",
     "author": [
       {
         "name": "Catalyst California",
@@ -284,8 +284,8 @@
     ],
     "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nWhy it matters?\r\nConversations about the under 5 population need to consider the needs of Latinx families, including:\r\ndual language access for children, and materials for parents in both English and Spanish.\r\nLearn more.\r\nThe importance of race and equity in the caring and educating of children under 5 cannot be overstated. See more in the Data Narrative for details.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-02-08-race-of-children-under-5/images/race0to5.PNG",
-    "last_modified": "2024-03-20T15:21:46-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-29T15:57:17-07:00",
+    "input_file": "race-of-children-under-5.knit.md"
   },
   {
     "path": "posts/2024-02-06-childcare-center-closures/",

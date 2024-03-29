@@ -1,6 +1,6 @@
 ---
 title: "Children under 5"
-description: "Updated analysis of total children age 0-5 in Los Angeles county from 2013 to 2022 (updated in 2024), as part of Catalyst California's annual update of key census indicators related to children age 0 to 5 using the most recent census data available." 
+description: "Updated analysis of total children under age 5 in Los Angeles county from 2013 to 2022 (updated in 2024), as part of the Catalyst California annual update of key census indicators related to children age 0 to 5 using the most recent census data available." 
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
