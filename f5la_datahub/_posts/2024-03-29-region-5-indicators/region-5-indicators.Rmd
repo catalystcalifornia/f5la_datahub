@@ -1,0 +1,282 @@
+---
+title: "Region 5 Indicators"
+description: "Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 5. Region 5 contains the Lancaster and Palmdale geographies."
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-03-29
+categories:
+  - Region 5
+  - Indicators
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: true
+    css: css_theme.css
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(highcharter)
+options(scipen = 999)
+
+# create connection for rda database and get data
+source("W:\\RDA Team\\R\\credentials_source.R")
+f5la_con <- connect_to_db("f5la_v2")
+race_under5 <- dbGetQuery(f5la_con, "select * from data.f5la_2024_bs_raceethnicity_pums")
+poverty_under5 <- dbGetQuery(f5la_con, "select * from data.f5la_2024_bs_poverty_pums")
+rent_burden_under5 <- dbGetQuery(f5la_con, "select * from data.f5la_2024_bs_rent_burden_pums")
+dbDisconnect(f5la_con)
+
+source("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\R\\chart_prep\\f5la_chart_functions.R")
+
+```
+
+```{r race_chart_function}
+
+# make race chart function
+make_race_chart <- function(df, best_start){
+  d_chart <- df %>% 
+  filter(geoid == best_start & subgroup != "Total") %>%
+   arrange(desc(num)) %>%
+   mutate(across('subgroup', str_replace, ' NL', '')) %>%
+   mutate(across('subgroup', str_replace, ' Alone or in Combination', '')) %>%
+   mutate(across('subgroup', str_replace, 'Two or More', 'Multiracial')) %>%
+   rename(population = num) %>%
+   mutate(group = "Children under 5")
+  
+#Get total pop under 5
+total_under5 <- df %>% 
+  filter(geoid == best_start & subgroup == "Total") %>%
+  pull(num)
+
+#Get under 5 population of race with most under 5
+num_race_under5 <- d_chart[which.max(d_chart$population),]$population
+
+#Get under 5 name of race with most under 5
+max_race_under5 <- d_chart[which.max(d_chart$population),]$subgroup
+
+#Calculate race's pct under 5 of total
+d_chart$pct = d_chart$population / total_under5 * 100
+
+#TITLE 
+title_text <- paste0(max_race_under5, " children under 5 make up the largest racial-ethnic group in ", best_start)
+
+#SUBTITLE
+subtitle_text <- paste0("Number of children under 5 by race-ethnicity")
+
+#CAPTION
+caption_text <- caption_text<- paste0(acsnote,"<br>",racenote)
+
+#TOOLTIP
+tooltip_text <- paste0("<b>{point.population:.,1f}</b> {point.subgroup} children under 5 or 
+                       <b>{point.pct:.1f}%</b> of all children under 5 in <b>{point.geoid}</b>")
+
+#STEP 4 RUN the hchart FUNCTION 
+graph <- fx_single(
+    df = d_chart,
+    x = 'subgroup',
+    y = 'population',
+    chart_title = title_text,
+    chart_subtitle = subtitle_text,
+    chart_tooltip = tooltip_text,
+    chart_caption = caption_text
+)
+  
+return(graph)
+}
+
+```
+
+```{r poverty_chart_function, results=FALSE}
+
+# make poverty chart function
+make_poverty_chart <- function(df, best_start){
+ d_chart <- df %>% filter(geoid == best_start) %>%
+   arrange(desc(rate)) %>%
+   mutate(across('subgroup', str_replace, ' NL', '')) %>%
+   mutate(across('subgroup', str_replace, ' Alone or in Combination', '')) %>%
+   mutate(across('subgroup', str_replace, 'Two or More', 'Multiracial')) %>%
+   rename(population = num) %>%
+   mutate(group = "Percent of children under 5 in poverty") %>%
+  filter(subgroup != "Total")
+
+# get Total poverty rate
+total_poverty_under5 <<- df %>%
+  filter(geoid == best_start & subgroup == "Total") %>%
+  pull(rate)
+
+#Get under 5 poverty rate of race with highest poverty rate
+rate_poverty_under5 <<- d_chart[which.max(d_chart$rate),]$rate
+
+#Get under 5 name of race with most under 5
+max_rate_poverty_under5 <<- d_chart[which.max(d_chart$rate),]$subgroup
+
+#TITLE
+title_text <- paste0(max_rate_poverty_under5, " children under 5 are most likely to be in poverty in ", best_start)
+
+#SUBTITLE
+subtitle_text <- paste0("Percent of children under 5 in poverty")
+
+#CAPTION
+caption_text<- paste0(acsnote,"<br>",racenote) #can always customize or add additional text to this as needed
+
+#TOOLTIP
+tooltip_text <- paste0("<b>{point.rate:.1f}%</b> of <b>{point.subgroup}</b> children under 5 are in poverty or <b>{point.population:,.0f}</b> children under 5 in <b>{point.geoid}</b>")  
+
+#STEP 4 RUN the hchart FUNCTION
+graph <- fx_single_tot(
+    df = d_chart,
+    x = 'subgroup',
+    y = 'rate',
+    chart_title = title_text,
+    chart_subtitle = subtitle_text,
+    chart_tooltip = tooltip_text,
+    chart_caption = caption_text,
+    line_label = paste0(" Total ", round(total_poverty_under5,1),"%"),
+    line_value = round(total_poverty_under5,1)
+)
+ 
+if(nrow(d_chart) > 1) { 
+  return(graph) 
+} else {
+  cat(paste0("The ", best_start, " under 5 poverty rate is ", round(total_poverty_under5,1), "%."))
+  cat(paste0("The only racial/ethnic group with statistically stable poverty rates is ",
+               d_chart[which.max(d_chart$rate),]$subgroup, " whose poverty rate is ",
+               round(rate_poverty_under5,1), "%."))  
+}
+      
+#The `r best_start` under 5 poverty rate is `r round(total_poverty_under5,1)`%. The only racial/ethnic group with statistically stable poverty rates (from ACS microdata) is `r max_rate_poverty_under5`, whose poverty rate is `r round(rate_poverty_under5,1)`%.
+
+}
+
+```
+
+
+```{r rent_burden_chart_function}
+
+# make rent burden chart function
+make_rent_burden_chart <- function(df, best_start){
+ d_chart <- df %>% filter(geoid == best_start) %>%
+   arrange(desc(rate)) %>%
+   mutate(across('subgroup', str_replace, ' NL', '')) %>%
+   mutate(across('subgroup', str_replace, ' Alone or in Combination', '')) %>%
+   mutate(across('subgroup', str_replace, 'Two or More', 'Multiracial')) %>%
+   rename(population = num) %>%
+   mutate(group = "Percent of children under 5 in poverty") %>%
+  filter(subgroup != "Total")
+
+# get Total rent burden rate
+total_rent_burden_under5 <- df %>% 
+  filter(geoid == best_start & subgroup == "Total") %>%
+  pull(rate)
+
+#Get under 5 rent burden rate of race with highest rent burden rate
+rate_rent_burden_under5 <- d_chart[which.max(d_chart$rate),]$rate
+
+#Get under 5 name of race with highest rent burden rate
+max_rate_rent_burden_under5 <- d_chart[which.max(d_chart$rate),]$subgroup
+
+#TITLE 
+title_text <- paste0(max_rate_rent_burden_under5, " children under 5 are most likely to be rent-burdened in ", best_start)
+
+#SUBTITLE
+subtitle_text <- paste0("Percent of children under 5 in rent-burdened households")
+
+#CAPTION
+caption_text<- paste0(acsnote,"<br>",racenote) #can always customize or add additional text to this as needed
+
+#TOOLTIP
+tooltip_text <- paste0("<b>{point.rate:.1f}%</b> of <b>{point.subgroup}</b> children under 5 are rent-burdened or  <b>{point.population:,.0f}</b> children under 5 in <b>{point.geoid}</b> ")
+
+
+#STEP 4 RUN the hchart FUNCTION 
+graph <- fx_single_tot(
+    df = d_chart,
+    x = 'subgroup',
+    y = 'rate',
+    chart_title = title_text,
+    chart_subtitle = subtitle_text,
+    chart_tooltip = tooltip_text,
+    chart_caption = caption_text,
+    line_label = paste0(" Total ", round(total_rent_burden_under5,1),"%"),
+    line_value = round(total_rent_burden_under5,1)
+)
+
+return(graph)
+}
+
+```
+
+# Lancaster
+
+## Race-Ethnicity
+
+```{r race1}
+
+best_start <- "Lancaster"
+make_race_chart(race_under5, best_start)
+
+```
+
+
+## Poverty
+
+```{r poverty1, out.width="100%", out.height="100%", results = 'asis'}
+
+best_start <- "Lancaster"
+make_poverty_chart(poverty_under5, best_start)
+
+```
+
+
+## Rent Burden
+
+```{r rb1}
+
+best_start <- "Lancaster"
+make_rent_burden_chart(rent_burden_under5, best_start)
+
+```
+
+
+
+# Palmdale
+
+## Race-Ethnicity
+
+```{r race2}
+
+best_start <- "Palmdale"
+make_race_chart(race_under5, best_start)
+
+```
+
+## Poverty
+
+```{r poverty2, out.width="100%", out.height="100%", results = 'asis'}
+
+best_start <- "Palmdale"
+make_poverty_chart(poverty_under5, best_start)
+
+```
+
+## Rent Burden
+
+```{r rb2 chart}
+
+best_start <- "Palmdale"
+make_rent_burden_chart(rent_burden_under5, best_start)
+
+```
+
+
+# Why it matters
+Understanding the racial-ethnic breakdown of an area is important to understanding its cultures and needs. Poverty and rent burden are indicators of economic need First 5 LA is interested in as it works to ensure all children prenatal to age 5 and their families have their basic needs met.
+
+# Learn more
+Learn more by reading the [First 5 LA 2024-2029 Strategic Plan](/https://www.first5la.org/wp-content/uploads/2023/11/First-5-LA-Strategic-Plan-2024-2029.pdf).
+

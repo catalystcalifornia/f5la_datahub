@@ -2409,6 +2409,26 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   }
 
 
+  /* JZ DISTILL WEBSITE TOC */
+
+
+  #TOC {
+      background:#FFFFFF
+   none repeat scroll 0 0;
+      display: table;
+      font-size: 95%;
+  	 border-radius: 25px;
+     margin-bottom: 1em;
+     padding: 10px;
+  	 min-width: 95%;
+  	 position: sticky !important;
+  	 top: 100px !important;
+  }
+
+  .d-article {
+    overflow-x: visible !important;
+    
+  }
 
   /* JZ DISTILL WEBSITE CSS STYLING */
 
@@ -2729,148 +2749,233 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
 <!--radix_placeholder_article_listing-->
-
-
-<script type="application/javascript">
-
-function init_posts_list() {
-
-  function load_image(img) {
-    var src = $(img).attr('data-src');
-    if (src) {
-      $(img).attr('src', src);
-      $(img).on("load", function() {
-        img.removeAttribute('data-src');
-      });
-    }
-  }
-
-  function set_posts_visible(posts, visible) {
-    if (visible) {
-
-      // show bottom border by default
-      $(posts).removeClass('post-preview-last');
-
-      // apply limits if need be
-      var max_posts = 25;
-      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
-      if (apply_limits && posts.length > max_posts) {
-        posts = $(posts).slice(0, max_posts);
-      } else {
-        $('.posts-more a').addClass('hidden');
-      }
-
-      // apply last style
-      $(posts.slice(-1)[0]).addClass('post-preview-last');
-
-      $(posts).removeClass('hidden');
-      $(posts).find('img[data-src]').each(function(i, img) {
-        load_image(img);
-      });
-    } else {
-      $(posts).addClass('hidden');
-    }
-  }
-
-  function apply_hash_filter() {
-
-    // clear active state
-    $('.categories .active').removeClass('active');
-
-    // mark all posts invisible to start
-    set_posts_visible($('.posts-list').children('a'), false);
-
-    // if we have a hash filter
-    if (window.location.hash && window.location.hash.startsWith("#category:")) {
-
-      // mark posts that match the category visible
-      var page_category = window.location.hash.replace(/^#category:/, "");
-      page_category = decodeURIComponent(page_category)
-      var posts = $('.post-metadata').map(function(idx, script) {
-        var metadata = $.parseJSON($(script).html());
-        var post = null;
-        $.each(metadata.categories, function(idx, category) {
-          category = category.replace(/ /g,"_");
-          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
-            post = $(script).parent().get();
-            return false;
-          }
-        });
-        return post;
-      });
-      set_posts_visible(posts, true);
-
-      // mark the hash active
-      $('.categories li>a[href="' + decodeURIComponent(window.location.hash) + '"]').addClass('active');
-
-      // update the list_caption
-      var list_caption = $('.posts-list-caption');
-      var caption = (page_category || '').toLowerCase() === "articles"
-        ? list_caption.attr('data-caption')
-        : ('Category: ' + page_category.replace(/_/g," "));
-      list_caption.text(caption);
-
-    } else {
-
-      // no hash filter, make all posts visible (subject to max display)
-      set_posts_visible($('.posts-list').children(), true);
-
-      // reset list caption
-      var list_caption = $('.posts-list-caption');
-      list_caption.text(list_caption.attr('data-caption'));
-
-
-    }
-  }
-
-  // more articles
-  function apply_post_limits(apply) {
-    if (apply) {
-      $('.posts-container').addClass('posts-apply-limit');
-      $('.posts-more a').removeClass('hidden');
-    } else {
-      $('.posts-container').removeClass('posts-apply-limit');
-      $('.posts-more a').addClass('hidden');
-    }
-  }
-
-  // click handling for tags
-  $('.dt-tag').click(function(ev) {
-    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
-    return false;
-  })
-
-  // hash filter handling
-  apply_hash_filter();
-  $(window).on('hashchange',function() {
-    apply_post_limits(true);
-    apply_hash_filter();
-  });
-
-  // more articles link
-  $('.posts-more a').click(function(e) {
-    e.preventDefault();
-    apply_post_limits(false);
-    apply_hash_filter();
-    return false;
-  });
-
-}
-
-</script>
-
-
+
+
+<script type="application/javascript">
+
+function init_posts_list() {
+
+  function load_image(img) {
+    var src = $(img).attr('data-src');
+    if (src) {
+      $(img).attr('src', src);
+      $(img).on("load", function() {
+        img.removeAttribute('data-src');
+      });
+    }
+  }
+
+  function set_posts_visible(posts, visible) {
+    if (visible) {
+
+      // show bottom border by default
+      $(posts).removeClass('post-preview-last');
+
+      // apply limits if need be
+      var max_posts = 25;
+      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
+      if (apply_limits && posts.length > max_posts) {
+        posts = $(posts).slice(0, max_posts);
+      } else {
+        $('.posts-more a').addClass('hidden');
+      }
+
+      // apply last style
+      $(posts.slice(-1)[0]).addClass('post-preview-last');
+
+      $(posts).removeClass('hidden');
+      $(posts).find('img[data-src]').each(function(i, img) {
+        load_image(img);
+      });
+    } else {
+      $(posts).addClass('hidden');
+    }
+  }
+
+  function apply_hash_filter() {
+
+    // clear active state
+    $('.categories .active').removeClass('active');
+
+    // mark all posts invisible to start
+    set_posts_visible($('.posts-list').children('a'), false);
+
+    // if we have a hash filter
+    if (window.location.hash && window.location.hash.startsWith("#category:")) {
+
+      // mark posts that match the category visible
+      var page_category = window.location.hash.replace(/^#category:/, "");
+      page_category = decodeURIComponent(page_category)
+      var posts = $('.post-metadata').map(function(idx, script) {
+        var metadata = $.parseJSON($(script).html());
+        var post = null;
+        $.each(metadata.categories, function(idx, category) {
+          category = category.replace(/ /g,"_");
+          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
+            post = $(script).parent().get();
+            return false;
+          }
+        });
+        return post;
+      });
+      set_posts_visible(posts, true);
+
+      // mark the hash active
+      $('.categories li>a[href="' + decodeURIComponent(window.location.hash) + '"]').addClass('active');
+
+      // update the list_caption
+      var list_caption = $('.posts-list-caption');
+      var caption = (page_category || '').toLowerCase() === "articles"
+        ? list_caption.attr('data-caption')
+        : ('Category: ' + page_category.replace(/_/g," "));
+      list_caption.text(caption);
+
+    } else {
+
+      // no hash filter, make all posts visible (subject to max display)
+      set_posts_visible($('.posts-list').children(), true);
+
+      // reset list caption
+      var list_caption = $('.posts-list-caption');
+      list_caption.text(list_caption.attr('data-caption'));
+
+
+    }
+  }
+
+  // more articles
+  function apply_post_limits(apply) {
+    if (apply) {
+      $('.posts-container').addClass('posts-apply-limit');
+      $('.posts-more a').removeClass('hidden');
+    } else {
+      $('.posts-container').removeClass('posts-apply-limit');
+      $('.posts-more a').addClass('hidden');
+    }
+  }
+
+  // click handling for tags
+  $('.dt-tag').click(function(ev) {
+    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
+    return false;
+  })
+
+  // hash filter handling
+  apply_hash_filter();
+  $(window).on('hashchange',function() {
+    apply_post_limits(true);
+    apply_hash_filter();
+  });
+
+  // more articles link
+  $('.posts-more a').click(function(e) {
+    e.preventDefault();
+    apply_post_limits(false);
+    apply_hash_filter();
+    return false;
+  });
+
+}
+
+</script>
+
+
 
 <div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
 <div class="posts-list">
 <h1 class="posts-list-caption" data-caption="First 5 LA Data Hub">First 5 LA Data Hub</h1>
+<a href="posts/2024-03-29-region-1-indicators/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["Region 1","Indicators"]}</script>
+<div class="metadata">
+<div class="publishedDate">March 29, 2024</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Region 1 Indicators</h2>
+<div class="dt-tags">
+<div class="dt-tag">Region 1</div>
+<div class="dt-tag">Indicators</div>
+</div>
+<p>Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 1. Region 1 contains the East LA, Metro LA, South El Monte/El Monte, and Southeast LA Best Start geographies.</p>
+</div>
+</a>
+<a href="posts/2024-03-29-region-2-indicators/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["Region 2","Indicators"]}</script>
+<div class="metadata">
+<div class="publishedDate">March 29, 2024</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Region 2 Indicators</h2>
+<div class="dt-tags">
+<div class="dt-tag">Region 2</div>
+<div class="dt-tag">Indicators</div>
+</div>
+<p>Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 2. Region 2 contains the West Athens, Broadway/Manchester, Watts/Willowbrook, and Compton/East Compton Best Start geographies.</p>
+</div>
+</a>
+<a href="posts/2024-03-29-region-3-indicators/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["Region 3","Indicators"]}</script>
+<div class="metadata">
+<div class="publishedDate">March 29, 2024</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Region 3 Indicators</h2>
+<div class="dt-tags">
+<div class="dt-tag">Region 3</div>
+<div class="dt-tag">Indicators</div>
+</div>
+<p>Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 3. Region 3 contains the Panorama City &amp; Neighbors and North East Valley Best Start geographies.</p>
+</div>
+</a>
+<a href="posts/2024-03-29-region-4-indicators/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["Region 4","Indicators"]}</script>
+<div class="metadata">
+<div class="publishedDate">March 29, 2024</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Region 4 Indicators</h2>
+<div class="dt-tags">
+<div class="dt-tag">Region 4</div>
+<div class="dt-tag">Indicators</div>
+</div>
+<p>Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 4. Region 4 contains the Central Long Beach and Wilmington geographies.</p>
+</div>
+</a>
+<a href="posts/2024-03-29-region-5-indicators/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["Region 5","Indicators"]}</script>
+<div class="metadata">
+<div class="publishedDate">March 29, 2024</div>
+</div>
+<div class="thumbnail">
+<img/>
+</div>
+<div class="description">
+<h2>Region 5 Indicators</h2>
+<div class="dt-tags">
+<div class="dt-tag">Region 5</div>
+<div class="dt-tag">Indicators</div>
+</div>
+<p>Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 5. Region 5 contains the Lancaster and Palmdale geographies.</p>
+</div>
+</a>
 <a href="posts/2024-03-20-real-cost-measure/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":["Indicators"]}</script>
 <div class="metadata">
 <div class="publishedDate">March 20, 2024</div>
 </div>
 <div class="thumbnail">
-<img src="posts/2024-03-20-real-cost-measure/images/RCM.png"/>
+<img data-src="posts/2024-03-20-real-cost-measure/images/RCM.png"/>
 </div>
 <div class="description">
 <h2>Real Cost Measure</h2>
@@ -2886,7 +2991,7 @@ function init_posts_list() {
 <div class="publishedDate">March 11, 2024</div>
 </div>
 <div class="thumbnail">
-<img src="posts/2024-03-11-state-of-the-child-report-region-4/images/wilmington.PNG"/>
+<img data-src="posts/2024-03-11-state-of-the-child-report-region-4/images/wilmington.PNG"/>
 </div>
 <div class="description">
 <h2>State of the Child Report Region 4</h2>
@@ -2918,7 +3023,7 @@ function init_posts_list() {
 <div class="publishedDate">Feb. 21, 2024</div>
 </div>
 <div class="thumbnail">
-<img src="posts/2024-02-21-housing-presentation/images/housing.png"/>
+<img data-src="posts/2024-02-21-housing-presentation/images/housing.png"/>
 </div>
 <div class="description">
 <h2>Housing Presentation</h2>
@@ -2934,7 +3039,7 @@ function init_posts_list() {
 <div class="publishedDate">Feb. 21, 2024</div>
 </div>
 <div class="thumbnail">
-<img src="posts/2024-02-21-state-of-the-child-report-region-5/images/av_beststart_logo.png"/>
+<img data-src="posts/2024-02-21-state-of-the-child-report-region-5/images/av_beststart_logo.png"/>
 </div>
 <div class="description">
 <h2>State of the Child Report Region 5</h2>
@@ -3094,7 +3199,7 @@ function init_posts_list() {
 <ul>
 <li>
 <a href="#category:Articles">Articles</a>
-<span class="category-count">(14)</span>
+<span class="category-count">(19)</span>
 </li>
 <li>
 <a href="#category:Analysis">Analysis</a>
@@ -3106,19 +3211,31 @@ function init_posts_list() {
 </li>
 <li>
 <a href="#category:Indicators">Indicators</a>
-<span class="category-count">(6)</span>
+<span class="category-count">(11)</span>
 </li>
 <li>
 <a href="#category:Learning_dialogue">Learning dialogue</a>
 <span class="category-count">(2)</span>
 </li>
 <li>
-<a href="#category:Region_4">Region 4</a>
+<a href="#category:Region_1">Region 1</a>
 <span class="category-count">(1)</span>
 </li>
 <li>
-<a href="#category:Region_5">Region 5</a>
+<a href="#category:Region_2">Region 2</a>
 <span class="category-count">(1)</span>
+</li>
+<li>
+<a href="#category:Region_3">Region 3</a>
+<span class="category-count">(1)</span>
+</li>
+<li>
+<a href="#category:Region_4">Region 4</a>
+<span class="category-count">(2)</span>
+</li>
+<li>
+<a href="#category:Region_5">Region 5</a>
+<span class="category-count">(2)</span>
 </li>
 </ul>
 </div>
@@ -3127,7 +3244,7 @@ function init_posts_list() {
 <a href="#">More articles &raquo;</a>
 </div>
 </div>
-<!--/radix_placeholder_article_listing-->
+<!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
 <h1>First 5 LA Data Hub</h1>
@@ -3154,4 +3271,8 @@ function init_posts_list() {
 <div class="appendix-bottom"></div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
-<!--/radix_placeholder_navigation_after_b
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
