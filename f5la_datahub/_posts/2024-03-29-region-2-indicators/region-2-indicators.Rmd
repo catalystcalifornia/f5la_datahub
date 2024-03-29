@@ -1,6 +1,6 @@
 ---
 title: "Region 2 Indicators"
-description: "Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 2. Region 2 contains the West Athens, Broadway/Manchester, Watts/Willowbrook, and Compton/East Compton Best Start geographies."
+description: "Data related to children age 0 to 5 that align with Best Start needs and the new First 5 LA new strategic plan within Region 2. Region 2 contains the West Athens, Broadway//Manchester, Watts//Willowbrook, and Compton//East Compton Best Start geographies."
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
