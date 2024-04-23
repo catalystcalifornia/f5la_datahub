@@ -1,6 +1,6 @@
 ---
 title: "Infant Deaths"
-description: "Rates of infant mortality are half those of 2017 and earlier."
+description: "Analysis of the infant death rate in Los Angeles county as part of the set of key data indicators related to children under age 5 that Catalyst California provides to First 5 LA."
 author:
   - name: Catalyst California
     url: catalystcalifornia.org

@@ -5,10 +5,10 @@
 /* Styling from https://www.catalystcalifornia.org/campaign-tools/maps-and-data/justice-equity-need-index */
 /* h1 seems reserved for the title of the webpage */
 h1{
-  font-size: 27px;
+  font-size: 35px;
   letter-spacing: normal;
   line-height: 1.24;
-  font-weight: 600;
+  font-weight: 700;
   display: block;
   color: #3A207D;
 }
@@ -50,19 +50,19 @@ p{
 /* --Headers-- */
 
   h1{
-    font-size: 27px;
+    font-size: 35px;
     letter-spacing: normal;
     line-height: 1.24;
-    font-weight: 600;
+    font-weight: 700;
     display: block;
     color: #3A207D;
   }
 
   h2{
-    font-size: 21px;
+    font-size: 25px !important;
     letter-spacing: normal;
     line-height: 1.2;
-    font-weight: 800;
+    font-weight: 650;
     margin: 1em 0;
     display: block;
     color: #3A207D;

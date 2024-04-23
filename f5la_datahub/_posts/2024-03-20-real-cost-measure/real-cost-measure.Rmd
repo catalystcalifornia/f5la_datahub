@@ -1,7 +1,7 @@
 ---
 title: "Real Cost Measure"
 description: |
-  Updated analysis of Real Cost Measure by race in Los Angeles county (updated in 2023), as part of Catalyst California's annual update of key indicators related to families with children age 0-5. 
+  Updated analysis of Real Cost Measure by race in Los Angeles county (updated in 2023), as part of the Catalyst California annual update of key indicators related to families with children under age 5. 
 author:
   - name: Catalyst California
     url: catalystcalifornia.org

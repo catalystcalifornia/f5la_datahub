@@ -1,6 +1,6 @@
 ---
 title: "ECE Access"
-description: "Updated analysis of licensed ECE access for children under 5, as part of Catalyst California's annual update of indicators related to children under 5."
+description: "Updated analysis of licensed ECE access for children under 5, as part of the Catalyst California annual update of indicators related to children under 5."
 author:
   - name: Catalyst California
     url: catalystcalifornia.org

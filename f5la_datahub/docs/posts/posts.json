@@ -1,5 +1,105 @@
 [
   {
+    "path": "posts/2024-03-29-region-1-indicators/",
+    "title": "Region 1 Indicators",
+    "description": "Data related to children age 0 to 5 that align with Best Start needs and the First 5 LA new strategic plan within Region 1. Region 1 contains the East LA, Metro LA, South El Monte & El Monte, and Southeast LA Best Start geographies.",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-03-29",
+    "categories": [
+      "Region 1",
+      "Indicators"
+    ],
+    "contents": "\r\n\r\nContents\r\nEast LA\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nMetro LA\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nSouth El Monte/El Monte\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nSoutheast LA\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nWhy it matters\r\nLearn more\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nEast LA\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\nThe East LA under 5 poverty rate is 33.4%.The only racial/ethnic group with statistically stable poverty rates is Latinx whose poverty rate is 34.7%.\r\n\r\nRent Burden\r\n\r\n\r\n\r\nMetro LA\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\n\r\n\r\nRent Burden\r\n\r\n\r\n\r\nSouth El Monte/El Monte\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\nThe South El Monte/El Monte under 5 poverty rate is 26.8%.The only racial/ethnic group with statistically stable poverty rates is Latinx whose poverty rate is 32.4%.\r\n\r\nRent Burden\r\n\r\n\r\n\r\nSoutheast LA\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\nThe Southeast LA under 5 poverty rate is 30.2%.The only racial/ethnic group with statistically stable poverty rates is Latinx whose poverty rate is 30.9%.\r\n\r\nRent Burden\r\n\r\n\r\n\r\nWhy it matters\r\nUnderstanding the racial-ethnic breakdown of an area is important to understanding its cultures and needs. Poverty and rent burden are indicators of economic need First 5 LA is interested in as it works to ensure all children prenatal to age 5 and their families have their basic needs met.\r\nLearn more\r\nLearn more by reading the First 5 LA 2024-2029 Strategic Plan.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2024-03-29T15:36:52-07:00",
+    "input_file": "region-1-indicators.knit.md"
+  },
+  {
+    "path": "posts/2024-03-29-region-2-indicators/",
+    "title": "Region 2 Indicators",
+    "description": "Data related to children age 0 to 5 that align with Best Start needs and the new First 5 LA new strategic plan within Region 2. Region 2 contains the West Athens, Broadway//Manchester, Watts//Willowbrook, and Compton//East Compton Best Start geographies.",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-03-29",
+    "categories": [
+      "Region 2",
+      "Indicators"
+    ],
+    "contents": "\r\n\r\nContents\r\nWest Athens\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nBroadway/Manchester\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nWatts/Willowbrook\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nCompton/East Compton\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nWhy it matters\r\nLearn more\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nWest Athens\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\n\r\n\r\nRent Burden\r\n\r\n\r\n\r\nBroadway/Manchester\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\n\r\n\r\nRent Burden\r\n\r\n\r\n\r\nWatts/Willowbrook\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\n\r\n\r\nRent Burden\r\n\r\n\r\n\r\nCompton/East Compton\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\n\r\n\r\nRent Burden\r\n\r\n\r\n\r\nWhy it matters\r\nUnderstanding the racial-ethnic breakdown of an area is important to understanding its cultures and needs. Poverty and rent burden are indicators of economic need First 5 LA is interested in as it works to ensure all children prenatal to age 5 and their families have their basic needs met.\r\nLearn more\r\nLearn more by reading the First 5 LA 2024-2029 Strategic Plan.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2024-03-29T15:38:14-07:00",
+    "input_file": "region-2-indicators.knit.md"
+  },
+  {
+    "path": "posts/2024-03-29-region-3-indicators/",
+    "title": "Region 3 Indicators",
+    "description": "Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 3. Region 3 contains the Panorama City & Neighbors and North East Valley Best Start geographies.",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-03-29",
+    "categories": [
+      "Region 3",
+      "Indicators"
+    ],
+    "contents": "\r\n\r\nContents\r\nPanorama City & Neighbors\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nNorth East Valley\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nWhy it matters\r\nLearn more\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nPanorama City & Neighbors\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\n\r\n\r\nRent Burden\r\n\r\n\r\n\r\nNorth East Valley\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\nThe North East Valley under 5 poverty rate is 18.7%.The only racial/ethnic group with statistically stable poverty rates is Latinx whose poverty rate is 22.6%.\r\n\r\nRent Burden\r\n\r\n\r\n\r\nWhy it matters\r\nUnderstanding the racial-ethnic breakdown of an area is important to understanding its cultures and needs. Poverty and rent burden are indicators of economic need First 5 LA is interested in as it works to ensure all children prenatal to age 5 and their families have their basic needs met.\r\nLearn more\r\nLearn more by reading the First 5 LA 2024-2029 Strategic Plan.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2024-03-29T14:39:53-07:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/2024-03-29-region-4-indicators/",
+    "title": "Region 4 Indicators",
+    "description": "Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 4. Region 4 contains the Central Long Beach and Wilmington geographies.",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-03-29",
+    "categories": [
+      "Region 4",
+      "Indicators"
+    ],
+    "contents": "\r\n\r\nContents\r\nCentral Long Beach\r\nRace-Ethnicity\r\nPoverty\r\nDisaggregating the Asian Subgroup\r\n\r\nRent Burden\r\nDisaggregating the Asian Subgroup\r\n\r\n\r\nWilmington\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nWhy it matters\r\nLearn more\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nCentral Long Beach\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\n\r\n\r\nDisaggregating the Asian Subgroup\r\nStatistics of Asian populations can often mask stark differences between people of different ancestries. Central Long Beach partners ask that we disaggregate these data when possible because of the Asian populations in the area. Unfortunately, there are no stable estimates of children under 5 in poverty by disaggregated Asian ancestry.\r\n\r\n\r\n\r\nRent Burden\r\n\r\n\r\n\r\nDisaggregating the Asian Subgroup\r\nStatistics of Asian populations can often mask stark differences between people of different ancestries. Central Long Beach partners ask that we disaggregate these data when possible because of the Asian populations in the area. See chart below for the Asian disaggregation of rent burden.\r\n\r\n\r\n\r\nWilmington\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\n\r\n\r\nRent Burden\r\n\r\n\r\n\r\nWhy it matters\r\nUnderstanding the racial-ethnic breakdown of an area is important to understanding its cultures and needs. Poverty and rent burden are indicators of economic need First 5 LA is interested in as it works to ensure all children prenatal to age 5 and their families have their basic needs met.\r\nLearn more\r\nLearn more by reading the First 5 LA 2024-2029 Strategic Plan.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2024-03-29T14:40:16-07:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/2024-03-29-region-5-indicators/",
+    "title": "Region 5 Indicators",
+    "description": "Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 5. Region 5 contains the Lancaster and Palmdale geographies.",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-03-29",
+    "categories": [
+      "Region 5",
+      "Indicators"
+    ],
+    "contents": "\r\n\r\nContents\r\nLancaster\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nPalmdale\r\nRace-Ethnicity\r\nPoverty\r\nRent Burden\r\n\r\nWhy it matters\r\nLearn more\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nLancaster\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\n\r\n\r\nRent Burden\r\n\r\n\r\n\r\nPalmdale\r\nRace-Ethnicity\r\n\r\n\r\n\r\nPoverty\r\n\r\n\r\n\r\nRent Burden\r\n\r\n\r\n\r\nWhy it matters\r\nUnderstanding the racial-ethnic breakdown of an area is important to understanding its cultures and needs. Poverty and rent burden are indicators of economic need First 5 LA is interested in as it works to ensure all children prenatal to age 5 and their families have their basic needs met.\r\nLearn more\r\nLearn more by reading the First 5 LA 2024-2029 Strategic Plan.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2024-03-29T14:41:46-07:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2024-03-20-real-cost-measure/",
     "title": "Real Cost Measure",
     "description": "Updated analysis of Real Cost Measure by race in Los Angeles county (updated in 2023), as part of Catalyst California's annual update of key indicators related to families with children age 0-5.",
@@ -15,8 +115,8 @@
     ],
     "contents": "\r\n\r\n\r\n\r\nThe data below visualizes the Real Cost Measure budget for a family in Los Angeles county with two children, one child age 0-5 and one school-aged child. This is visualized alongside the Los Angeles county median household income. All data is from 2021.\r\n\r\n\r\n\r\nWhy it matters\r\nFirst 5 LA’s first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes economic security. Economic security is foundational to reducing the annual percent of households with prenatal to 5 living poverty and experiencing housing insecurity, which are also part of the first strategic plan goal. The Real Cost Measure is a more holistic indicator that measures economic security in the context of families with young children, and what it costs to meet the essential needs of young children.\r\nLearn more\r\nSee data for other indicators of basic needs in the First 5 LA 2024-2029 Strategic Plan and see related economic indicators and indicators by race/ethnicity in the Data Narrative.\r\nTo learn more about Guaranteed Basic Income (GBI) efforts in Los Angeles county and how GBI improves outcomes for children and families, see the Catalyst California GBI presentation from the First 5 LA GBI Learning Dialogue here\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-03-20-real-cost-measure/images/RCM.png",
-    "last_modified": "2024-03-25T14:14:06-07:00",
-    "input_file": "real-cost-measure.knit.md"
+    "last_modified": "2024-03-29T14:29:04-07:00",
+    "input_file": {}
   },
   {
     "path": "posts/2024-03-11-state-of-the-child-report-region-4/",
@@ -40,7 +140,7 @@
   {
     "path": "posts/2024-03-20-infant-deaths/",
     "title": "Infant Deaths",
-    "description": "Rates of infant mortality are half those of 2017 and earlier.",
+    "description": "Analysis of the infant death rate in Los Angeles county as part of the set of key data indicators related to children under age 5 that Catalyst California provides to First 5 LA.",
     "author": [
       {
         "name": "Catalyst California",
@@ -53,8 +153,8 @@
     ],
     "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\nWhy it matters\r\nWhile any infant death is one too many, a decline in numbers and rates of infant deaths is something to celebrate. Fewer infant deaths means more healthy infants and families.\r\nLearn more\r\nAreas of concern remain for infants. Life/death is unfortunately not the only measure of child welfare. Antelope Valley partners highlight concerns over child welfare. See their State of the Child report for details.\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2024-03-21T12:58:28-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-29T15:44:12-07:00",
+    "input_file": "infant-deaths.knit.md"
   },
   {
     "path": "posts/2024-02-21-housing-presentation/",
@@ -78,7 +178,7 @@
   {
     "path": "posts/2024-02-21-state-of-the-child-report-region-5/",
     "title": "State of the Child Report Region 5",
-    "description": "Analysis of systems and outcomes impacting children and families in the Antelope Valley. Report was commissioned by Children's Bureau of Southern California.",
+    "description": "Analysis of systems and outcomes impacting children and families in the Antelope Valley. Report was commissioned by Childrens Bureau of Southern California.",
     "author": [
       {
         "name": "Catalyst California",
@@ -91,8 +191,8 @@
     ],
     "contents": "\r\nThe Best Start Region 5 State of the Child Report represents the most comprehensive analysis of data from the region to date, consolidating data on children, families and systems in the Antelope Valley. Children’s Bureau of Southern California commissioned this report to understand the state of children in the Antelope Valley, identify indicators to monitor, and increase the amount of data available to advocates.\r\nYou can view and download the report in its entirety here.\r\nThe report finds that:\r\nThe family-friendly, low-cost-living in the Antelope Valley, that residents love and depend on, is disappearing and a new, more proactive infrastructure for children and families is needed. The current infrastructure was not established for the population increases the Antelope Valley has experienced in the last decade, and the lack of resources is a driver for school-to-prison, youth-to-houselessness pipelines, and other avoidable outcomes. To be specific:\r\nAntelope Valley has a large, diverse, and growing population with roughly 120,000 children under the age of eighteen and 30,000 children under age 5, including many children who need extra support.\r\nHalf of the households in and around the neighborhoods of Lancaster and Palmdale cannot cover basic costs like housing, food, transportation, and child care with their incomes, and four in five families with children under the age of six earn less than the real cost of living.\r\nHigh housing costs and lower wages contribute to a growing unhoused population in the region. Resources available in the Antelope Valley are not keeping up with the needs of the residents. Residents struggle to access health and mental health services and there are few child care and learning opportunities for their children.\r\nEquitable treatment of local children and families is a concern. Rates of hate crimes exceed those countywide, and law enforcement is known to both stop Black drivers and injure Black civilians more than people of other races.\r\nHigh School graduation rates in Antelope Valley schools are lower than those countywide. School administration and the teacher workforce are not representative of the diversity within the student body. Foster students and students with disabilities – students who may need the most support – are most likely to be suspended from school.\r\nTo address these ongoing issues, increased investments in health and mental health are needed, as are increases in child care reimbursement rates and other forms of investments in education within the region. Strengthening the safety net of programs which provide resources or training to residents is a must. Individuals can collaborate to hold systems accountable and spread awareness of resources as well.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-02-21-state-of-the-child-report-region-5/images/av_beststart_logo.png",
-    "last_modified": "2024-03-20T15:21:46-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-29T15:59:11-07:00",
+    "input_file": "state-of-the-child-report-region-5.knit.md"
   },
   {
     "path": "posts/2024-03-01-children-under-5/",
@@ -116,7 +216,7 @@
   {
     "path": "posts/2024-03-01-rent-burden/",
     "title": "Rent Burden of Children under 5",
-    "description": "Updated analysis of children age 0-5 experiencing rent burden in Los Angeles county (updated in 2024), as part of Catalyst California's annual update of key census indicators related to children age 0 to 5 using the most recent census data available.",
+    "description": "Updated analysis of children age under age 5 experiencing rent burden in Los Angeles county (updated in 2024), as part of the Catalyst California annual update of key census indicators related to children age 0 to 5 using the most recent census data available.",
     "author": [
       {
         "name": "Catalyst California",
@@ -129,13 +229,13 @@
     ],
     "contents": "\r\n\r\n\r\n\r\nDisaggregating the Asian Subgroup\r\nStatistics of Asian populations can often mask stark differences between people of different ancestries. See chart below for the Asian disaggregation of rent burden.\r\n100% of children of Afghan descent are rent-burdened, representing a group for advocates to focus on.\r\nOver 70% of Hmong and Pakistani children under 5 are also rent-burdened.\r\n\r\n\r\n\r\nWhy it matters\r\nFirst 5 LA’s first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes secure housing for essential psychological safety. This goal has an objective to reduce the annual percent of households with children prenatal through age 5 who experience housing insecurity. Rent burden is not the sole cause of housing insecurity, but it is a key contributor.\r\nLearn more\r\nSee data for other indicators of basic needs in the First 5 LA 2024-2029 Strategic Plan and see related housing indicators and indicators by race/ethnicity in the Data Narrative.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-03-01-rent-burden/images/rentburden.PNG",
-    "last_modified": "2024-03-20T15:21:47-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-29T16:02:16-07:00",
+    "input_file": "rent-burden.knit.md"
   },
   {
     "path": "posts/2024-03-21-poverty-of-children-under-5/",
     "title": "Poverty of children under 5",
-    "description": "Analysis of children under 5 in poverty by race in Los Angeles County, as part of Catalyst California’s annual update of key indicators for First 5 LA and Best Start",
+    "description": "Analysis of children under 5 in poverty by race in Los Angeles County, as part of the Catalyst California annual update of key indicators for First 5 LA and Best Start",
     "author": [
       {
         "name": "Catalyst California",
@@ -146,13 +246,13 @@
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\nNote: Aggregated data above conceal variations with disaggregated subgroups. 61.5% of children under 5 of Mongolian descent are in poverty. See chart below for details. Cambodian children under 5 are also more likely to be in poverty than LA County children overall. Many of these Cambodian children live in Best Start Region 4, where you can read more about the state of children here.\r\n\r\n\r\n\r\nWhy it matters\r\nPoverty is a key indicator of whether a family can provide for the basic needs of its children. That 17.6% of children under 5 live in poverty is too a percentage for such a prosperous county.\r\nLearn more\r\nSee related indicators of basic needs in the Data Narrative.\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2024-03-22T09:00:51-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-29T15:52:27-07:00",
+    "input_file": "poverty-of-children-under-5.knit.md"
   },
   {
     "path": "posts/2024-03-22-ece-access/",
     "title": "ECE Access",
-    "description": "Updated analysis of licensed ECE access for children under 5, as part of Catalyst California's annual update of indicators related to children under 5.",
+    "description": "Updated analysis of licensed ECE access for children under 5, as part of the Catalyst California annual update of indicators related to children under 5.",
     "author": [
       {
         "name": "Catalyst California",
@@ -165,13 +265,13 @@
     ],
     "contents": "\r\n\r\n\r\n\r\nWhy it matters\r\nEarly Care and Education (ECE) is critical to the socioemotional and cognitive development of children, with lifelong positive impacts. The percentage of children enrolled is too low.\r\nLearn more\r\nSee related indicators of child care access need in the Data Narrative.\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2024-03-22T15:03:54-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-29T16:00:01-07:00",
+    "input_file": "ece-access.knit.md"
   },
   {
     "path": "posts/2024-02-08-race-of-children-under-5/",
     "title": "Race of Children under 5",
-    "description": "Updated analysis of race of children age 0-5 in Los Angeles county (updated in 2024), as part of Catalyst California's annual update of key census indicators related to children age 0 to 5 using the most recent census data available.",
+    "description": "Updated analysis of race of children under 5 in Los Angeles county (updated in 2024), as part of the Catalyst California annual update of key census indicators related to children age 0 to 5 using the most recent census data available.",
     "author": [
       {
         "name": "Catalyst California",
@@ -184,8 +284,8 @@
     ],
     "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nWhy it matters?\r\nConversations about the under 5 population need to consider the needs of Latinx families, including:\r\ndual language access for children, and materials for parents in both English and Spanish.\r\nLearn more.\r\nThe importance of race and equity in the caring and educating of children under 5 cannot be overstated. See more in the Data Narrative for details.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-02-08-race-of-children-under-5/images/race0to5.PNG",
-    "last_modified": "2024-03-20T15:21:46-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-29T15:57:17-07:00",
+    "input_file": "race-of-children-under-5.knit.md"
   },
   {
     "path": "posts/2024-02-06-childcare-center-closures/",
@@ -194,7 +294,7 @@
     "author": [
       {
         "name": "Catalyst California",
-        "url": "catalystcalifornia.orgyeah"
+        "url": "catalystcalifornia.org"
       }
     ],
     "date": "2024-02-06",
@@ -203,7 +303,7 @@
     ],
     "contents": "\r\n\r\nContents\r\nOverview\r\nMap of Permanent Closures\r\nSummary of Findings\r\nChild Care Centers\r\nClosures\r\nSeats Lost\r\n\r\nFamily Child Care Homes\r\nClosures\r\nSeats\r\n\r\n\r\nOverview\r\nThe purpose of this research is to explore child care center and family child care home closures in 2020 to gauge if and how Covid-19 affected closures. This research question was lifted by F5LA and might be incorporated into our F5LA deliverable.\r\nFor this research, I pulled child care center and family child care home data from the California Department of Social Services (CDSS) page. The data was last downloaded on 01/07/21 and is updated on the CDSS page weekly.\r\nIt is important to note that using the licensing data has limitations. Data from the CDSS page only reflects permanent facility closures. These are facilities that no longer have a license to operate. For the purposes of this analysis, facilities that are pending having their licenses approved are also considered closed.\r\nThe CDSS data does not show the reason a facility permanently closed. Many facilities have had to close due to new Covid-19 guidelines, or a decrease in enrollment and funding. However, these closures could be excluded from this data because the facility owners can still have their license but cease operations. These type of closures can be thought of as ‘temporary closures’ because the facility owners still have a license. Temporary closures are not captured in the data, resulting in an under-representation of facilities that are no longer providing services to families.\r\nWhile this research focuses on permanently closed facilities, the facilities that are open are being impacted by Covid-19. Anecdotes from providers and families reveal that many facilities are heavily impacted by Covid-19, which the data might not accurately capture. Women of color and immigrant women in particular, who disproportionately represent child care workers, are shouldering the burden for providing early learning and care to families.\r\nFor more information on how Covid-19 has been impacting child care in California and Los Angeles, please refer to the Center for the Study of Child Care and Employment’s (CSCCE) survey of licensed child care centers and licensed family child care programs.\r\nThe survey results show that family child care homes and child care centers in Los Angeles are facing significant financial challenges and staffing changes as a result of Covid-19.\r\nOver 70% of centers reported that families are unable to pay for childcare due to loss of income\r\nMajority of centers report difficulty in affording sanitizing supplies and PPE for staff.\r\nMap of Permanent Closures\r\nBelow shows the child care facilities and family home care centers that have closed permanently in 2020. Please note that for family home care centers, addresses for each facility was not available. Family home care centers are plotted by the state, city and zip code information. Child care facilities are plotted based on the facility address.\r\n\r\n\r\n\r\nSummary of Findings\r\nChild Care Centers\r\nMore Child Care Centers closed permanently in 2019 compared to 2020 in both California and Los Angeles County\r\nThere was a huge spike in child care center closures in June of 2020 in California, resulting in a substantial number of seats lost. Los Angeles County did not experience the same drastic spike.\r\nCompared to California, Los Angeles County has fewer closures and seats lost.\r\nIn Los Angeles County, permanent closures decreased in April of 2020.\r\nFamily Care Centers\r\nFamily Child Care Centers in California experienced a spike in closures and seats lost in August of 2020\r\nBoth Los Angeles County and California experienced a decrease in closures in April of 2020, similar with Child Care Centers\r\nThe difference between California and Los Angeles County closures and seats lost is lower compared to the California and Los Angeles County child care centers.\r\n\r\n\r\nTable 1: Summary of Permanent Closures and Seats Lost\r\n\r\n\r\n\r\n\r\n\r\n\r\nCalifornia\r\n\r\n\r\nLos Angeles County\r\n\r\n\r\nPermanent Center Closures\r\n\r\n\r\nFamily Child Care Home\r\n\r\n\r\n2019\r\n\r\n\r\nChild Care Center-Closures\r\n\r\n\r\n725\r\n\r\n\r\n180\r\n\r\n\r\n2020\r\n\r\n\r\nChild Care Center-Closures\r\n\r\n\r\n691\r\n\r\n\r\n134\r\n\r\n\r\nChild Care Center\r\n\r\n\r\n2019\r\n\r\n\r\nChild Care Center-Seats Lost\r\n\r\n\r\n32,269\r\n\r\n\r\n8,507\r\n\r\n\r\n2020\r\n\r\n\r\nChild Care Center-Seats Lost\r\n\r\n\r\n30,708\r\n\r\n\r\n6,024\r\n\r\n\r\nSeats Lost\r\n\r\n\r\nFamily Child Care Home\r\n\r\n\r\n2019\r\n\r\n\r\nFamily Child Care Home-Closures\r\n\r\n\r\n937\r\n\r\n\r\n194\r\n\r\n\r\n2020\r\n\r\n\r\nFamily Child Care Home-Closures\r\n\r\n\r\n894\r\n\r\n\r\n207\r\n\r\n\r\nChild Care Center\r\n\r\n\r\n2019\r\n\r\n\r\nFamily Child Care Home-Seats Lost\r\n\r\n\r\n13,041\r\n\r\n\r\n2,696\r\n\r\n\r\n2020\r\n\r\n\r\nFamily Child Care Home-Seats Lost\r\n\r\n\r\n12,434\r\n\r\n\r\n2,856\r\n\r\n\r\nChild Care Centers\r\nClosures\r\nClosures in 2020 by month\r\n\r\n\r\n\r\nClosures in 2020 by day\r\n\r\n\r\n\r\nClosures in 2019 vs. 2020\r\n\r\n\r\n\r\nSeats Lost\r\nSeats lost in 2020 by month\r\n\r\n\r\n\r\nSeats lost in 2020 by day\r\n\r\n\r\n\r\nSeats lost in 2019 vs. 2020\r\n\r\n\r\n\r\nFamily Child Care Homes\r\nClosures\r\nClosures in 2020 by month\r\n\r\n\r\n\r\nClosures in 2020 by day\r\n\r\n\r\n\r\nClosures in 2019 vs. 2020\r\n\r\n\r\n\r\nSeats\r\nSeats Lost in 2020 by month\r\n\r\n\r\n\r\nSeats Lost in 2020 by day\r\n\r\n\r\n\r\nSeats Lost in 2019 vs. 2020\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-02-06-childcare-center-closures/images/closures.PNG",
-    "last_modified": "2024-03-25T14:07:55-07:00",
+    "last_modified": "2024-03-29T15:23:58-07:00",
     "input_file": "childcare-center-closures.knit.md"
   },
   {
@@ -261,7 +361,7 @@
     ],
     "contents": "\r\nCatalyst California supported First 5 LA in its strategic refinement process by processing key indicators related to children 0-5 across the Best Start Geographies for 2008-2012 and 2017-2021.\r\nThe final product is a webpage consisting of maps that visualize changes over time to key indicators for households with children age 0-5. All maps are visualized at the PUMA geography level for 2012 and 2021. Both the 2012 and 2012 data come from American Community Survey (ACS) 5-year estimates. The 2012 data is comprised of the 2008-2012 ACS 5-year estimates, while the 2021 data is comprised of the 2017-2021 ACS 5-year estimates.\r\nClick here to explore the strategic heat maps analysis\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-01-23-strategic-heat-maps/images/strategicmap.PNG",
-    "last_modified": "2024-03-20T15:21:46-07:00",
-    "input_file": {}
+    "last_modified": "2024-03-29T15:45:13-07:00",
+    "input_file": "strategic-heat-maps.knit.md"
   }
 ]

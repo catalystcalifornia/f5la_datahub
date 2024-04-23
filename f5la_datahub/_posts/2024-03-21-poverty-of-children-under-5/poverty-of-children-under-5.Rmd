@@ -1,6 +1,6 @@
 ---
 title: "Poverty of children under 5"
-description: "Analysis of children under 5 in poverty by race in Los Angeles County, as part of Catalyst California’s annual update of key indicators for First 5 LA and Best Start"
+description: "Analysis of children under 5 in poverty by race in Los Angeles County, as part of the Catalyst California annual update of key indicators for First 5 LA and Best Start"
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
@@ -69,7 +69,7 @@ la_cnty_under5<-la_cnty_under5%>%
 pums_swana_list<-list("Algerian","Arab","Assyrian","Bahraini","Berber","Chaldean","Egyptian","Emirati","Iranian","Iraqi","Israeli","Jordanian","Kurdish","Kuwaiti","Lebanese","Libyan","Middle Eastern","Moroccan","North African","Omani","Palestinian","Qatari","Saudi","Syriac","Syrian","Tunisian","Yazidi","Yemeni","Mideast","Saudi Arabian","Arabic","Other Arab","Libyan (2017 or later)","Kuwaiti (2017 or later)","Turkish","Sudanese","Afghan") # 2017 or later needed based on reviewing data dictionary and saw fields for Arabic and Other Arab
 
 ## import PUMS codes
-pums_codes <- read_excel("W:/Data/Demographics/PUMS/CA_2018_2022/PUMS_Data_Dictionary_2018-2022_ANC1P.xlsx")%>%
+pums_codes <- read_excel("W://Data//Demographics//PUMS//CA_2018_2022//PUMS_Data_Dictionary_2018-2022_ANC1P.xlsx")%>%
   mutate_all(as.character) # create this excel document separate by opening PUMS Data Dictionary in excel and deleting everything but ancestry fields -- since ANC1P and ANC2P have same data values no need to do both
 pums_codes <- pums_codes %>% dplyr::rename("ANC_Code" = "Code_1")
 
@@ -407,7 +407,7 @@ graph
 
 ```
 
-Note: Aggregated data above conceal variations with disaggregated subgroups. 61.5% of children under 5 of Mongolian descent are in poverty. See chart below for details. Cambodian children under 5 are also more likely to be in poverty than LA County children overall. Many of these Cambodian children live in Best Start Region 4, where you can read more about the state of children [here](https://beststartregion4.org/?). 
+Note: Aggregated data above conceal variations with disaggregated subgroups. 61.5% of children under 5 of Mongolian descent are in poverty. See chart below for details. Cambodian children under 5 are also more likely to be in poverty than LA County children overall. Many of these Cambodian children live in Best Start Region 4, where you can read more about the state of children [here](https://beststartregion4.org//?). 
 
 
 ```{r, echo=FALSE,out.width="100%", out.height="100%"}
@@ -457,7 +457,7 @@ graph
 Poverty is a key indicator of whether a family can provide for the basic needs of its children. That 17.6% of children under 5 live in poverty is too a percentage for such a prosperous county.
 
 ## Learn more
-See related indicators of basic needs in the [Data Narrative](https://apca-dev.dreamhosters.com/).
+See related indicators of basic needs in the [Data Narrative](https://apca-dev.dreamhosters.com//).
 
 ```{r include=FALSE}
 
