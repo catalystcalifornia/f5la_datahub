@@ -1,5 +1,24 @@
 [
   {
+    "path": "posts/2024-04-24-poverty-and-housing-insecurity-data/",
+    "title": "Poverty and Housing Insecurity Data",
+    "description": "Excel workbook and PowerPoint templates of poverty and housing insecurity data for the First 5 LA Office of Data for Action.",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-04-24",
+    "categories": [
+      "ODFA"
+    ],
+    "contents": "\r\nThe ODFA Team at First 5 LA asked Catalyst California for data on poverty and housing insecurity among households with children under five in Los Angeles County. The poverty data are at the federal poverty level, and the housing insecurity data include rent burden, homeownership cost burden, and the combination of the two. The data are by racial-ethnic group and Service Planning Area (SPA) for the years 2013-2022.\r\nLink to the workbook\r\nLink to the poverty presentation\r\nLink to the housing insecurity presentation\r\n\r\n\r\n\r\n",
+    "preview": "posts/2024-04-24-poverty-and-housing-insecurity-data/images/housing_insecurity.png",
+    "last_modified": "2024-04-24T14:20:53-07:00",
+    "input_file": "poverty-and-housing-insecurity-data.knit.md"
+  },
+  {
     "path": "posts/2024-03-29-region-1-indicators/",
     "title": "Region 1 Indicators",
     "description": "Data related to children age 0 to 5 that align with Best Start needs and the First 5 LA new strategic plan within Region 1. Region 1 contains the East LA, Metro LA, South El Monte & El Monte, and Southeast LA Best Start geographies.",
