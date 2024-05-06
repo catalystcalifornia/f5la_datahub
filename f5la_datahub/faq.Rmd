@@ -8,7 +8,7 @@ output:
     toc_depth: '2'
 ---
 
-# How to navigate this site?
+# How to navigate this site
 
 Navigating the site can be done in multiple ways. A list of all of the resources contained within the site can be found on the home page of the website, along with the date that the resource was added to the site. To directly search for the data or resource you are looking for, you can use the search bar located at the top left corner of the site and type in what you are looking for. 
 
@@ -24,24 +24,23 @@ Indicators | Any analysis of indicators related to children age 0 to 5 which are
 Region 1-5 | Each Region has its own category. Here you can find any Region specific reports or deliverables.
 Region 1-5 | Each Region has its own category. Here you can find any Region specific reports or deliverables.
 
-# What are the data sources on this site?
+# What are the data sources on this site
 
-The data on this site are from a variety of sources that grow and change as new data are added and updates are made. The US Census Bureau’s American Community Survey is the data source for most of the demographic data about households with children under 5, whether by summary tables or public use microdata. United Ways of California provides the data on the real cost of living in California, and the California Department of Public Health is the source of the infant death data. See individual posts for their data sources, generally listed on or below charts.
+The data on this site are from a variety of sources that grow and change as new data are added and updates are made. The US [Census Bureau’s American Community Survey](https://www.census.gov/programs-surveys/acs) is the data source for most of the demographic data about households with children under 5, whether by summary tables or public use microdata. [United Ways of California](https://unitedwaysca.org/realcost/) provides the data on the real cost of living in California, and the [California Department of Public Health](https://data.chhs.ca.gov/) is the source of the infant death data. See individual posts for their data sources, generally listed on or below charts.
 
-# Where can I find more data?
+# Where can I find more data
 
 The data on this site are a small fraction of the data provided by their sources. Here are some data sources where you can learn more about households with children under 5, whether by direct download or contracting for special cuts of data:
-* American Institutes for Research Early Learning Needs Assessment Tool
-* California Health Interview Survey
-* California Child Care Resource and Referral Network Child Care Data Tool
-* California Department of Social Services Community Care Licensing Division
-* Kidsdata.org
-* LA County Health Survey
-* PHFE WIC WIC Data for LA County
 
+* American Institutes for Research [Early Learning Needs Assessment Tool](https://elneedsassessment.org/)
+* [California Health Interview Survey](https://ask.chis.ucla.edu/ask/SitePages/AskChisLogin.aspx?ReturnUrl=%2fAskCHIS%2ftools%2f_layouts%2fAuthenticate.aspx%3fSource%3d%252FAskCHIS%252Ftools%252F%255Flayouts%252FAskChisTool%252Fhome%252Easpx&Source=%2FAskCHIS%2Ftools%2F%5Flayouts%2FAskChisTool%2Fhome%2Easpx)
+* California Child Care Resource and Referral Network [Child Care Data Tool](https://rrnetwork.org/research/child-care-data-tool#!0)
+* California Department of Social Services [Community Care Licensing Division](https://www.ccld.dss.ca.gov/carefacilitysearch/)
+* [Kidsdata.org](https://www.kidsdata.org/?site=full)
+* [LA County Health Survey](http://www.publichealth.lacounty.gov/ha/hasurveyintro.htm)
+* PHFE WIC [WIC Data for LA County](http://www.publichealth.lacounty.gov/ha/hasurveyintro.htm)
 
-
-# What is SWANA?
+# What is SWANA
 
 SWANA is an acronym that stands for Southwest Asian, or North African, which includes people of Southwest Asian or North African (SWANA), or Middle Eastern or North African (MENA), descent. Southwest Asian or North African is an alternative term to the acronym MENA, which is also commonly used in the data disaggregation of Middle Eastern groups. 
 
