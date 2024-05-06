@@ -2,7 +2,7 @@
   {
     "path": "posts/2024-04-24-poverty-and-housing-insecurity-data/",
     "title": "Poverty and Housing Insecurity Data",
-    "description": "Excel workbook and PowerPoint templates of poverty and housing insecurity data for the First 5 LA Office of Data for Action.",
+    "description": "Excel workbook and PowerPoint templates populated with poverty and housing insecurity data by Catalyst California for the First 5 LA Office of Data for Action. This work is part of Catalyst California's ongoing strategic partnership and technical support for First 5 LA departments.",
     "author": [
       {
         "name": "Catalyst California",
@@ -13,9 +13,9 @@
     "categories": [
       "ODFA"
     ],
-    "contents": "\r\nThe ODFA Team at First 5 LA asked Catalyst California for data on poverty and housing insecurity among households with children under five in Los Angeles County. The poverty data are at the federal poverty level, and the housing insecurity data include rent burden, homeownership cost burden, and the combination of the two. The data are by racial-ethnic group and Service Planning Area (SPA) for the years 2013-2022.\r\nLink to the workbook\r\nLink to the poverty presentation\r\nLink to the housing insecurity presentation\r\n\r\n\r\n\r\n",
+    "contents": "\r\nThe ODFA Team at First 5 LA asked Catalyst California for data on poverty and housing insecurity among households with children under five in Los Angeles County. The poverty data are at the federal poverty level, and the housing insecurity data includes rent burden, homeownership cost burden, and the combination of the two. The data are by racial-ethnic group and Service Planning Area (SPA) for the years 2013-2022.\r\nLink to the workbook\r\nLink to the poverty presentation\r\nLink to the housing insecurity presentation\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-04-24-poverty-and-housing-insecurity-data/images/housing_insecurity.png",
-    "last_modified": "2024-04-24T14:20:53-07:00",
+    "last_modified": "2024-05-06T14:51:31-07:00",
     "input_file": "poverty-and-housing-insecurity-data.knit.md"
   },
   {
