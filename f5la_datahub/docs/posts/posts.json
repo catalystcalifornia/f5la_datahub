@@ -11,11 +11,11 @@
     ],
     "date": "2024-04-24",
     "categories": [
-      "ODFA"
+      "Analysis"
     ],
     "contents": "\r\nThe ODFA Team at First 5 LA asked Catalyst California for data on poverty and housing insecurity among households with children under five in Los Angeles County. The poverty data are at the federal poverty level, and the housing insecurity data includes rent burden, homeownership cost burden, and the combination of the two. The data are by racial-ethnic group and Service Planning Area (SPA) for the years 2013-2022.\r\nLink to the workbook\r\nLink to the poverty presentation\r\nLink to the housing insecurity presentation\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-04-24-poverty-and-housing-insecurity-data/images/housing_insecurity.png",
-    "last_modified": "2024-05-06T14:51:31-07:00",
+    "last_modified": "2024-05-06T15:33:28-07:00",
     "input_file": "poverty-and-housing-insecurity-data.knit.md"
   },
   {

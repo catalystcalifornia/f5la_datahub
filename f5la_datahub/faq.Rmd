@@ -18,11 +18,28 @@ The current categories on the site are:
 
 Category | Description
 ------------- | -------------
-Analysis | Requested exploratory research and analysis on specific topics. Includes research requests from ODFA and other First 5 LA departments.
+Analysis | Requested exploratory research and analysis on specific topics. Includes research requests from other First 5 LA departments.
 Data Narrative | The Data Narrative wordpress page, which contains qualitative interview findings from Regional Network Grantees and First 5 LA Program Officers, as well as data framing and analysis to understand essential workers in Best Start geographies from 2019 - 2022.
 Indicators | Any analysis of indicators related to children age 0 to 5 which are updated on a semi-regular basis by Catalyst California.
-Learning dialogue | All of the Learning Dialogue presentations created by Catalyst California
 Region 1-5 | Each Region has its own category. Here you can find any Region specific reports or deliverables.
+Region 1-5 | Each Region has its own category. Here you can find any Region specific reports or deliverables.
+
+# What are the data sources on this site?
+
+The data on this site are from a variety of sources that grow and change as new data are added and updates are made. The US Census Bureau’s American Community Survey is the data source for most of the demographic data about households with children under 5, whether by summary tables or public use microdata. United Ways of California provides the data on the real cost of living in California, and the California Department of Public Health is the source of the infant death data. See individual posts for their data sources, generally listed on or below charts.
+
+# Where can I find more data?
+
+The data on this site are a small fraction of the data provided by their sources. Here are some data sources where you can learn more about households with children under 5, whether by direct download or contracting for special cuts of data:
+* American Institutes for Research Early Learning Needs Assessment Tool
+* California Health Interview Survey
+* California Child Care Resource and Referral Network Child Care Data Tool
+* California Department of Social Services Community Care Licensing Division
+* Kidsdata.org
+* LA County Health Survey
+* PHFE WIC WIC Data for LA County
+
+
 
 # What is SWANA?
 

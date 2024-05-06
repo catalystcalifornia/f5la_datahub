@@ -7,7 +7,7 @@ author:
     url: catalystcalifornia.org
 date: 2024-04-24
 categories:
-  - ODFA
+  - Analysis
 output:
   distill::distill_article:
     self_contained: false
