@@ -1,7 +1,7 @@
 ---
 title: "Poverty and Housing Insecurity Data"
 description: |
-  Excel workbook and PowerPoint templates of poverty and housing insecurity data for the First 5 LA Office of Data for Action.
+  Excel workbook and PowerPoint templates populated with poverty and housing insecurity data by Catalyst California for the First 5 LA Office of Data for Action. This work is part of Catalyst California's ongoing strategic partnership and technical support for First 5 LA departments.
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
@@ -14,11 +14,11 @@ output:
 preview: images/housing_insecurity.png
 ---
 
-The ODFA Team at First 5 LA asked Catalyst California for data on poverty and housing insecurity among households with children under five in Los Angeles County. The poverty data are at the federal poverty level, and the housing insecurity data include rent burden, homeownership cost burden, and the combination of the two. The data are by racial-ethnic group and Service Planning Area (SPA) for the years 2013-2022. 
+The ODFA Team at First 5 LA asked Catalyst California for data on poverty and housing insecurity among households with children under five in Los Angeles County. The poverty data are at the federal poverty level, and the housing insecurity data includes rent burden, homeownership cost burden, and the combination of the two. The data are by racial-ethnic group and Service Planning Area (SPA) for the years 2013-2022. 
 
-[Link to the workbook](https://github.com/catalystcalifornia/f5la_datahub/blob/main/Catalyst%California.%Data%Request%Template.xlsx) 
+[Link to the workbook](https://github.com/catalystcalifornia/f5la_datahub/blob/main/Catalyst%20California.%20Data%20Request%20Template.xlsx) 
 
-[Link to the poverty presentation](https://github.com/catalystcalifornia/f5la_datahub/blob/main/1.2%Poverty%Templates.pptx)
+[Link to the poverty presentation](https://github.com/catalystcalifornia/f5la_datahub/blob/main/1.2%20Poverty%20Templates.pptx)
 
-[Link to the housing insecurity presentation](https://github.com/catalystcalifornia/f5la_datahub/blob/main/1.3%Housing%Insecurity%Templates.pptx)
+[Link to the housing insecurity presentation](https://github.com/catalystcalifornia/f5la_datahub/blob/main/1.3%20Housing%20Insecurity%20Templates.pptx)
 
