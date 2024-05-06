@@ -1,0 +1,24 @@
+---
+title: "Poverty and Housing Insecurity Data"
+description: |
+  Excel workbook and PowerPoint templates of poverty and housing insecurity data for the First 5 LA Office of Data for Action.
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-04-24
+categories:
+  - ODFA
+output:
+  distill::distill_article:
+    self_contained: false
+preview: images/housing_insecurity.png
+---
+
+The ODFA Team at First 5 LA asked Catalyst California for data on poverty and housing insecurity among households with children under five in Los Angeles County. The poverty data are at the federal poverty level, and the housing insecurity data include rent burden, homeownership cost burden, and the combination of the two. The data are by racial-ethnic group and Service Planning Area (SPA) for the years 2013-2022. 
+
+[Link to the workbook](https://github.com/catalystcalifornia/f5la_datahub/blob/main/Catalyst%California.%Data%Request%Template.xlsx) 
+
+[Link to the poverty presentation](https://github.com/catalystcalifornia/f5la_datahub/blob/main/1.2%Poverty%Templates.pptx)
+
+[Link to the housing insecurity presentation](https://github.com/catalystcalifornia/f5la_datahub/blob/main/1.3%Housing%Insecurity%Templates.pptx)
+
