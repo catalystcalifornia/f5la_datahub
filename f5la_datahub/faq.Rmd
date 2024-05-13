@@ -1,5 +1,8 @@
 ---
 title: "Frequenty Asked Questions"
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
 output:
   distill::distill_article:
     css: css_theme.css
