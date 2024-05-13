@@ -5,9 +5,7 @@ output:
     css: css_theme.css
     self_contained: false
 ---
-
 This data hub was created by Catalyst California to host the various products created during the First 5 LA-Catalyst California Strategic Partnership. The Strategic Partnership was created in 2019 to support the First 5 LA Communities team in understanding the current conditions in Best Start geographies through data support and thought partnership. 
-
 If you have any questions, please contact:
 
 * Chris Ringewald: cringewald@catalystcalifornia.org
