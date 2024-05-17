@@ -1,0 +1,122 @@
+---
+title: "Rent Burden of Households with Children under 5"
+description: "Updated analysis of households with children under 5 experiencing rent burden in Los Angeles county as part of Catalyst California annual updates of key indicators."
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-05-17
+categories:
+  - Indicators
+output:
+  distill::distill_article:
+    css: css_theme.css
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+
+# get LA County under5 ages 0-4 by race in rent-burdened households
+# Data Dictionary: https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2018-2022.pdf
+
+library(tidyverse)
+library(data.table)
+library(readxl)
+library(tidycensus)
+library(srvyr)
+library(highcharter)
+library(stringr)
+
+source("W:\\RDA Team\\R\\credentials_source.R")
+
+```
+
+```{r data, include=FALSE}
+
+#### Step 1: load the data ####
+
+# PUMS Data
+root <- "W:/Data/Demographics/PUMS/"
+
+# Load the people PUMS data
+people <- fread(paste0(root, "CA_2018_2022/psam_p06.csv"), header = TRUE, data.table = FALSE,
+             colClasses = list(character = c("PUMA10", "PUMA20", "ANC1P", "ANC2P", "HISP", "RAC1P", "RAC2P", "RAC3P", "RACAIAN", "RACPI", "RACNH")))
+
+
+# Load the housing PUMS data
+housing <- fread(paste0(root, "CA_2018_2022/psam_h06.csv"), header = TRUE, data.table = FALSE,
+                 colClasses = list(character = c("PUMA10", "PUMA20")))
+
+
+####  Step 2: filter households eligible for calculation  #### 
+
+eligible_hhs <- people %>% left_join(housing %>% 
+      
+        #filtering for renter and LA county                               
+        filter(TEN == "3" & !is.na(GRPIP) & 
+        (grepl('037', PUMA20) | grepl('037', PUMA10))), 
+                                             
+        by = c("SERIALNO", "PUMA10", "PUMA20")) %>%
+  
+  #remove records with no weights
+  filter(!is.na(WGTP)) %>%
+  
+  #filter for age 0-5 and select distinct households
+  filter(AGEP < 5) %>% distinct(SERIALNO, .keep_all = TRUE)
+
+
+#### Step 3: import and join xwalks
+
+# get 2010 and 2020 vintage PUMA xwalks
+f5la_con <- connect_to_db("f5la_v2")
+bs_puma_xwalk10 <- st_read(f5la_con, query = "select * from data.bsc_puma_crosswalk_2022")
+bs_puma_xwalk20 <- st_read(f5la_con, query = "select * from data.bs_puma_xwalk24")
+dbDisconnect(f5la_con)
+
+# format to better distinguish crosswalks
+bs_puma_xwalk10 <- as.data.frame(bs_puma_xwalk10) %>% mutate(PUMA10 = substr(geoid10, 3, 7)) %>%
+  rename(pct_area_intersect10 = pct_area_intersect,
+         pct_area_intersect_bsc10 = pct_area_intersect_bsc) %>%
+select(best_start, PUMA10, pct_area_intersect10, pct_area_intersect_bsc10)
+bs_puma_xwalk20 <- bs_puma_xwalk20 %>% rename(pct_int_of_bs20  = pct_int_of_bs)
+
+#join
+eligible_hhs <- eligible_hhs %>% left_join(bs_puma_xwalk20, by = "PUMA20")
+eligible_hhs <- eligible_hhs %>% left_join(bs_puma_xwalk10, by = "PUMA10")
+
+#create one best start field combining both vintages
+eligible_hhs <- eligible_hhs %>% mutate(best_start_final = ifelse(is.na(eligible_hhs$best_start) & is.na(eligible_hhs$BEST_START), NA, 
+  ifelse(is.na(best_start), eligible_hhs$BEST_START, eligible_hhs$best_start)))
+
+
+####  Step 4. Recode race/eth  ####
+source("W:\\Project\\RDA Team\\First5LA\\Ad-hoc Research\\Laura ask\\ask_functions.R")
+eligible_hhs <- race_recode(eligible_hhs)
+
+
+####  Step 5: set up surveys and calculate percentages of under5 in rent-burdened households by race/ethnicity  ####
+
+under5 <- eligible_hhs
+under5$geoid <- eligible_hhs$best_start_final
+
+under5<-under5%>%
+  mutate(indicator=(ifelse(under5$GRPIP > 29, "burdened", "not burdened")))
+
+under5 <- survey_return_race(under5)
+
+d_long <- under5 %>% select(geoid, everything()) %>% 
+  filter(indicator == "burdened" &
+           !is.na(geoid) & rate_cv < 40 & pop > 100)
+
+# 
+# # # send by race to postgres
+#   con <- connect_to_db("f5la_v2")
+#   dbWriteTable(con,"f5la_2024_bs_rent_burden_hh_pums", d_long, row.names = FALSE)
+#  
+#   sql_command <- "COMMENT ON TABLE data.f5la_2024_bs_rent_burden_hh_pums IS 'Under 5 rent burden created in W:/Project/RDA Team/First5LA/First 5 LA Data Hub Year 5 2024/R/analysis/region-rent-burden_hh.Rmd.';"
+#   dbGetQuery(con, sql_command)
+#  
+#   dbDisconnect(con)
+
+```
+
