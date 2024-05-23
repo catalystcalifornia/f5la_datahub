@@ -22,6 +22,7 @@ library(tidyverse)
 library(scales)
 library(highcharter)
 library(magrittr)
+library(data.table)
 
 ```
 
@@ -30,13 +31,15 @@ library(magrittr)
 #make a line chart of infant deaths over liver births per 1,000 over time (infant mortality rate)
 
 #get CHHS deaths. There are provisional deaths for 23-24, but the numbers are half 2022 or less so suspicious
-deaths14_22 <- read.csv(url("https://data.chhs.ca.gov/datastore/dump/579cc04a-52d6-4c4c-b2df-ad901c9049b7?bom=True"))
+deaths14_22 <- fread("https://data.chhs.ca.gov/datastore/dump/579cc04a-52d6-4c4c-b2df-ad901c9049b7?bom=True",
+                        encoding="UTF-8")
 
 deaths <- deaths14_22 %>% filter(County == "Los Angeles" & Strata_Name == "Under 1 year") %>% 
   group_by(Year) %>% summarize(Year = min(Year), Deaths = sum(Count))
 
 #get CHHS births, comes in two sets of years
-births60_22 <- read.csv(url("https://data.chhs.ca.gov/datastore/dump/d6c30e46-8618-407a-ba5a-bae308f86a1c?bom=True"))
+births60_22 <- fread("https://data.chhs.ca.gov/datastore/dump/d6c30e46-8618-407a-ba5a-bae308f86a1c?bom=True", 
+                        encoding="UTF-8")
 
 births <- births60_22 %>% filter(County == "Los Angeles" & Year >= 2014) %>% 
   group_by(Year) %>% summarize(Year = min(Year), Births = sum(Count, na.rm = TRUE))

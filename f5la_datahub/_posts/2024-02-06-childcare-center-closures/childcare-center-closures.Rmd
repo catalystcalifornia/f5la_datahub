@@ -260,59 +260,59 @@ library(htmltools)
 
 #######Map#########
 
-
-
+# 
+# 
 leaflet()%>%
   addMapPane("centers_pane", zIndex=480)%>%
   addMapPane("family_pane", zIndex=480)%>%
   addMapPane("bsc_pane", zIndex=490)%>%
 
-  
-addCircleMarkers(data = centers, lat = ~Y, lng = ~X, 
+
+addCircleMarkers(data = centers, lat = ~Y, lng = ~X,
                    weight = 3, fillOpacity = 1, radius=3,
                    color="white", popup = ~htmlEscape(points), fillColor= "#332a86", stroke = TRUE,
                  group="Child Care Centers",
                   options = pathOptions(pane = "centers_pane"))%>%
-  
-  addCircleMarkers(data = family, lat = ~Y, lng = ~X, 
+
+  addCircleMarkers(data = family, lat = ~Y, lng = ~X,
                    weight = 3, fillOpacity = 1, radius=3,
                    group="Family Child Care Homes",
                    color="white", popup = ~htmlEscape(points), fillColor= "#22bcb9", stroke = TRUE,
                   options = pathOptions(pane = "family_pane"))%>%
-  
-  
+
+
   #bsc layer
-  
+
   addPolygons(data=bsc, color="black", weight=1, opacity = 1, fill=F,
               options = pathOptions(pane = "bsc_pane"),
               label=as.character(bsc$best_start)
                ) %>%
-  addLabelOnlyMarkers(data=bsc,  ~X, ~Y, label =  ~as.character(bsc_label), 
+  addLabelOnlyMarkers(data=bsc,  ~X, ~Y, label =  ~as.character(bsc_label),
                       labelOptions = labelOptions(noHide= T, direction = 'top', textOnly = T,
                                                   style=list("font-size"="8px", "color"="black",  "font-weight" = "bold")))%>%
-  
-  
+
+
   #LA County Layer
-  
+
   addPolygons(data=lac, color="black", weight=2, fill=F)%>%
-  
-  
+
+
    # toggled layers
     addLayersControl(overlayGroups =
-                       c("Family Child Care Homes", "Child Care Centers"), 
+                       c("Family Child Care Homes", "Child Care Centers"),
                   options = layersControlOptions(collapsed = FALSE),
                   position = c("bottomleft"))%>%
-  
-  
+
+
   #legend
-   addLegend("bottomleft", colors = c("#22bcb9", "#332a86"), 
+   addLegend("bottomleft", colors = c("#22bcb9", "#332a86"),
                   labels = c("Family Child Care Homes", "Child Care Centers"))%>%
- 
-  
+
+
   #base and view
   addProviderTiles("CartoDB.PositronNoLabels")%>%
   setView(	-118.205914, 	34.187684	, zoom = 9)
-  
+#   
 
 ```
 
