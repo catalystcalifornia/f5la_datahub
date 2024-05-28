@@ -41,7 +41,7 @@ The data on this site are a small fraction of the data provided by their sources
 * California Department of Social Services [Community Care Licensing Division](https://www.ccld.dss.ca.gov/carefacilitysearch/)
 * [Kidsdata.org](https://www.kidsdata.org/?site=full)
 * [LA County Health Survey](http://www.publichealth.lacounty.gov/ha/hasurveyintro.htm)
-* PHFE WIC [WIC Data for LA County](http://www.publichealth.lacounty.gov/ha/hasurveyintro.htm)
+* PHFE WIC [WIC Data for LA County](https://lawicdata.org/)
 
 # What is SWANA
 
