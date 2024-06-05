@@ -1,5 +1,24 @@
 [
   {
+    "path": "posts/2024-06-05-rent-burden/",
+    "title": "Rent Burden of Households with Children under 5",
+    "description": "Updated analysis of households with children age 0-5 experiencing rent burden in Los Angeles county (updated in 2024), as part of Catalyst California's annual update of indicators.",
+    "author": [
+      {
+        "name": "Catalyst California",
+        "url": "catalystcalifornia.org"
+      }
+    ],
+    "date": "2024-06-05",
+    "categories": [
+      "Indicators"
+    ],
+    "contents": "\r\n\r\n\r\n\r\nWhy it matters\r\nFirst 5 LA’s first strategic plan goal is that children prenatal to age 5 and their families have their basic needs met, which includes secure housing for essential psychological safety. This goal has an objective to reduce the annual percent of households with children prenatal through age 5 who experience housing insecurity. Rent burden is not the sole cause of housing insecurity, but it is a key contributor.\r\nLearn more\r\nSee data for other indicators of basic needs in the First 5 LA 2024-2029 Strategic Plan and see related housing indicators and indicators by race/ethnicity in the Data Narrative.\r\n\r\n\r\n\r\n",
+    "preview": "posts/2024-06-05-rent-burden/images/rentburden.PNG",
+    "last_modified": "2024-06-05T12:58:59-07:00",
+    "input_file": "rent-burden.knit.md"
+  },
+  {
     "path": "posts/2024-04-24-poverty-and-housing-insecurity-data/",
     "title": "Poverty and Housing Insecurity Data",
     "description": "Excel workbook and PowerPoint templates populated with poverty and housing insecurity data by Catalyst California for the First 5 LA Office of Data for Action. This work is part of Catalyst California's ongoing strategic partnership and technical support for First 5 LA departments.",
