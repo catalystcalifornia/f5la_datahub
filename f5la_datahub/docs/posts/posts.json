@@ -197,7 +197,7 @@
   {
     "path": "posts/2024-02-21-housing-presentation/",
     "title": "Housing Presentation",
-    "description": "description",
+    "description": "Presentation created by Catalyst California for the First 5 LA Learning Dialogue on Housing that took place on October 18th, 2023. This presentation connects data with literature review findings to illustrate the various ways in which housing insecurity is a racial equity issue, and negatively impacts health and socioeconomic outcomes for families and children ages 0 to 5.",
     "author": [
       {
         "name": "Catalyst California",
@@ -210,8 +210,8 @@
     ],
     "contents": "\r\nThe Communities Team at First 5 LA hosted a Learning Dialogue for First 5 LA departments and external partners to share knowledge and learn more about housing issues as they relate to children age 0-5 living in Best Start geographies and Los Angeles county.\r\nLink to the full presentation\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-02-21-housing-presentation/images/housing.png",
-    "last_modified": "2024-05-23T10:42:28-07:00",
-    "input_file": {}
+    "last_modified": "2024-06-06T12:37:13-07:00",
+    "input_file": "housing-presentation.knit.md"
   },
   {
     "path": "posts/2024-02-21-state-of-the-child-report-region-5/",
@@ -230,25 +230,6 @@
     "contents": "\r\nThe Best Start Region 5 State of the Child Report represents the most comprehensive analysis of data from the region to date, consolidating data on children, families and systems in the Antelope Valley. Children’s Bureau of Southern California commissioned this report to understand the state of children in the Antelope Valley, identify indicators to monitor, and increase the amount of data available to advocates.\r\nYou can view and download the report in its entirety here.\r\nThe report finds that:\r\nThe family-friendly, low-cost-living in the Antelope Valley, that residents love and depend on, is disappearing and a new, more proactive infrastructure for children and families is needed. The current infrastructure was not established for the population increases the Antelope Valley has experienced in the last decade, and the lack of resources is a driver for school-to-prison, youth-to-houselessness pipelines, and other avoidable outcomes. To be specific:\r\nAntelope Valley has a large, diverse, and growing population with roughly 120,000 children under the age of eighteen and 30,000 children under age 5, including many children who need extra support.\r\nHalf of the households in and around the neighborhoods of Lancaster and Palmdale cannot cover basic costs like housing, food, transportation, and child care with their incomes, and four in five families with children under the age of six earn less than the real cost of living.\r\nHigh housing costs and lower wages contribute to a growing unhoused population in the region. Resources available in the Antelope Valley are not keeping up with the needs of the residents. Residents struggle to access health and mental health services and there are few child care and learning opportunities for their children.\r\nEquitable treatment of local children and families is a concern. Rates of hate crimes exceed those countywide, and law enforcement is known to both stop Black drivers and injure Black civilians more than people of other races.\r\nHigh School graduation rates in Antelope Valley schools are lower than those countywide. School administration and the teacher workforce are not representative of the diversity within the student body. Foster students and students with disabilities – students who may need the most support – are most likely to be suspended from school.\r\nTo address these ongoing issues, increased investments in health and mental health are needed, as are increases in child care reimbursement rates and other forms of investments in education within the region. Strengthening the safety net of programs which provide resources or training to residents is a must. Individuals can collaborate to hold systems accountable and spread awareness of resources as well.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-02-21-state-of-the-child-report-region-5/images/av_beststart_logo.png",
     "last_modified": "2024-03-29T15:59:13-07:00",
-    "input_file": {}
-  },
-  {
-    "path": "posts/2024-05-21-debugging/",
-    "title": "Poverty for Households with Children under 5",
-    "description": "Presentation created by Catalyst California for the First 5 LA Learning Dialogue on Housing that took place on October 18th, 2023. This presentation connects data with literature review findings to illustrate the various ways in which housing insecurity is a racial equity issue, and negatively impacts health and socioeconomic outcomes for families and children ages 0 to 5.",
-    "author": [
-      {
-        "name": "Catalyst California",
-        "url": "catalystcalifornia.org"
-      }
-    ],
-    "date": "2024-02-21",
-    "categories": [
-      "Indicators"
-    ],
-    "contents": "\r\n\r\n\r\n\r\nWhy it matters\r\nPoverty is a key indicator of whether a family can provide for the basic needs of its children. That 5% of households with children under 5 live in poverty is too high a percentage for such a prosperous county.\r\nLearn more\r\nSee related indicators of basic needs in the Data Narrative.\r\n\r\n\r\n\r\n",
-    "preview": {},
-    "last_modified": "2024-05-23T10:42:31-07:00",
     "input_file": {}
   },
   {
