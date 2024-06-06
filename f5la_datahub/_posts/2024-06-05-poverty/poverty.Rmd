@@ -9,7 +9,6 @@ categories:
   - Indicators
 output:
   distill::distill_article:
-    css: css_theme.css
     self_contained: false
 ---
 
@@ -97,4 +96,5 @@ See related indicators of basic needs in the [Data Narrative](https://apca-dev.d
 ```{r include=FALSE}
 
 dbDisconnect(con)
+
 ```
