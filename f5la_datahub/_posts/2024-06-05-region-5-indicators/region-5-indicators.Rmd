@@ -12,7 +12,6 @@ output:
   distill::distill_article:
     toc: true
     toc_float: true
-    css: css_theme.css
     self_contained: false
 ---
 
@@ -25,12 +24,12 @@ options(scipen = 999)
 
 # create connection for rda database and get data
 source("W:\\RDA Team\\R\\credentials_source.R")
-f5la_con <- connect_to_db("f5la_v2")
-race_under5 <- dbGetQuery(f5la_con, "select * from data.f5la_2024_bs_raceethnicity_pums")
-poverty_under5 <- dbGetQuery(f5la_con, "select * from data.f5la_2024_bs_poverty_hh_pums")
-rent_burden_under5 <- dbGetQuery(f5la_con, "select * from data.f5la_2024_bs_rent_burden_hh_pums")
+# f5la_con <- connect_to_db("f5la_v2")
+# race_under5 <- dbGetQuery(f5la_con, "select * from data.f5la_2024_bs_raceethnicity_pums")
+# poverty_under5 <- dbGetQuery(f5la_con, "select * from data.f5la_2024_bs_poverty_hh_pums")
+# rent_burden_under5 <- dbGetQuery(f5la_con, "select * from data.f5la_2024_bs_rent_burden_hh_pums")
 
-dbDisconnect(f5la_con)
+# dbDisconnect(f5la_con)
 
 source("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\R\\chart_prep\\f5la_chart_functions.R")
 
