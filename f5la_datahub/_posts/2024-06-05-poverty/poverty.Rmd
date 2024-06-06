@@ -4,7 +4,7 @@ description: "Analysis of households with children under 5 in poverty by race in
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
-date: 2024-05-17
+date: 2024-06-06
 categories:
   - Indicators
 output:
@@ -12,7 +12,6 @@ output:
     css: css_theme.css
     self_contained: false
 ---
-
 
 ```{r setup, include=FALSE}
 
