@@ -2,7 +2,7 @@
   {
     "path": "posts/2024-06-05-poverty/",
     "title": "Poverty for Households with Children under 5",
-    "description": "Analysis of households with children nuder 5 that experience poverty by race in Los Angeles county. This indicator analysis is part of Catalyst California's annual update of key indicators related to children age 0-5 and Best Start work.",
+    "description": "Analysis of households with children under 5 that experience poverty by race in Los Angeles county. This indicator analysis is part of Catalyst California's annual update of key indicators related to children age 0-5 and Best Start work.",
     "author": [
       {
         "name": "Catalyst California",
@@ -15,8 +15,8 @@
     ],
     "contents": "\r\n\r\n\r\n\r\nWhy it matters\r\nPoverty is a key indicator of whether a family can provide for the basic needs of its children. That 17.2% of households with children under 5 live in poverty is too high a percentage for such a prosperous county.\r\nLearn more\r\nSee related indicators of basic needs in the Data Narrative.\r\n\r\n\r\n\r\n",
     "preview": "posts/2024-06-05-poverty/images/poverty_hh.PNG",
-    "last_modified": "2024-06-10T09:27:56-07:00",
-    "input_file": {}
+    "last_modified": "2024-06-10T11:13:47-07:00",
+    "input_file": "poverty.knit.md"
   },
   {
     "path": "posts/2024-06-05-region-1-indicators/",

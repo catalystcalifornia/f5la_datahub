@@ -1,6 +1,6 @@
 ---
 title: "Poverty for Households with Children under 5"
-description: "Analysis of households with children nuder 5 that experience poverty by race in Los Angeles county. This indicator analysis is part of Catalyst California's annual update of key indicators related to children age 0-5 and Best Start work."
+description: "Analysis of households with children under 5 that experience poverty by race in Los Angeles county. This indicator analysis is part of Catalyst California's annual update of key indicators related to children age 0-5 and Best Start work."
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
