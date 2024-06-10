@@ -1,6 +1,6 @@
 ---
 title: "Region 1 Indicators"
-description: "Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 1. Region 1 contains the East LA, Metro LA, South El Monte/El Monte, and Southeast LA Best Start geographies."
+description: "Data related to children age 0 to 5 that align with Best Start needs and the new First 5 LA strategic plan within Region 1. Region 1 contains the East LA, Metro LA, South El Monte and El Monte, and Southeast LA Best Start geographies."
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
@@ -14,6 +14,7 @@ output:
     toc_float: true
     css: css_theme.css
     self_contained: false
+preview: images/reg1.png
 ---
 
 ```{r setup, include=FALSE}

@@ -1,6 +1,6 @@
 ---
 title: "Region 4 Indicators"
-description: "Data related to children age 0 to 5 that align with Best Start needs and First 5 LA’s new strategic plan within Region 4. Region 4 contains the Central Long Beach and Wilmington geographies."
+description: "Data related to children age 0 to 5 that align with Best Start needs and the new First 5 LA strategic plan within Region 4. Region 4 contains the Central Long Beach and Wilmington geographies."
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
@@ -14,6 +14,7 @@ output:
     toc_float: true
     css: css_theme.css
     self_contained: false
+preview: images/reg4.png
 ---
 
 ```{r setup, include=FALSE}
