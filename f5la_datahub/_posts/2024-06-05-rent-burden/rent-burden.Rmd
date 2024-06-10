@@ -39,7 +39,7 @@ source("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\R\\cha
 
 ```{r data, include=FALSE}
 
-source("W:\\Project\\RDA Team\\First5LA\\Ad-hoc Research\\Laura ask\\Rent Burden\\rent_burden_by_race.R")
+ source("W:\\Project\\RDA Team\\First5LA\\Ad-hoc Research\\Laura ask\\Rent Burden\\rent_burden_by_race.R")
 
 ```
 
