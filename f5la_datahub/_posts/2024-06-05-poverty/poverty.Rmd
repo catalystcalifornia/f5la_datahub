@@ -1,10 +1,10 @@
 ---
 title: "Poverty for Households with Children under 5"
-description: "Analysis of households with children under 5 in poverty by race in Los Angeles County, as part of Catalyst California’s annual update of key indicators for First 5 LA and Best Start."
+description: "Analysis of households with children nuder 5 that experience poverty by race in Los Angeles county. This indicator analysis is part of Catalyst California's annual update of key indicators related to children age 0-5 and Best Start work."
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
-date: 2024-06-06
+date: 2024-06-05
 categories:
   - Indicators
 output:
@@ -36,15 +36,15 @@ source("W:\\Project\\RDA Team\\First5LA\\First 5 LA Data Hub Year 5 2024\\R\\cha
 
 ```{r data, include=FALSE}
 
-source("W:\\Project\\RDA Team\\First5LA\\Ad-hoc Research\\Laura ask\\Poverty\\poverty_by_race.R")
+ source("W:\\Project\\RDA Team\\First5LA\\Ad-hoc Research\\Laura ask\\Poverty\\poverty_by_race.R")
 
 ```
 
 
-```{r, echo=FALSE,out.width="100%", out.height="100%"}
+```{r, echo=FALSE, out.width="100%", out.height="100%"}
 
  #format for chart
- d_chart <- d_long %>% 
+ d_chart <- d_long %>%
    arrange(desc(rate)) %>%
    mutate(across('subgroup', str_replace, ' NL', '')) %>%
    mutate(across('subgroup', str_replace, ' Alone or in Combination', '')) %>%
@@ -52,7 +52,7 @@ source("W:\\Project\\RDA Team\\First5LA\\Ad-hoc Research\\Laura ask\\Poverty\\po
    mutate(group = "Percent of children under 5 in poverty") %>%
   filter(subgroup != "Total")
 
-#TITLE 
+#TITLE
 title_text <- paste0("Black, and Latinx households with children under 5 are more likely to be in poverty")
 
 #SUBTITLE
@@ -62,12 +62,12 @@ subtitle_text <- paste0("Percent of households with children under 5 in poverty 
 caption_text<- paste0(acsnote,"<br>",racenote) #can always customize or add additional text to this as needed
 
 #TOOLTIP
-#modify tooltips as needed 
+#modify tooltips as needed
 
 tooltip_text <- paste0("<b>{point.rate:.1f}%</b> of <b>{point.subgroup}</b> households with children under 5 are in poverty,<br> or  <b>{point.population:,.0f}</b> households with children under 5")
 
 
-#STEP 4 RUN the hchart FUNCTION 
+#STEP 4 RUN the hchart FUNCTION
 total_rate <- round(d_long$rate[ which(d_long$subgroup=="Total")],1)
 
 graph <- fx_single_tot(
@@ -85,7 +85,6 @@ graph <- fx_single_tot(
 graph
 
 ```
-
 
 ## Why it matters
 Poverty is a key indicator of whether a family can provide for the basic needs of its children. That `r total_rate`% of households with children under 5 live in poverty is too high a percentage for such a prosperous county.
