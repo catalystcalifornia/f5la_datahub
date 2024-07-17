@@ -1,0 +1,21 @@
+---
+title: "Access to Parks Data"
+description: |
+  PowerPoint template populated with a map of Open Access land in Los Angeles County by Catalyst California for the First 5 LA Office of Data for Action. This work is part of Catalyst California's ongoing strategic partnership and technical support for First 5 LA departments.
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-04-24
+categories:
+  - Analysis
+output:
+  distill::distill_article:
+    self_contained: false
+preview: images/cpad.png
+---
+
+The ODFA Team at First 5 LA asked Catalyst California for data on park access in Los Angeles County and by Supervisorial  District. The data is from the California Protected Areas Database (CPAD) and was last updated in 2023. For this map, parks are defined as Open Access public lands.
+
+[Link to the parks presentation](https://github.com/catalystcalifornia/f5la_datahub/blob/main/Parks%20Template.pptx) 
+
+[Original data source: California Protected Areas Database (CPAD) –www.calands.org (June 2023)](https://www.calands.org/)
