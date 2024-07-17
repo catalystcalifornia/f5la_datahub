@@ -14,7 +14,7 @@ output:
     toc_float: true
     css: css_theme.css
     self_contained: false
-preview: images/reg5.png
+preview: images/reg5.PNG
 ---
 
 ```{r setup, include=FALSE}
