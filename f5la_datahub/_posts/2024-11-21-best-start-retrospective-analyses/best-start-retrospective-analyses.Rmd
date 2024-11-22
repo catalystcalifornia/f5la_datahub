@@ -11,18 +11,18 @@ categories:
 output:
   distill::distill_article:
     self_contained: false
-preview: images/reg1.PNG
+preview: images/retrospect.PNG
 ---
 
 The First 5 LA Communities Team asked Catalyst California for an analysis of what changed in Best Start geographies since their analysis in 2012. Catalyst California analyzed changes between data in that 2012 report and with data available in 2019, the time of the retrospectives. 
 
-[Link to the Broadway Manchester retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Broadway%Manchester.pdf) 
+[Link to the Broadway Manchester retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Broadway%20Manchester.pdf) 
 
-[Link to the Central Long Beach retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Central%Long%Beach.pdf)
+[Link to the Central Long Beach retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Central%20Long%20Beach.pdf)
 
-[Link to the Compton retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Compton%.pdf)
+[Link to the Compton retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Compton.pdf)
 
-[Link to the East LA retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/East%LA.pdf)
+[Link to the East LA retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/East%20LA.pdf)
 
 [Link to the Lancaster retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Lancaster.pdf)
 
@@ -32,15 +32,15 @@ The First 5 LA Communities Team asked Catalyst California for an analysis of wha
 
 [Link to the Palmdale retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Palmdale.pdf)
 
-[Link to the Panorama City retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Panorama%City.pdf)
+[Link to the Panorama City retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Panorama%20City.pdf)
 
-[Link to the South El Monte retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/South%El%Monte.pdf)
+[Link to the South El Monte retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/South%20El%20Monte.pdf)
 
-[Link to the Southeast LA retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Southeast%LA.pdf)
+[Link to the Southeast LA retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Southeast%20LA.pdf)
 
-[Link to the Watts Willowbrook retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Watts%Willowbrook.pdf)
+[Link to the Watts Willowbrook retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/WattsWillowbrook.pdf)
 
-[Link to the West Athens retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/West%Athens.pdf)
+[Link to the West Athens retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/WestAthens.pdf)
 
 [Link to the Wilmington retrospective](https://github.com/catalystcalifornia/f5la_datahub/blob/main/retrospectives/Wilmington.pdf)
 
