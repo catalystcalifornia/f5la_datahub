@@ -1,0 +1,193 @@
+---
+title: "Licensed Child Care Centers and Large Family Child Care Homes with Under 5 Population"
+description: |
+  Numbers of licensed child care centers, licensed large family child care homes, capacity for each, and children under age 5 (with margin of error) by ZIP code. Only facilities licensed by the California Department of Social Services are included.
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2025-01-22
+categories:
+  - Analysis
+output:
+  distill::distill_article:
+    self_contained: false
+preview: images/fire.jpg
+---
+
+```{r, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+
+#### Load libraries ####
+
+library(dplyr)
+library(sf)
+library(leaflet)
+library(lubridate)
+library(foreign)
+library(tidycensus)
+library(data.table)
+library(janitor)
+
+#### Add database connection ####
+
+source("W:\\RDA Team\\R\\credentials_source.R")
+
+con <- connect_to_db("la_fires")
+con_shared <- connect_to_db("rda_shared_data")
+
+options(scipen = 999)
+
+# Load F5LA specific zip codes------------------
+
+f5la_zips<-c("90272", "90265", "90290", "91101", "91103", "91104", "91105", "91106", "91107", "91001", "91024", "91011", "91342", "91344")
+
+f5la_zips_df<-as.data.frame(f5la_zips)
+
+```
+
+```{r, include=FALSE}
+
+# ANALYSIS: Licensed Child Care Centers ---------------------------------
+
+# Read in data from postgres
+
+#childcare<-st_read(con_shared, query="SELECT * FROM education.ccld_childcare_centers_2023", geom="geom")
+
+# read in and format child care center data
+
+childcare <- read.csv("W:/Data/Education/CCLD/CCLD 2024/ChildCareCenters01192025.csv", header = FALSE, sep = ",")
+childcare <- childcare[,1:14]
+names(childcare) <- childcare[1,]
+childcare <- childcare[-1,]
+childcare <- clean_names(childcare)
+childcare$facility_capacity <- as.numeric(childcare$facility_capacity)
+
+# Take child care df and filter only for F5LA zips, then calculate total numbers
+
+childcare_f5la<-childcare%>%
+  filter(facility_zip %in% f5la_zips & facility_status=="LICENSED")%>%
+  as.data.frame()%>%
+  group_by(facility_zip)%>%
+  summarise(total_centers=n(),
+            capacity_centers=sum(facility_capacity))
+
+
+# ANALYSIS: Family Child Care Homes ------------------------------------
+
+
+# Read in data from postgres
+
+#familyhome<-dbGetQuery(con_shared, "SELECT * FROM education.ccld_family_childcare_homes_2023")
+
+familyhome <- read.csv("W:/Data/Education/CCLD/CCLD 2024/CHILDCAREHOMEmorethan801192025.csv", header = FALSE, sep = ",")
+familyhome <- familyhome[,1:14]
+names(familyhome) <- familyhome[1,]
+familyhome <- familyhome[-1,]
+familyhome <- clean_names(familyhome)
+familyhome$facility_capacity <- as.numeric(familyhome$facility_capacity)
+
+
+# Take df and filter only for F5LA zips, then calculate total numbers
+
+familyhome_f5la<-familyhome%>%
+  filter(facility_zip %in% f5la_zips & facility_status=="LICENSED")%>%
+  group_by(facility_zip)%>%
+  summarise(total_family_homes=n(),
+            capacity_family_homes=sum(facility_capacity))
+
+# final table: join back f5la zips so we can see which zips had 0
+
+familyhome_f5la<-f5la_zips_df%>%
+  left_join(familyhome_f5la, by=c("f5la_zips"="facility_zip"))
+
+
+# ANALYSIS: Age 0-5-------------------------------------------------
+
+# age_f5la<-dbGetQuery(con_shared, "SELECT * FROM demographics.acs_5yr_s0101_multigeo_2022")%>%
+#   filter(geolevel=="zcta" & name %in% f5la_zips)%>%
+#   select(name, s0101_c01_002e, s0101_c01_002m	) # select columns of interest: zip, total pop under age 5, and MOE for total pop under age 5
+# 
+# # Analyze data
+# 
+# age_f5la<-age_f5la%>%
+#   rename("zcta"="name")%>%
+#   group_by(zcta)%>%
+#   summarise(total_0_5=sum(s0101_c01_002e),
+#             moe_0_5=moe_sum(s0101_c01_002m))
+
+# identify ACS age under 5 variables to import
+
+acs_variable <- load_variables(2023, "acs5/subject") %>% 
+  filter(concept == "Age and Sex" & label == "Estimate!!Total!!Total population!!AGE!!Under 5 years")
+
+tidy_variables <- c(paste0(as.character(acs_variable[1,1]), "E"), paste0(as.character(acs_variable[1,1]), "M"))
+
+# import ACS data
+
+age_0to5 <- get_acs(geography = "zcta",
+                    variables = tidy_variables,
+                    year = 2023,
+                    dataset = "acs5/subject",
+                    cache_table = TRUE)
+
+# filter by F5LA ZIP codes and format for join
+
+age_f5la <- subset(age_0to5, GEOID %in% f5la_zips) %>% 
+  rename(zcta = GEOID,
+         total_0_5 = estimate,
+         moe_0_5 = moe) %>%
+  select(-NAME, -variable)
+
+
+# Final combine into single table ----------------------------------------
+
+df<-childcare_f5la%>%
+  rename("f5la_zips"="facility_zip")%>%
+  left_join(familyhome_f5la)%>%
+  left_join(age_f5la, by=c("f5la_zips"="zcta"))%>%
+   mutate(across(everything(), ~replace(., is.na(.), 0))) # Replace all NA values with "N/A" for  visualizing
+
+
+# Disconnect 
+
+dbDisconnect(con)
+dbDisconnect(con_shared)
+
+``` 
+
+
+```{r}
+
+# Visualize final table
+
+library(flextable)
+library(officer)
+
+ft<-flextable(df)%>%
+  set_header_labels(f5la_zips = "Zip Code", total_centers = "Child Care Centers", capacity_centers = "Child Care Center Seats", total_family_homes="Large Family Child Care Homes", capacity_family_homes="Large Family Child Care Home Seats", total_0_5="Children Under Age 5", moe_0_5 = "MOE Under Age 5")%>%
+  align(align = "center", part = "all") %>%
+  autofit()
+
+# Add borders
+
+ft <- border_remove(x = ft)
+ft <- hline(ft, part = "all", border =  fp_border(color = "gray"))
+
+# Bold headers
+
+ft <- bold(ft, part = "header")
+
+ft
+
+```
+
+Data Sources:
+
+*Child Care Centers and Large Family Child Care Homes* <br>
+California Department of Social Services (CDSS) 2024. Data retrieved from https://www.ccld.dss.ca.gov/carefacilitysearch/DownloadData on 1/21/2024
+
+
+*Children Under Age 5* <br>
+American Community Survey (ACS) 5-year estimates 2019-2023, table S0101
+
