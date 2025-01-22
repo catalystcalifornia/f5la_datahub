@@ -2,7 +2,7 @@
   {
     "path": "posts/2025-01-22-los-angeles-fires-stats/",
     "title": "Licensed Child Care Centers and Large Family Child Care Homes with Under 5 Population",
-    "description": "Numbers of licensed child care centers, licensed large family child care homes, capacity for each, and children under age 5 (with margin of error) by ZIP code. Only facilities licensed by the California Department of Social Services are included.",
+    "description": "Numbers of licensed child care centers, licensed large family child care homes, capacity for each, and children under age 5 (with margin of error) by ZIP code. Zip codes used in analysis were defined by First 5 LA. Only facilities licensed by the California Department of Social Services are included.",
     "author": [
       {
         "name": "Catalyst California",
@@ -13,10 +13,10 @@
     "categories": [
       "Analysis"
     ],
-    "contents": "\r\n\r\nZip CodeChild Care CentersChild Care Center SeatsLarge Family Child Care HomesLarge Family Child Care Home SeatsChildren Under Age 5MOE Under Age 59026582590047716390272159801141,2083159029031681143522299100122972243361,92136491011221,5441148301999102443061145572329110186170090528191103158203421,200320911048486121681,6283609110513837004951689110683783421,18838791107251,482101381,9423709134217874273765,26764491344261,352456242,650431\r\n\r\nData Sources:\r\nChild Care Centers and Large Family Child Care Homes \r\nCalifornia Department of Social Services (CDSS) 2024. Data retrieved from https://www.ccld.dss.ca.gov/carefacilitysearch/DownloadData on 1/21/2024\r\nChildren Under Age 5 \r\nAmerican Community Survey (ACS) 5-year estimates 2019-2023, table S0101\r\n\r\n\r\n\r\n",
+    "contents": "\r\nThis analysis was created by request of First 5 LA during the 2025 wildfires in Los Angeles in January 2025. The analysis was for specific zip codes requested by First 5 LA as part of their rapid response efforts.\r\n\r\nZip CodeChild Care CentersChild Care Center SeatsLarge Family Child Care HomesLarge Family Child Care Home SeatsChildren Under Age 5MOE Under Age 59026582590047716390272159801141,2083159029031681143522299100122972243361,92136491011221,5441148301999102443061145572329110186170090528191103158203421,200320911048486121681,6283609110513837004951689110683783421,18838791107251,482101381,9423709134217874273765,26764491344261,352456242,650431\r\n\r\nData Sources:\r\nChild Care Centers and Large Family Child Care Homes \r\nCalifornia Department of Social Services (CDSS) 2024. Data retrieved from https://www.ccld.dss.ca.gov/carefacilitysearch/DownloadData on 1/21/2024\r\nChildren Under Age 5 \r\nAmerican Community Survey (ACS) 5-year estimates 2019-2023, table S0101\r\n\r\n\r\n\r\n",
     "preview": "posts/2025-01-22-los-angeles-fires-stats/images/fire.jpg",
-    "last_modified": "2025-01-22T14:28:09-08:00",
-    "input_file": {}
+    "last_modified": "2025-01-22T15:35:17-08:00",
+    "input_file": "los-angeles-fires-stats.knit.md"
   },
   {
     "path": "posts/2024-11-21-best-start-retrospective-analyses/",

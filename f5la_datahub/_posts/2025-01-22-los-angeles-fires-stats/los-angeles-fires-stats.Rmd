@@ -1,7 +1,7 @@
 ---
 title: "Licensed Child Care Centers and Large Family Child Care Homes with Under 5 Population"
 description: |
-  Numbers of licensed child care centers, licensed large family child care homes, capacity for each, and children under age 5 (with margin of error) by ZIP code. Only facilities licensed by the California Department of Social Services are included.
+  Numbers of licensed child care centers, licensed large family child care homes, capacity for each, and children under age 5 (with margin of error) by ZIP code. Zip codes used in analysis were defined by First 5 LA. Only facilities licensed by the California Department of Social Services are included.
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
@@ -13,6 +13,8 @@ output:
     self_contained: false
 preview: images/fire.jpg
 ---
+
+This analysis was created by request of First 5 LA during the 2025 wildfires in Los Angeles in January 2025. The analysis was for specific zip codes requested by First 5 LA as part of their rapid response efforts. 
 
 ```{r, include=FALSE}
 
