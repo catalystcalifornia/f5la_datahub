@@ -1,0 +1,178 @@
+---
+title: "Poverty Data Update"
+description: |
+  Excel workbook with updated and PowerPoint templates populated with poverty and housing insecurity data by Catalyst California for the First 5 LA Office of Data for Action. This work is part of Catalyst California's ongoing strategic partnership and technical support for First 5 LA departments.
+author:
+  - name: Catalyst California
+    url: catalystcalifornia.org
+date: 2024-04-24
+categories:
+  - Analysis
+output:
+  distill::distill_article:
+    self_contained: false
+include: 
+  after_body: code_folding.html
+preview: images/housing_insecurity.png
+---
+
+The I&A Team at First 5 LA asked Catalyst California for updated data on poverty among households with children under five in Los Angeles County. The data are by racial-ethnic group and Service Planning Area (SPA) for the years 2019-2023. 
+
+[Link to the workbook](https://github.com/catalystcalifornia/f5la_datahub/blob/main/Poverty%20Data%20Update%20Data%20Template.xlsx) 
+
+Catalyst California also created a PUMA to SPA crosswalk map to visualize which PUMAs across Los Angeles County fall within each of the five SPAs. 
+
+Below is the code used to match PUMAs to SPAs:
+
+```{r}
+
+library(tidyverse)
+library(data.table)
+library(readxl)
+library(tidycensus)
+library(srvyr)
+library(stringr)
+library(sf)
+library(tigris)
+options(scipen=999)
+
+#SOURCE from the script that has: styling, packages, dbconnection, colors
+source("W:\\RDA Team\\R\\credentials_source.R")
+
+
+# get spas and convert to same crs
+spas <- st_read("W:/Data/Geographies/LA County/LA_County_Service_Planning_Area/2022/Service_Planning_Areas_2022/Service_Planning_Areas__2022_.shp")
+spas <- st_transform(spas, crs = 2229)
+
+# get pumas and convert to same crs
+pumas <- pumas(state = "06", year = 2022)
+state <- states(year = 2022, cb = TRUE) %>% filter(GEOID == '06') # pull in CA CBF shape
+cb_pumas <- st_intersection(pumas, state) %>% filter(grepl("06037", GEOID20)) # create LA County CBF PUMAs by clipping CBF state shape and filtering geoids
+cb_pumas <- st_transform(cb_pumas, crs = 2229) # reproject CBF PUMAs
+
+
+# calculate area of spas and pumas
+spas$spas_area <- st_area(spas)
+
+cb_pumas$cb_pumas_area <- st_area(cb_pumas) # Calc CBF PUMA area
+
+# intersect spas and pumas
+
+intersects <- st_intersection(cb_pumas, spas)
+
+# calculate area of the intersect
+intersects$intersect_area <- st_area(intersects)
+
+# calculate percent of intersect out of spa and puma areas
+intersects$prc_spas_area <- as.numeric(intersects$intersect_area/intersects$spas_area)
+
+intersects$prc_pumas_area <- as.numeric(intersects$intersect_area/intersects$cb_pumas_area)
+
+# xwalk with twenty percent threshold
+puma_spa_xwalk <- intersects %>% filter(prc_pumas_area>=.20) %>%
+
+  
+  # select fields we need
+  select(PUMACE20, NAMELSAD20, SPA, SPA_NAME, prc_spas_area, prc_pumas_area) %>%
+  
+  # rename PUMA
+  rename(PUMA = PUMACE20) %>%
+  
+  # keep only unique rows -- needed when using CBF PUMAs
+  unique()
+
+
+#write crosswalk to postgres
+# conn <- connect_to_db("f5la_v2")
+# dbWriteTable(conn, "puma_spa_xwalk_2022", puma_spa_xwalk, overwrite = TRUE, row.names= FALSE)
+# sql_command <- "COMMENT ON TABLE puma_spa_xwalk_2022 IS 'PUMA-SPA crosswalk by 20%+ intersect of PUMA within SPA from W:\\Project\\RDA Team\\First5LA\\Ad-hoc Research\\Laura ask\\puma_spa_xwalk.R. SRID = 2229';"
+# dbGetQuery(conn, sql_command)
+# dbDisconnect(conn)
+
+
+
+
+
+
+
+```
+
+Below is the code for visualizing the PUMAs to SPAs crosswalk.
+
+```{r include=FALSE}
+
+#### Load libraries ####
+library(tidycensus)
+library(dplyr)
+library(sf)
+library(leaflet)
+
+#### Add database connection ####
+source("W:\\RDA Team\\R\\credentials_source.R")
+options(scipen = 999)
+
+source("W:\\Project\\RDA Team\\First5LA\\Ad-hoc Research\\Laura ask poverty update\\puma_spa_xwalk.R")
+
+#get spas and transform and relabel
+st_crs(spas)
+spas <- st_transform(spas, 4326) %>%
+  mutate(map_label = paste0("SPA: ", SPA))
+
+#get pumas and transform and relabel
+st_crs(cb_pumas)
+cb_pumas <- st_transform(cb_pumas, 4326) %>%
+  mutate(map_label = paste0("PUMA: ", PUMACE20))
+
+#get puma_spa crosswalk and transform
+st_crs(puma_spa_xwalk)
+puma_spa_xwalk <- st_transform(puma_spa_xwalk, 4326)
+
+#color puma-spa crosswalk by spa polygon is in
+puma_spa_xwalk <- puma_spa_xwalk %>% mutate(color = ifelse(puma_spa_xwalk$SPA == '1', 'red', 
+                                                         ifelse(puma_spa_xwalk$SPA == '2', 'orange', 
+                                                                ifelse(puma_spa_xwalk$SPA == '3', 'yellow',
+                                                                       ifelse(puma_spa_xwalk$SPA == '4', 'green',
+                                                                          ifelse(puma_spa_xwalk$SPA == '5', 'blue',
+                                                                                 ifelse(puma_spa_xwalk$SPA == '6', 'purple',
+                                                                                        ifelse(puma_spa_xwalk$SPA == '7', 'violet',
+                                                                                               ifelse(puma_spa_xwalk$SPA == '8', 'maroon','grey'))))))))) %>%
+  
+  #make map label
+  mutate(map_label = paste0("SPA: ", SPA, ", PUMA: ", PUMA))
+
+
+```
+
+## Map of Public Use Microdata Areas (PUMAs), LA County Service Planning Areas (SPAs), and Crosswalk
+
+Data for households with children 0-5 in poverty is available by PUMA and the request is for that data by SPA. We created a PUMA-SPA crosswalk to facilitate calculating numbers and percentages of households with children 0-5 by SPA.
+
+There are 71 PUMAs in LA County with blue borders with identification numbers between 03703 and 03782, with 037 being the LA County identifier. These numbers are on the initial labeling on the map hover.
+
+There are 8 SPAs in LA County with black borders numbered one through eight below. You can see these labels by turning off/unchecking the PUMA layer. Note: SPA 7 has a cut out of SPA 8 in the Signal Hill area.
+
+The crosswalk of PUMAs to SPAs we use to attribute household 0-5 poverty data are the colored areas, colored by SPA. The areas without colors are the smaller portions of PUMAs that overlap multiple SPAs. For example, the non-colored portion of PUMA 03709 (at the center of the map in La Canada Flintridge) is the portion of PUMA 03709 that falls in SPA 2. The vast majority of PUMA 03709 falls in SPA 3, so it is attributed to SPA 3 and not SPA 2. We don't attribute fractions of PUMAs to SPAs because the additional the potential increase in accuracy is outweighed by a decrease in statistical stability.
+
+```{r, echo=FALSE}
+
+# exploratory map
+leaflet() %>%
+  addTiles()%>%
+  
+  addPolygons(data=spas, weight = 2, smoothFactor = 0.2, fillOpacity = 0.0, color = "black", label = spas$map_label, group = "SPAs") %>%
+
+  addPolygons(data=cb_pumas, weight = 1, smoothFactor = 0.2, fillOpacity = 0.0, color = "blue", label = cb_pumas$map_label, group = "PUMAs") %>%
+  
+  addPolygons(data=puma_spa_xwalk, weight = 0, smoothFactor = 0.2, fillOpacity = 0.2, fillColor= puma_spa_xwalk$color, label = puma_spa_xwalk$map_label, group = "PUMA-SPA crosswalk") %>%
+
+# Add layers control with check boxes
+  addLayersControl(
+    overlayGroups = c("PUMA-SPA crosswalk", "PUMAs", "SPAs"),
+    options = layersControlOptions(collapsed = FALSE)
+  ) %>%
+  
+  setView(-118.4603529, 34.2602307, 9)
+
+```
+
+
