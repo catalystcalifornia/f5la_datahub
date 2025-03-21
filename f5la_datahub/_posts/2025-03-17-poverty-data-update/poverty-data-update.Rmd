@@ -5,7 +5,7 @@ description: |
 author:
   - name: Catalyst California
     url: catalystcalifornia.org
-date: 2024-04-24
+date: 2025-03-21
 categories:
   - Analysis
 output:
@@ -14,7 +14,7 @@ output:
     toc: true
     toc_float: true
     css: css_theme.css
-preview: images/spa_xwalk.png
+preview: images/spa_xwalk.PNG
 ---
 
 The I&A team at First 5 LA asked Catalyst California for updated data on poverty among households with children under five in Los Angeles County. The data are by racial-ethnic group, Service Planning Area (SPA) and county for 2022 and 2023. For this data update, Catalyst California analyzed poverty at both the 100% FPL level and the 138% FPL level. Data is analyzed for both FPL levels for years 2022 and 2023. Estimates that are cut by race use 2022 and 2023 5-year estimates. Estimates at the SPA level and county level use 2022 and 2023 1-year estimates. 
