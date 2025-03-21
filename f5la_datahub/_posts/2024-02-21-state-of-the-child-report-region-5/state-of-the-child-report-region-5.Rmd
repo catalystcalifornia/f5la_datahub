@@ -12,7 +12,7 @@ output:
   distill::distill_article:
     css: css_theme.css
     self_contained: false
-preview: images/av_beststart_logo.png
+preview: images/av_beststart_logo.PNG
 ---
 
 The Best Start Region 5 State of the Child Report represents the most comprehensive analysis of data from the region to date, consolidating data on children, families and systems in the Antelope Valley. Children’s Bureau of Southern California commissioned this report to understand the state of children in the Antelope Valley, identify indicators to monitor, and increase the amount of data available to advocates. 
