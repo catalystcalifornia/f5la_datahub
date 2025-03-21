@@ -1,0 +1,27 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll("pre.sourceCode").forEach(function(codeBlock) {
+    var button = document.createElement("button");
+    button.innerHTML = "Show/Hide Code";
+    button.style.marginBottom = "5px";
+    button.style.cursor = "pointer";
+    button.style.display = "block";
+    button.style.backgroundColor = "#007BFF";
+    button.style.color = "white";
+    button.style.border = "none";
+    button.style.padding = "5px 10px";
+    button.style.borderRadius = "5px";
+
+    button.onclick = function() {
+      if (codeBlock.style.display === "none") {
+        codeBlock.style.display = "block";
+      } else {
+        codeBlock.style.display = "none";
+      }
+    };
+
+    codeBlock.before(button);
+    codeBlock.style.display = "none"; // Hide code by default
+  });
+});
+</script>
